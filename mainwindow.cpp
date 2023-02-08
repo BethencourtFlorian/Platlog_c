@@ -47,14 +47,14 @@ int MainWindow::storage()
 
             QDomElement user = document.createElement("User");
             user.setAttribute("Login", login);
-            user.setAttribute("Password", password);
-            user.setAttribute("Email", email);
-            user.setAttribute("FirstName", firstName);
-            user.setAttribute("LastName", lastName);
             root.appendChild(user);
 
-            QDomElement userInfo = document.createElement("UserInfo")
-
+            QDomElement userInfo = document.createElement("UserInfo");
+            userInfo.setAttribute("Password", password);
+            userInfo.setAttribute("Email", email);
+            userInfo.setAttribute("FirstName", firstName);
+            userInfo.setAttribute("LastName", lastName);
+            user.appendChild(userInfo);
 
         QFile file("myFile.xml");
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text))

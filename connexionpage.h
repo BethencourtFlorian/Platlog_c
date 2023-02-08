@@ -14,6 +14,7 @@ class ConnexionPage : public QDialog
 public:
     explicit ConnexionPage(QWidget *parent = nullptr);
     ~ConnexionPage();
+    int onClick(void);
 
 private:
     Ui::ConnexionPage *ui;

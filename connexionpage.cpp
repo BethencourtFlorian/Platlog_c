@@ -6,6 +6,7 @@ ConnexionPage::ConnexionPage(QWidget *parent) :
     ui(new Ui::ConnexionPage)
 {
     ui->setupUi(this);
+    connect(ui->button_connection, &QPushButton::clicked, this, &ConnexionPage::onClick);
 }
 
 ConnexionPage::~ConnexionPage()
