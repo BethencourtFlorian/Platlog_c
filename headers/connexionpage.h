@@ -2,6 +2,8 @@
 #define CONNEXIONPAGE_H
 
 #include <QDialog>
+#include "qdom.h"
+#include <QFile>
 
 namespace Ui {
 class ConnexionPage;
