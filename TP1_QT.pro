@@ -11,24 +11,24 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    src/connexion.cpp \
+    src/XLMParser.cpp \
     src/connexionpage.cpp \
     src/mainpage.cpp \
     src/mainwindow.cpp \
-    src/user.cpp \
+    src/user.cpp
 
 HEADERS += \
-    headers/connexion.h \
+    headers/XMLParser.h \
     headers/connexionpage.h \
+    headers/mainpage.h \
     headers/mainwindow.h \
-    headers/user.h \
-    src/mainpage.h
+    headers/user.h
 
 FORMS += \
     forms/connexionpage.ui \
     forms/dialog.ui \
-    forms/mainwindow.ui \
-    src/mainpage.ui
+    forms/mainpage.ui \
+    forms/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
