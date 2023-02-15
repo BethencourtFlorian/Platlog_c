@@ -33,7 +33,7 @@ int ConnexionPage::onClick(){
         QString typedPassword = ui->input_password->text();
         QString savedLogin = "";
         QString savedPassword = "";
-
+        user foundUser;
 
         bool found = false;
 
@@ -43,26 +43,37 @@ int ConnexionPage::onClick(){
             {
                 while (!XMLUser.isNull() && !found)
                 {
+
                     savedLogin = XMLUser.attribute("Login", "0");
+                    qDebug() << "Error";
                     savedPassword = XMLUser.attribute("Password", "Password");
                     if ((savedLogin == typedLogin) && (savedPassword == typedPassword))
+                    {
                         found = true;
 
+                        foundUser.setLogin(savedLogin.toStdString());
+                        foundUser.setPassword(savedPassword.toStdString());
+                        foundUser.setEmail(XMLUser.attribute("Email", "Email").toStdString());
+                        foundUser.setFirstName(XMLUser.attribute("FirstName", "FirstName").toStdString());
+                        foundUser.setLastName(XMLUser.attribute("LastName", "LastName").toStdString());
+                        XMLUser = XMLUser.nextSibling().toElement();
+                    }
                     XMLUser = XMLUser.nextSibling().toElement();
-
                 }
+
             }
-            XMLUser = XMLUser.nextSibling().toElement();
+
         }
         if (!found)
             ui->label_error->setText("Login failed");
         else
         {
-            emit notifyInfoSent(typedLogin);
-            this->hide();
-            MainPage mainPage;
-            mainPage.setModal(true);
-            mainPage.exec();
+            MainPage *mpg = new MainPage;
+            connect(this, &ConnexionPage::notifyInfoSent, mpg, &MainPage::onInfoSent);
+            mpg->show();
+            emit notifyInfoSent(foundUser);
+            hide();
+
         }
         return 0;
 }

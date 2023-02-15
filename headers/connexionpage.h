@@ -5,6 +5,7 @@
 #include "qdom.h"
 #include <QFile>
 #include "../src/mainpage.h"
+#include "user.h"
 
 namespace Ui {
 class ConnexionPage;
@@ -20,7 +21,7 @@ public:
     int onClick(void);
 
 signals:
-    void notifyInfoSent(const QString& name);
+    void notifyInfoSent(user& user);
 
 private:
     Ui::ConnexionPage *ui;

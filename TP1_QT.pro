@@ -13,7 +13,6 @@ SOURCES += \
     main.cpp \
     src/connexion.cpp \
     src/connexionpage.cpp \
-    src/inscription.cpp \
     src/mainpage.cpp \
     src/mainwindow.cpp \
     src/user.cpp \
@@ -21,7 +20,6 @@ SOURCES += \
 HEADERS += \
     headers/connexion.h \
     headers/connexionpage.h \
-    headers/inscription.h \
     headers/mainwindow.h \
     headers/user.h \
     src/mainpage.h

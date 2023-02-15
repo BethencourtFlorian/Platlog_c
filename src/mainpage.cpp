@@ -13,8 +13,20 @@ MainPage::~MainPage()
     delete ui;
 }
 
-void MainPage::onInfoSent(const QString& info)
+void MainPage::onInfoSent(user& user)
 {
-    ui->info_username->setText(info);
-    qDebug() << info;
+    ui->title->setText(ui->title->text() + " " + QString::fromStdString(user.getFirstName()));
+    ui->info_login->setText(ui->info_login->text() + " " + QString::fromStdString(user.getLogin()));
+    ui->info_firstName->setText(ui->info_firstName->text() + " " + QString::fromStdString(user.getFirstName()));
+    ui->info_lastName->setText(ui->info_lastName->text() + " " + QString::fromStdString(user.getLastName()));
+    ui->info_mail->setText(ui->info_mail->text() + " " + QString::fromStdString(user.getEmail()));
 }
+
+void MainPage::on_button_deconnect_clicked()
+{
+    this->hide();
+    ConnexionPage connexionPage;
+    connexionPage.setModal(true);
+    connexionPage.exec();
+}
+

@@ -2,6 +2,8 @@
 #define MAINPAGE_H
 
 #include <QDialog>
+#include "../headers/user.h"
+#include "../headers/connexionPage.h"
 
 namespace Ui {
 class MainPage;
@@ -15,8 +17,11 @@ public:
     explicit MainPage(QWidget *parent = nullptr);
     ~MainPage();
 
+public slots:
+    void onInfoSent(user &);
+
 private slots:
-    void onInfoSent(const QString &);
+    void on_button_deconnect_clicked();
 
 private:
     Ui::MainPage *ui;
