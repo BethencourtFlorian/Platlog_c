@@ -77,37 +77,38 @@ int MainWindow::storage()
                         while(reader.readNextStartElement()){
                             if(reader.name() ==  QString("Users")){
                                 while(reader.readNextStartElement()){
-                                    if(reader.name() ==  QString("User")){
-                                        if(reader.attributes().hasAttribute("Login")){
-                                            newLogin = reader.attributes().value("Login").toString();
+                                if(reader.name() ==  QString("User")){
+                                    if(reader.attributes().hasAttribute("Login")){
+                                        newLogin = reader.attributes().value("Login").toString();
+                                        qDebug() << newLogin;
+                                        while(reader.readNextStartElement()){
+                                            if(reader.name() ==  QString("UserInfo")){
+                                                if(reader.attributes().hasAttribute("FirstName") &&
+                                                reader.attributes().hasAttribute("LastName") &&
+                                                reader.attributes().hasAttribute("Email") &&
+                                                reader.attributes().hasAttribute("Password")){
 
-                                            while(reader.readNextStartElement()){
-                                                if(reader.name() ==  QString("UserInfo")){
-                                                    if(reader.attributes().hasAttribute("FirstName") &&
-                                                    reader.attributes().hasAttribute("LastName") &&
-                                                    reader.attributes().hasAttribute("Email") &&
-                                                    reader.attributes().hasAttribute("Password")){
+                                                    QDomElement user = document.createElement("User");
+                                                    user.setAttribute("Login", newLogin);
+                                                    users.appendChild(user);
 
-                                                        QDomElement user = document.createElement("User");
-                                                        user.setAttribute("Login", newLogin);
-                                                        users.appendChild(user);
+                                                    QDomElement userInfo = document.createElement("UserInfo");
+                                                    userInfo.setAttribute("Password", reader.attributes().value("Password").toString());
+                                                    userInfo.setAttribute("Email", reader.attributes().value("Email").toString());
+                                                    userInfo.setAttribute("FirstName", reader.attributes().value("FirstName").toString());
+                                                    userInfo.setAttribute("LastName", reader.attributes().value("LastName").toString());
+                                                    user.appendChild(userInfo);
 
-                                                        QDomElement userInfo = document.createElement("UserInfo");
-                                                        userInfo.setAttribute("Password", reader.attributes().value("Password").toString());
-                                                        userInfo.setAttribute("Email", reader.attributes().value("Email").toString());
-                                                        userInfo.setAttribute("FirstName", reader.attributes().value("FirstName").toString());
-                                                        userInfo.setAttribute("LastName", reader.attributes().value("LastName").toString());
-                                                        user.appendChild(userInfo);
-
-                                                    }
-                                                    else
-                                                        reader.raiseError(QObject::tr("Users info should have 4 attributes (FirstName, LastName, Email and Password)"));
                                                 }
+                                                else
+                                                    reader.raiseError(QObject::tr("Users info should have 4 attributes (FirstName, LastName, Email and Password)"));
                                             }
                                         }
-                                        else
-                                            reader.raiseError(QObject::tr("Users should have a login attribute"));
                                     }
+                                    else
+                                        reader.raiseError(QObject::tr("Users should have a login attribute"));
+                                reader.skipCurrentElement();
+                                }
                                 }
                             }
                             else
@@ -117,6 +118,17 @@ int MainWindow::storage()
                     else
                         reader.raiseError(QObject::tr("Incorrect file"));
                 }
+                // Adding the new user to the xml
+                QDomElement user = document.createElement("User");
+                user.setAttribute("Login", login);
+                users.appendChild(user);
+
+                QDomElement userInfo = document.createElement("UserInfo");
+                userInfo.setAttribute("Password", password);
+                userInfo.setAttribute("Email", email);
+                userInfo.setAttribute("FirstName", firstName);
+                userInfo.setAttribute("LastName", lastName);
+                user.appendChild(userInfo);
             }
             QFile wFile("myFile.xml");
             if (!wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate))
@@ -125,7 +137,6 @@ int MainWindow::storage()
                 return -1;
             }
             QTextStream stream(&wFile);
-            qDebug() << document.toString();
             stream << document.toString();
             file.close();
             wFile.close();
