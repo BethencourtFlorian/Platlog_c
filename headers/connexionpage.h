@@ -6,12 +6,13 @@
 #include <QFile>
 #include "../src/mainpage.h"
 #include "user.h"
+#include <QMainWindow>
 
 namespace Ui {
 class ConnexionPage;
 }
 
-class ConnexionPage : public QDialog
+class ConnexionPage : public QMainWindow
 {
     Q_OBJECT
 

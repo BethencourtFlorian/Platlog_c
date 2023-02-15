@@ -3,7 +3,7 @@
 
 
 ConnexionPage::ConnexionPage(QWidget *parent) :
-    QDialog(parent),
+    QMainWindow(parent),
     ui(new Ui::ConnexionPage)
 {
     ui->setupUi(this);
@@ -45,7 +45,6 @@ int ConnexionPage::onClick(){
                 {
 
                     savedLogin = XMLUser.attribute("Login", "0");
-                    qDebug() << "Error";
                     savedPassword = XMLUser.attribute("Password", "Password");
                     if ((savedLogin == typedLogin) && (savedPassword == typedPassword))
                     {

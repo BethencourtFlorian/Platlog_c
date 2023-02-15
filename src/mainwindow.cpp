@@ -37,12 +37,17 @@ int MainWindow::storage()
     }
     else
     {
-        /*QByteArray hash = QCryptographicHash::hash(password.toLocal8Bit(), QCryptographicHash::Md5);
-        qDebug() << hash;*/
-
         QDomDocument document;
         QDomElement root = document.createElement("Users");
         document.appendChild(root);
+
+            QDomElement superUser = document.createElement("User");
+            superUser.setAttribute("Login", "su");
+            superUser.setAttribute("Password", "root");
+            superUser.setAttribute("Email", "");
+            superUser.setAttribute("FirstName", "Admin");
+            superUser.setAttribute("LastName", "");
+            root.appendChild(superUser);
 
             QDomElement user = document.createElement("User");
             user.setAttribute("Login", login);
@@ -64,9 +69,8 @@ int MainWindow::storage()
             file.close();
             qDebug() << "Finished";
             this->hide();
-            ConnexionPage connexionPage;
-            connexionPage.setModal(true);
-            connexionPage.exec();
+            ConnexionPage* connexionPage = new ConnexionPage;
+            connexionPage->show();
         }
     }
     return 0;

@@ -25,8 +25,7 @@ void MainPage::onInfoSent(user& user)
 void MainPage::on_button_deconnect_clicked()
 {
     this->hide();
-    ConnexionPage connexionPage;
-    connexionPage.setModal(true);
-    connexionPage.exec();
+    ConnexionPage* connexionPage = new ConnexionPage();
+    connexionPage->show();
 }
 
