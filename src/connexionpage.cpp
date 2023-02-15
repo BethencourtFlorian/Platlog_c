@@ -3,7 +3,7 @@
 
 
 ConnexionPage::ConnexionPage(QWidget *parent) :
-    QDialog(parent),
+    QMainWindow(parent),
     ui(new Ui::ConnexionPage)
 {
     ui->setupUi(this);
@@ -18,31 +18,61 @@ ConnexionPage::~ConnexionPage()
 int ConnexionPage::onClick(){
     QDomDocument xmlDoc;
 
-        QFile f("myFile.xml");
+        QFile f("userInfo.xml");
         if (!f.open(QIODevice::ReadOnly))
         {
-            qDebug() << "Erreur lors de l'ouverture du fichier";
+            qDebug() << "Error while opening user file";
             return 1;
         }
         xmlDoc.setContent(&f);
         f.close();
 
         QDomElement XMLRoot = xmlDoc.documentElement();
-        QDomElement XMLNode = XMLRoot.firstChild().toElement();
-        QString datas = "";
+        QDomElement XMLUser = XMLRoot.firstChild().toElement();
+        QString typedLogin = ui->input_login->text();
+        QString typedPassword = ui->input_password->text();
+        QString savedLogin = "";
+        QString savedPassword = "";
+        user foundUser;
 
-        while(XMLNode.isNull() == false)
+        bool found = false;
+
+        while(XMLUser.isNull() == false)
         {
-            qDebug() << XMLNode.tagName();
-            if (XMLNode.tagName() == "User")
+            if (XMLUser.tagName() == "User")
             {
-                while (!XMLNode.isNull())
+                while (!XMLUser.isNull() && !found)
                 {
 
-                }
-            }
-        }
+                    savedLogin = XMLUser.attribute("Login", "0");
+                    savedPassword = XMLUser.attribute("Password", "Password");
+                    if ((savedLogin == typedLogin) && (savedPassword == typedPassword))
+                    {
+                        found = true;
 
-        qDebug() << "Connexion";
+                        foundUser.setLogin(savedLogin.toStdString());
+                        foundUser.setPassword(savedPassword.toStdString());
+                        foundUser.setEmail(XMLUser.attribute("Email", "Email").toStdString());
+                        foundUser.setFirstName(XMLUser.attribute("FirstName", "FirstName").toStdString());
+                        foundUser.setLastName(XMLUser.attribute("LastName", "LastName").toStdString());
+                        XMLUser = XMLUser.nextSibling().toElement();
+                    }
+                    XMLUser = XMLUser.nextSibling().toElement();
+                }
+
+            }
+
+        }
+        if (!found)
+            ui->label_error->setText("Login failed");
+        else
+        {
+            MainPage *mpg = new MainPage;
+            connect(this, &ConnexionPage::notifyInfoSent, mpg, &MainPage::onInfoSent);
+            mpg->show();
+            emit notifyInfoSent(foundUser);
+            hide();
+
+        }
         return 0;
 }

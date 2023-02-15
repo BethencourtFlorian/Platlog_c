@@ -13,21 +13,22 @@ SOURCES += \
     main.cpp \
     src/connexion.cpp \
     src/connexionpage.cpp \
-    src/inscription.cpp \
+    src/mainpage.cpp \
     src/mainwindow.cpp \
     src/user.cpp \
 
 HEADERS += \
     headers/connexion.h \
     headers/connexionpage.h \
-    headers/inscription.h \
     headers/mainwindow.h \
     headers/user.h \
+    src/mainpage.h
 
 FORMS += \
     forms/connexionpage.ui \
     forms/dialog.ui \
     forms/mainwindow.ui \
+    src/mainpage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

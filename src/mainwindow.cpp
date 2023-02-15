@@ -34,6 +34,17 @@ int XMLParser(QDomDocument& document, QDomElement& users, QString filePath){
     }
     else {
         if(file.size() == 0){
+            QDomElement superUser = document.createElement("User");
+            superUser.setAttribute("Login", "su");
+            users.appendChild(superUser);
+
+            QDomElement userInfo = document.createElement("UserInfo");
+            userInfo.setAttribute("Password", "root");
+            userInfo.setAttribute("Email", "");
+            userInfo.setAttribute("FirstName", "Admin");
+            userInfo.setAttribute("LastName", "");
+            superUser.appendChild(userInfo);
+
             file.close();
             return 0;
         }
@@ -103,13 +114,10 @@ int MainWindow::storage()
 
     if (login.isEmpty() || password.isEmpty() || email.isEmpty() || firstName.isEmpty() || lastName.isEmpty())
     {
-        ui->label_error->setText("Inscription refusée");
+        ui->label_error->setText("Registration failed");
     }
     else
     {
-        /*QByteArray hash = QCryptographicHash::hash(password.toLocal8Bit(), QCryptographicHash::Md5);
-        qDebug() << hash;*/
-
         QDomDocument document;
         QDomElement root = document.createElement("QtProject");
         document.appendChild(root);
@@ -133,19 +141,28 @@ int MainWindow::storage()
         }
 
         QFile wFile(filePath);
-        if (!wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate))
-        {
+        if (!wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate)){
+            // Adding the new User
+            QDomElement user = document.createElement("User");
+            user.setAttribute("Login", login);
+            user.setAttribute("Password", password);
+            user.setAttribute("Email", email);
+            user.setAttribute("FirstName", firstName);
+            user.setAttribute("LastName", lastName);
+            root.appendChild(user);
+
+            QTextStream stream(&wFile);
+            stream << document.toString();
+            wFile.close();
+            qDebug() << "Finished";
+            this->hide();
+            ConnexionPage* connexionPage = new ConnexionPage;
+            connexionPage->show();
+        }
+        else{
             qDebug() << "Failed to open writting";
             return -1;
         }
-        QTextStream stream(&wFile);
-        stream << document.toString();
-        wFile.close();
-        qDebug() << "Finished";
-        this->hide();
-        ConnexionPage connexionPage;
-        connexionPage.setModal(true);
-        connexionPage.exec();
     }
     return 0;
 }
