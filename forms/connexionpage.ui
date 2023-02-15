@@ -26,7 +26,7 @@
     <string>Connexion</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="label_login">
    <property name="geometry">
     <rect>
      <x>180</x>
@@ -39,7 +39,7 @@
     <string>login</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="label_password">
    <property name="geometry">
     <rect>
      <x>170</x>
@@ -52,7 +52,7 @@
     <string>password</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="input_login">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -62,7 +62,7 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="input_password">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -70,6 +70,19 @@
      <width>113</width>
      <height>28</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_error">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>360</y>
+     <width>161</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

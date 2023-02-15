@@ -33,29 +33,31 @@ int MainWindow::storage()
 
     if (login.isEmpty() || password.isEmpty() || email.isEmpty() || firstName.isEmpty() || lastName.isEmpty())
     {
-        ui->label_error->setText("Inscription refusée");
+        ui->label_error->setText("Registration failed");
     }
     else
     {
-        /*QByteArray hash = QCryptographicHash::hash(password.toLocal8Bit(), QCryptographicHash::Md5);
-        qDebug() << hash;*/
-
         QDomDocument document;
         QDomElement root = document.createElement("Users");
         document.appendChild(root);
 
+            QDomElement superUser = document.createElement("User");
+            superUser.setAttribute("Login", "su");
+            superUser.setAttribute("Password", "root");
+            superUser.setAttribute("Email", "");
+            superUser.setAttribute("FirstName", "Admin");
+            superUser.setAttribute("LastName", "");
+            root.appendChild(superUser);
+
             QDomElement user = document.createElement("User");
             user.setAttribute("Login", login);
+            user.setAttribute("Password", password);
+            user.setAttribute("Email", email);
+            user.setAttribute("FirstName", firstName);
+            user.setAttribute("LastName", lastName);
             root.appendChild(user);
 
-            QDomElement userInfo = document.createElement("UserInfo");
-            userInfo.setAttribute("Password", password);
-            userInfo.setAttribute("Email", email);
-            userInfo.setAttribute("FirstName", firstName);
-            userInfo.setAttribute("LastName", lastName);
-            user.appendChild(userInfo);
-
-        QFile file("myFile.xml");
+        QFile file("userInfo.xml");
         if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
         {
             qDebug() << "Failed to open writting";
@@ -67,9 +69,8 @@ int MainWindow::storage()
             file.close();
             qDebug() << "Finished";
             this->hide();
-            ConnexionPage connexionPage;
-            connexionPage.setModal(true);
-            connexionPage.exec();
+            ConnexionPage* connexionPage = new ConnexionPage;
+            connexionPage->show();
         }
     }
     return 0;

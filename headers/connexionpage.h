@@ -4,12 +4,15 @@
 #include <QDialog>
 #include "qdom.h"
 #include <QFile>
+#include "../src/mainpage.h"
+#include "user.h"
+#include <QMainWindow>
 
 namespace Ui {
 class ConnexionPage;
 }
 
-class ConnexionPage : public QDialog
+class ConnexionPage : public QMainWindow
 {
     Q_OBJECT
 
@@ -17,6 +20,9 @@ public:
     explicit ConnexionPage(QWidget *parent = nullptr);
     ~ConnexionPage();
     int onClick(void);
+
+signals:
+    void notifyInfoSent(user& user);
 
 private:
     Ui::ConnexionPage *ui;
