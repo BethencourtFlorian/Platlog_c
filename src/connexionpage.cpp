@@ -7,6 +7,8 @@ ConnexionPage::ConnexionPage(QWidget *parent) :
     ui(new Ui::ConnexionPage)
 {
     ui->setupUi(this);
+    ui->input_password->setEchoMode(QLineEdit::Password);
+    this->setWindowTitle("Connexion");
     connect(ui->button_connection, &QPushButton::clicked, this, &ConnexionPage::onClick);
 }
 
@@ -59,9 +61,7 @@ int ConnexionPage::onClick(){
                     }
                     XMLUser = XMLUser.nextSibling().toElement();
                 }
-
             }
-
         }
         if (!found)
             ui->label_error->setText("Login failed");

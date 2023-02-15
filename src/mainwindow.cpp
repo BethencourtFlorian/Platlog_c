@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     , lastName("")
 {
     ui->setupUi(this);
+    this->setWindowTitle("Inscription");
     ui->input_password->setEchoMode(QLineEdit::Password);
     connect(ui->button_inscription, &QPushButton::clicked, this, &MainWindow::storage);
 }

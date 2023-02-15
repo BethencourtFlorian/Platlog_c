@@ -6,6 +6,7 @@ MainPage::MainPage(QWidget *parent) :
     ui(new Ui::MainPage)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Accueil");
 }
 
 MainPage::~MainPage()
