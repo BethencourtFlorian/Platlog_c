@@ -2,6 +2,8 @@
 
 #include "qdom.h"
 #include <QFile>
+#include <QString>
+#include <QXmlStreamReader>
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -23,6 +25,85 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+int XMLParser(QDomDocument& document, QDomElement& users, QString filePath){
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly| QIODevice::Text))
+    {
+        qDebug() << "Failed to open writting";
+        return -1;
+    }
+    else {
+        if(file.size() == 0){
+            QDomElement superUser = document.createElement("User");
+            superUser.setAttribute("Login", "su");
+            users.appendChild(superUser);
+
+            QDomElement userInfo = document.createElement("UserInfo");
+            userInfo.setAttribute("Password", "root");
+            userInfo.setAttribute("Email", "");
+            userInfo.setAttribute("FirstName", "Admin");
+            userInfo.setAttribute("LastName", "");
+            superUser.appendChild(userInfo);
+
+            file.close();
+            return 0;
+        }
+        else{
+            QString newLogin = "";
+            QXmlStreamReader reader(&file);
+            if (reader.readNextStartElement()) {
+                if (reader.name() == QString("QtProject")){
+                    while(reader.readNextStartElement()){
+                        if(reader.name() ==  QString("Users")){
+                            while(reader.readNextStartElement()){
+                            if(reader.name() ==  QString("User")){
+                                if(reader.attributes().hasAttribute("Login")){
+                                    newLogin = reader.attributes().value("Login").toString();
+                                    qDebug() << newLogin;
+                                    while(reader.readNextStartElement()){
+                                        if(reader.name() ==  QString("UserInfo")){
+                                            if(reader.attributes().hasAttribute("FirstName") &&
+                                            reader.attributes().hasAttribute("LastName") &&
+                                            reader.attributes().hasAttribute("Email") &&
+                                            reader.attributes().hasAttribute("Password")){
+
+                                                QDomElement user = document.createElement("User");
+                                                user.setAttribute("Login", newLogin);
+                                                users.appendChild(user);
+
+                                                QDomElement userInfo = document.createElement("UserInfo");
+                                                userInfo.setAttribute("Password", reader.attributes().value("Password").toString());
+                                                userInfo.setAttribute("Email", reader.attributes().value("Email").toString());
+                                                userInfo.setAttribute("FirstName", reader.attributes().value("FirstName").toString());
+                                                userInfo.setAttribute("LastName", reader.attributes().value("LastName").toString());
+                                                user.appendChild(userInfo);
+
+                                            }
+                                            else
+                                                reader.raiseError(QObject::tr("Users info should have 4 attributes (FirstName, LastName, Email and Password)"));
+                                        }
+                                    }
+                                }
+                                else
+                                    reader.raiseError(QObject::tr("Users should have a login attribute"));
+                            reader.skipCurrentElement();
+                            }
+                            }
+                        }
+                        else
+                            reader.skipCurrentElement();
+                    }
+                }
+                else
+                    reader.raiseError(QObject::tr("Incorrect file"));
+            }
+            file.close();
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int MainWindow::storage()
 {
     login = ui->input_login->text();
@@ -38,17 +119,30 @@ int MainWindow::storage()
     else
     {
         QDomDocument document;
-        QDomElement root = document.createElement("Users");
+        QDomElement root = document.createElement("QtProject");
         document.appendChild(root);
 
-            QDomElement superUser = document.createElement("User");
-            superUser.setAttribute("Login", "su");
-            superUser.setAttribute("Password", "root");
-            superUser.setAttribute("Email", "");
-            superUser.setAttribute("FirstName", "Admin");
-            superUser.setAttribute("LastName", "");
-            root.appendChild(superUser);
+        QDomElement users = document.createElement("Users");
+        root.appendChild(users);
 
+        QString filePath("myFile.xml");
+        if(XMLParser(document, users, filePath) == 0){
+            // Adding the new user to the xml
+            QDomElement user = document.createElement("User");
+            user.setAttribute("Login", login);
+            users.appendChild(user);
+
+            QDomElement userInfo = document.createElement("UserInfo");
+            userInfo.setAttribute("Password", password);
+            userInfo.setAttribute("Email", email);
+            userInfo.setAttribute("FirstName", firstName);
+            userInfo.setAttribute("LastName", lastName);
+            user.appendChild(userInfo);
+        }
+
+        QFile wFile(filePath);
+        if (!wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate)){
+            // Adding the new User
             QDomElement user = document.createElement("User");
             user.setAttribute("Login", login);
             user.setAttribute("Password", password);
@@ -57,20 +151,17 @@ int MainWindow::storage()
             user.setAttribute("LastName", lastName);
             root.appendChild(user);
 
-        QFile file("userInfo.xml");
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            qDebug() << "Failed to open writting";
-            return -1;
-        }
-        else {
-            QTextStream stream(&file);
+            QTextStream stream(&wFile);
             stream << document.toString();
-            file.close();
+            wFile.close();
             qDebug() << "Finished";
             this->hide();
             ConnexionPage* connexionPage = new ConnexionPage;
             connexionPage->show();
+        }
+        else{
+            qDebug() << "Failed to open writting";
+            return -1;
         }
     }
     return 0;
