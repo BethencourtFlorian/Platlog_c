@@ -2,8 +2,8 @@
 #define MAINPAGE_H
 
 #include <QDialog>
-#include "../headers/user.h"
-#include "../headers/connexionPage.h"
+#include "user.h"
+#include "connexionPage.h"
 
 namespace Ui {
 class MainPage;

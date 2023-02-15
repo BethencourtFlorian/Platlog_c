@@ -1,4 +1,4 @@
-#include "mainpage.h"
+#include "headers/mainpage.h"
 #include "ui_mainpage.h"
 
 MainPage::MainPage(QWidget *parent) :

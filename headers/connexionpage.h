@@ -4,7 +4,7 @@
 #include <QDialog>
 #include "qdom.h"
 #include <QFile>
-#include "../src/mainpage.h"
+#include "mainpage.h"
 #include "user.h"
 #include <QMainWindow>
 
