@@ -20,15 +20,15 @@ SOURCES += \
 HEADERS += \
     headers/XMLParser.h \
     headers/connexionpage.h \
+    headers/mainpage.h \
     headers/mainwindow.h \
-    headers/user.h \
-    src/mainpage.h
+    headers/user.h
 
 FORMS += \
     forms/connexionpage.ui \
     forms/dialog.ui \
-    forms/mainwindow.ui \
-    src/mainpage.ui
+    forms/mainpage.ui \
+    forms/mainwindow.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
