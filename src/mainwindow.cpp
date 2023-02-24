@@ -33,7 +33,7 @@ int MainWindow::storage()
 
     if (login.isEmpty() || password.isEmpty() || email.isEmpty() || firstName.isEmpty() || lastName.isEmpty())
     {
-        ui->label_error->setText("Registration failed");
+        ui->label_error->setText("Veuillez remplir tous les champs");
     }
     else
     {
@@ -45,8 +45,9 @@ int MainWindow::storage()
         root.appendChild(users);
 
         QString filePath("myFile.xml");
+        // myFile sera d'abord ouvert en lecture pour récupérer les utilisateurs déjà existants
         if(XMLParser::CheckUser(document, users, filePath) == 0){
-            // Adding the new user to the xml
+            // On ajoute le nouvel utilisateur dans le QDomDocument
             QDomElement user = document.createElement("User");
             user.setAttribute("Login", login);
             users.appendChild(user);
@@ -58,28 +59,23 @@ int MainWindow::storage()
             userInfo.setAttribute("LastName", lastName);
             user.appendChild(userInfo);
         }
+        else{
+            qDebug() << "Erreur de lecture du fichier";
+            return -1;
+        }
 
+        // On ouvre le même fichier, en écriture cette fois-ci pour enregistrer le nouvel utlisateur dans le XML
         QFile wFile(filePath);
-        if (wFile.open(QIODevice::ReadWrite| QIODevice::Text | QIODevice::Truncate)){
-            // Adding the new User
-            QDomElement user = document.createElement("User");
-            user.setAttribute("Login", login);
-            user.setAttribute("Password", password);
-            user.setAttribute("Email", email);
-            user.setAttribute("FirstName", firstName);
-            user.setAttribute("LastName", lastName);
-            root.appendChild(user);
-
+        if (wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate)){
             QTextStream stream(&wFile);
             stream << document.toString();
             wFile.close();
-            qDebug() << "Finished";
             this->hide();
             ConnexionPage* connexionPage = new ConnexionPage;
             connexionPage->show();
         }
         else{
-            qDebug() << "Failed to open writting";
+            qDebug() << "Erreur d'écriture du fichier";
             return -1;
         }
     }

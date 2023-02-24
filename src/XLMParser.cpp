@@ -5,7 +5,7 @@ int XMLParser::CheckUser(QDomDocument& document, QDomElement& users, QString fil
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly| QIODevice::Text | QIODevice::ReadWrite))
     {
-        qDebug() << "Failed to open writting";
+        // Erreur d'ouverture du fichier
         return -1;
     }
     else {
@@ -35,7 +35,6 @@ int XMLParser::CheckUser(QDomDocument& document, QDomElement& users, QString fil
                             if(reader.name() ==  QString("User")){
                                 if(reader.attributes().hasAttribute("Login")){
                                     newLogin = reader.attributes().value("Login").toString();
-                                    qDebug() << newLogin;
                                     while(reader.readNextStartElement()){
                                         if(reader.name() ==  QString("UserInfo")){
                                             if(reader.attributes().hasAttribute("FirstName") &&
@@ -55,13 +54,20 @@ int XMLParser::CheckUser(QDomDocument& document, QDomElement& users, QString fil
                                                 user.appendChild(userInfo);
 
                                             }
-                                            else
-                                                reader.raiseError(QObject::tr("Users info should have 4 attributes (FirstName, LastName, Email and Password)"));
+                                            else{
+                                                /*
+                                                 * Chaque utilisateur doit posséder les 4 attributs suivants : FirstName, LastName, Email et Password
+                                                 * Situés dans la balise "UserInfo" associée
+                                                */
+                                                return -1;
+                                            }
                                         }
                                     }
                                 }
-                                else
-                                    reader.raiseError(QObject::tr("Users should have a login attribute"));
+                                else{
+                                    // Chaque utilisateur doit posséder un attribut Login
+                                    return -1;
+                                }
                             reader.skipCurrentElement();
                             }
                             }
@@ -70,27 +76,29 @@ int XMLParser::CheckUser(QDomDocument& document, QDomElement& users, QString fil
                             reader.skipCurrentElement();
                     }
                 }
-                else
-                    reader.raiseError(QObject::tr("Incorrect file"));
+                else{
+                    // Mauvais fichier
+                    return -1;
+                }
             }
             file.close();
             return 0;
         }
     }
-    return 1;
 }
 
 int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPassword, QString typedLogin){
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly| QIODevice::Text))
     {
-        qDebug() << "Failed to open writting";
+        // Erreur d'ouverture du fichier
         return -1;
     }
     else {
         if(file.size() == 0){
+            // Fichier vide, inutile de rechercher une correspondance
             file.close();
-            return 1;
+            return -1;
         }
         else{
             QXmlStreamReader reader(&file);
@@ -118,13 +126,20 @@ int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPa
                                                     return 0;
                                                 }
                                             }
-                                            else
-                                                reader.raiseError(QObject::tr("Users info should have 4 attributes (FirstName, LastName, Email and Password)"));
+                                            else{
+                                                /*
+                                                 * Chaque utilisateur doit posséder les 4 attributs suivants : FirstName, LastName, Email et Password
+                                                 * Situés dans la balise "UserInfo" associée
+                                                */
+                                                return -1;
+                                            }
                                         }
                                     }
                                 }
-                                else
-                                    reader.raiseError(QObject::tr("Users should have a login attribute"));
+                                else{
+                                    // Chaque utilisateur doit posséder un attribut Login
+                                    return -1;
+                                }
                             reader.skipCurrentElement();
                             }
                             }
@@ -133,12 +148,14 @@ int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPa
                             reader.skipCurrentElement();
                     }
                 }
-                else
-                    reader.raiseError(QObject::tr("Incorrect file"));
+                else{
+                    // Mauvais fichier
+                    return -1;
+                }
             }
+            // Aucune correspondance trouvée, mauvais login ou mdp
             file.close();
-            return 1;
+            return -1;
         }
     }
-    return 1;
 }
