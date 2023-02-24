@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>ConnexionPage</class>
- <widget class="QDialog" name="ConnexionPage">
+ <widget class="QWidget" name="ConnexionPage">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -83,6 +83,19 @@
    </property>
    <property name="text">
     <string/>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="button_inscription">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>410</y>
+     <width>83</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Inscription</string>
    </property>
   </widget>
  </widget>

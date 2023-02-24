@@ -60,7 +60,7 @@ int MainWindow::storage()
         }
 
         QFile wFile(filePath);
-        if (!wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate)){
+        if (wFile.open(QIODevice::ReadWrite| QIODevice::Text | QIODevice::Truncate)){
             // Adding the new User
             QDomElement user = document.createElement("User");
             user.setAttribute("Login", login);

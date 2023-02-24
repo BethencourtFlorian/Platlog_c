@@ -3,7 +3,7 @@
 
 int XMLParser::CheckUser(QDomDocument& document, QDomElement& users, QString filePath){
     QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly| QIODevice::Text))
+    if (!file.open(QIODevice::ReadOnly| QIODevice::Text | QIODevice::ReadWrite))
     {
         qDebug() << "Failed to open writting";
         return -1;

@@ -8,7 +8,8 @@ ConnexionPage::ConnexionPage(QWidget *parent) :
     ui(new Ui::ConnexionPage)
 {
     ui->setupUi(this);
-    connect(ui->button_connection, &QPushButton::clicked, this, &ConnexionPage::onClick);
+    connect(ui->button_connection, &QPushButton::clicked, this, &ConnexionPage::onConnectionButton_Click);
+    connect(ui->button_inscription, &QPushButton::clicked, this, &ConnexionPage::onInscriptionButton_Click);
 }
 
 ConnexionPage::~ConnexionPage()
@@ -16,9 +17,7 @@ ConnexionPage::~ConnexionPage()
     delete ui;
 }
 
-
-
-int ConnexionPage::onClick(){
+int ConnexionPage::onConnectionButton_Click(){
     QString typedLogin = ui->input_login->text();
     QString typedPassword = ui->input_password->text();
     user foundUser;
@@ -34,5 +33,12 @@ int ConnexionPage::onClick(){
         hide();
 
     }
+    return 0;
+}
+
+int ConnexionPage::onInscriptionButton_Click(){
+    this->hide();
+    MainWindow* mainwindow = new MainWindow();
+    mainwindow->show();
     return 0;
 }

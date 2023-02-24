@@ -4,6 +4,7 @@
 #include <QDialog>
 #include "qdom.h"
 #include <QFile>
+#include "mainwindow.h"
 #include "mainpage.h"
 #include "user.h"
 #include <QMainWindow>
@@ -19,7 +20,8 @@ class ConnexionPage : public QMainWindow
 public:
     explicit ConnexionPage(QWidget *parent = nullptr);
     ~ConnexionPage();
-    int onClick(void);
+    int onConnectionButton_Click(void);
+    int onInscriptionButton_Click(void);
 
 signals:
     void notifyInfoSent(user& user);
