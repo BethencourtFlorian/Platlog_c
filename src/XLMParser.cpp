@@ -56,7 +56,7 @@ int XMLParser::CheckUser(QDomDocument& document, QDomElement& users, QString fil
 
                                             }
                                             else
-                                                reader.raiseError(QObject::tr("Users info should have 4 attributes (FirstName, LastName, Email and Password)"));
+                                                qDebug("Users info should have 4 attributes (FirstName, LastName, Email and Password)");
                                         }
                                     }
                                 }
@@ -70,14 +70,15 @@ int XMLParser::CheckUser(QDomDocument& document, QDomElement& users, QString fil
                             reader.skipCurrentElement();
                     }
                 }
-                else
+                else{
                     reader.raiseError(QObject::tr("Incorrect file"));
+                    return -1;
+                }
             }
             file.close();
             return 0;
         }
     }
-    return 1;
 }
 
 int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPassword, QString typedLogin){

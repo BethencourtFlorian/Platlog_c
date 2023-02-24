@@ -8,7 +8,7 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-        MainWindow w;
+        MainWindow w; // Page "par défaut", c'est-à-dire l'inscription
         ConnexionPage c;
 
         if (QFile::exists("myFile.xml"))

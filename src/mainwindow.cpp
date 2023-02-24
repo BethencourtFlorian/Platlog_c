@@ -79,7 +79,7 @@ int MainWindow::storage()
             connexionPage->show();
         }
         else{
-            qDebug() << "Failed to open writting";
+            qDebug() << "mw : Failed to open writting";
             return -1;
         }
     }
