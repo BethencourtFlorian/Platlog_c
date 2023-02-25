@@ -14,45 +14,35 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true"/>
+   <string notr="true">font: 8pt &quot;Segoe UI&quot;;
+background-color: rgb(24, 24, 24);</string>
   </property>
   <widget class="QPushButton" name="button_connection">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>370</y>
-     <width>83</width>
-     <height>29</height>
+     <x>300</x>
+     <y>310</y>
+     <width>131</width>
+     <height>41</height>
     </rect>
    </property>
-   <property name="text">
-    <string>Connexion</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_login">
-   <property name="geometry">
-    <rect>
-     <x>180</x>
-     <y>160</y>
-     <width>63</width>
-     <height>20</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>login</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="label_password">
-   <property name="geometry">
-    <rect>
-     <x>170</x>
-     <y>230</y>
-     <width>63</width>
-     <height>20</height>
-    </rect>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	background-color: rgb(33, 185, 255);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+	color: #FFF;
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(16, 124, 255);
+}</string>
    </property>
    <property name="text">
-    <string>password</string>
+    <string>Log In</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="input_login">
@@ -60,9 +50,31 @@
     <rect>
      <x>260</x>
      <y>160</y>
-     <width>113</width>
-     <height>28</height>
+     <width>201</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+	border: 2px solid rgb(37,39,48);	
+	border-radius: 20px;
+	color: #FFF;
+	padding-left: 20px;
+	padding-right:20px;
+	background-color: rgb(34,36,44);
+	font-size: 20px;
+}
+
+QLineEdit:hover{
+	background-color: rgb(48,50,62);
+}
+
+QLineEdit:focus{
+	border: 2px solid rgb(65,70,155);
+}</string>
+   </property>
+   <property name="placeholderText">
+    <string>Login</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="input_password">
@@ -70,19 +82,45 @@
     <rect>
      <x>260</x>
      <y>230</y>
-     <width>113</width>
-     <height>28</height>
+     <width>201</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit {
+	border: 2px solid rgb(37,39,48);	
+	border-radius: 20px;
+	color: #FFF;
+	padding-left: 20px;
+	padding-right:20px;
+	background-color: rgb(34,36,44);
+	font-size: 20px;
+}
+
+QLineEdit:hover{
+	background-color: rgb(48,50,62);
+}
+
+QLineEdit:focus{
+	border: 2px solid rgb(65,70,155);
+}</string>
+   </property>
+   <property name="placeholderText">
+    <string>Password</string>
    </property>
   </widget>
   <widget class="QLabel" name="label_error">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>400</y>
+     <x>210</x>
+     <y>440</y>
      <width>311</width>
      <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 16, 20);
+font-size: 16px;</string>
    </property>
    <property name="text">
     <string/>
@@ -91,14 +129,50 @@
   <widget class="QPushButton" name="button_inscription">
    <property name="geometry">
     <rect>
-     <x>380</x>
-     <y>410</y>
-     <width>83</width>
-     <height>29</height>
+     <x>300</x>
+     <y>380</y>
+     <width>131</width>
+     <height>41</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	background-color: rgb(33, 185, 255);
+	font-weight:  bold;
+	font-size: 15px;
+	color: #FFF;
+	background-color: rgb(10, 176, 29);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(16, 145, 6);
+}</string>
+   </property>
    <property name="text">
-    <string>Inscription</string>
+    <string>Create Account</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>50</y>
+     <width>141</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	font-size: 24px;
+	font-weight: bold;
+	
+	color: rgb(255, 255, 255);
+}</string>
+   </property>
+   <property name="text">
+    <string>Welcome !</string>
    </property>
   </widget>
  </widget>

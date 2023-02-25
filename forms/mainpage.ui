@@ -13,17 +13,32 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">font: 8pt &quot;Segoe UI&quot;;
+background-color: rgb(24, 24, 24);</string>
+  </property>
   <widget class="QLabel" name="title">
    <property name="geometry">
     <rect>
      <x>210</x>
      <y>60</y>
-     <width>221</width>
-     <height>20</height>
+     <width>351</width>
+     <height>31</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	font-size: 24px;
+	font-weight: bold;
+	
+	color: rgb(255, 255, 255);
+}</string>
+   </property>
    <property name="text">
-    <string>Bienvenue </string>
+    <string>Homepage</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
    </property>
   </widget>
   <widget class="QLabel" name="info_login">
@@ -31,9 +46,17 @@
     <rect>
      <x>130</x>
      <y>170</y>
-     <width>251</width>
-     <height>20</height>
+     <width>411</width>
+     <height>31</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	font-size: 20px;
+	font-weight: bold;
+	
+	color: rgb(255, 255, 255);
+}</string>
    </property>
    <property name="text">
     <string>Login :</string>
@@ -43,36 +66,60 @@
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>220</y>
-     <width>271</width>
+     <y>230</y>
+     <width>421</width>
      <height>20</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	font-size: 20px;
+	font-weight: bold;
+	
+	color: rgb(255, 255, 255);
+}</string>
+   </property>
    <property name="text">
-    <string>Prénom :</string>
+    <string>First Name : </string>
    </property>
   </widget>
   <widget class="QLabel" name="info_lastName">
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>270</y>
-     <width>281</width>
+     <y>280</y>
+     <width>441</width>
      <height>20</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	font-size: 20px;
+	font-weight: bold;
+	
+	color: rgb(255, 255, 255);
+}</string>
+   </property>
    <property name="text">
-    <string>Nom : </string>
+    <string>Last Name :</string>
    </property>
   </widget>
   <widget class="QLabel" name="info_mail">
    <property name="geometry">
     <rect>
      <x>130</x>
-     <y>320</y>
-     <width>321</width>
+     <y>340</y>
+     <width>461</width>
      <height>20</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel{
+	font-size: 20px;
+	font-weight: bold;
+	
+	color: rgb(255, 255, 255);
+}</string>
    </property>
    <property name="text">
     <string>Mail :</string>
@@ -81,11 +128,26 @@
   <widget class="QPushButton" name="button_deconnect">
    <property name="geometry">
     <rect>
-     <x>130</x>
-     <y>390</y>
-     <width>111</width>
-     <height>29</height>
+     <x>310</x>
+     <y>400</y>
+     <width>121</width>
+     <height>41</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	
+	background-color: rgb(255, 15, 19);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(185, 1, 5);
+}</string>
    </property>
    <property name="text">
     <string>Déconnexion</string>
