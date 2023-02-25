@@ -26,7 +26,6 @@ HEADERS += \
 
 FORMS += \
     forms/connexionpage.ui \
-    forms/dialog.ui \
     forms/mainpage.ui \
     forms/mainwindow.ui
 
