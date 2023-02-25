@@ -23,7 +23,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-int MainWindow::storage()
+void MainWindow::storage()
 {
     login = ui->input_login->text();
     password = ui->input_password->text();
@@ -61,7 +61,6 @@ int MainWindow::storage()
         }
         else{
             qDebug() << "Erreur de lecture du fichier";
-            return -1;
         }
 
         // On ouvre le même fichier, en écriture cette fois-ci pour enregistrer le nouvel utlisateur dans le XML
@@ -76,8 +75,6 @@ int MainWindow::storage()
         }
         else{
             qDebug() << "Erreur d'écriture du fichier";
-            return -1;
         }
     }
-    return 0;
 }

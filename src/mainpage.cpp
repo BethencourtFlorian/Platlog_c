@@ -15,6 +15,7 @@ MainPage::~MainPage()
 
 void MainPage::onInfoSent(user& user)
 {
+    // Chaque champ de la vue est remplie avec les informations de l'utilisateur récupérées par la vue Connexion
     ui->title->setText(ui->title->text() + " " + QString::fromStdString(user.getFirstName()));
     ui->info_login->setText(ui->info_login->text() + " " + QString::fromStdString(user.getLogin()));
     ui->info_firstName->setText(ui->info_firstName->text() + " " + QString::fromStdString(user.getFirstName()));

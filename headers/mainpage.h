@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "user.h"
-#include "connexionPage.h"
+#include "connexionpage.h"
 
 namespace Ui {
 class MainPage;
@@ -18,9 +18,18 @@ public:
     ~MainPage();
 
 public slots:
-    void onInfoSent(user &);
+    /**
+     * @brief Remplit la MainPage
+     *
+     * Avec les informations de l'utilisateur passé en paramètre
+     * @param user contient les informations de l'utilisateur
+     */
+    void onInfoSent(user& user);
 
 private slots:
+    /**
+     * @brief Renvoie vers la page de connexion
+     */
     void on_button_deconnect_clicked();
 
 private:

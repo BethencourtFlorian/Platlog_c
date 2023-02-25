@@ -19,7 +19,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    int storage(void);
+
+    /**
+     * @brief storage
+     * @return
+     */
+    void storage();
 
 private:
     Ui::MainWindow *ui;
