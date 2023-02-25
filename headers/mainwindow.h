@@ -21,8 +21,7 @@ public:
     ~MainWindow();
 
     /**
-     * @brief storage
-     * @return
+     * @brief Incrit le nouvel utilisateur dans le fichier XML.
      */
     void storage();
 
