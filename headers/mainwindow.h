@@ -19,7 +19,11 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-    int storage(void);
+
+    /**
+     * @brief Incrit le nouvel utilisateur dans le fichier XML.
+     */
+    void storage();
 
 private:
     Ui::MainWindow *ui;

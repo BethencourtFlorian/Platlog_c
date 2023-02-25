@@ -17,28 +17,27 @@ ConnexionPage::~ConnexionPage()
     delete ui;
 }
 
-int ConnexionPage::onConnectionButton_Click(){
+void ConnexionPage::onConnectionButton_Click(){
     QString typedLogin = ui->input_login->text();
     QString typedPassword = ui->input_password->text();
     user foundUser;
 
     if (XMLParser::CheckConnexion("myFile.xml", foundUser, typedPassword, typedLogin) != 0)
-        ui->label_error->setText("Login failed");
+        // TODO : messages d'erreurs en fonction du retour de CheckConnexion (créer une fonction dans XMLParser)
+        ui->label_error->setText("Mauvais login et/ou mot de passe");
     else
     {
         MainPage *mpg = new MainPage;
         connect(this, &ConnexionPage::notifyInfoSent, mpg, &MainPage::onInfoSent);
         mpg->show();
-        emit notifyInfoSent(foundUser);
+        emit notifyInfoSent(foundUser); // On transmet les informations de l'utilisateur à la MainPage
         hide();
 
     }
-    return 0;
 }
 
-int ConnexionPage::onInscriptionButton_Click(){
+void ConnexionPage::onInscriptionButton_Click(){
     this->hide();
     MainWindow* mainwindow = new MainWindow();
     mainwindow->show();
-    return 0;
 }

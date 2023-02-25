@@ -1,0 +1,31 @@
+<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
+<HTML><HEAD></HEAD><BODY>
+<OBJECT type="text/site properties">
+<param name="FrameName" value="right">
+</OBJECT>
+<UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html"><param name="Name" value="ConnexionPage"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html"><param name="Name" value="ConnexionPage"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html#a05d14e1296df90ebd22c89ddd5f51c20"><param name="Name" value="notifyInfoSent(user &amp;user)"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html"><param name="Name" value="ConnexionPage"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html#a5f5046b1cd400eeb311856749fce1114"><param name="Name" value="onConnectionButton_Click()"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html"><param name="Name" value="ConnexionPage"></OBJECT>
+  <UL>
+    <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html#a9b9df2ecfcb2ef38b303b5d1a71d62e8"><param name="Name" value="onInscriptionButton_Click()"></OBJECT>
+  </UL>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_main_page.html"><param name="Name" value="MainPage"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_main_window.html"><param name="Name" value="MainWindow"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="md__r_e_a_d_m_e.html"><param name="Name" value="Platlog_c"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_x_m_l_parser.html"><param name="Name" value="XMLParser"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classadmin.html"><param name="Name" value="admin"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html#a05d14e1296df90ebd22c89ddd5f51c20"><param name="Name" value="notifyInfoSent(user &amp;user)"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html#a5f5046b1cd400eeb311856749fce1114"><param name="Name" value="onConnectionButton_Click()"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="class_connexion_page.html#a9b9df2ecfcb2ef38b303b5d1a71d62e8"><param name="Name" value="onInscriptionButton_Click()"></OBJECT>
+  <LI><OBJECT type="text/sitemap"><param name="Local" value="classuser.html"><param name="Name" value="user"></OBJECT>
+</UL>
+</BODY>
+</HTML>
