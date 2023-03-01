@@ -8,6 +8,7 @@ ConnexionPage::ConnexionPage(QWidget *parent) :
     ui(new Ui::ConnexionPage)
 {
     ui->setupUi(this);
+    ui->input_password->setEchoMode(QLineEdit::Password);
     connect(ui->button_connection, &QPushButton::clicked, this, &ConnexionPage::onConnectionButton_Click);
     connect(ui->button_inscription, &QPushButton::clicked, this, &ConnexionPage::onInscriptionButton_Click);
 }
