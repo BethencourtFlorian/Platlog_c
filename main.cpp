@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
         MainWindow w;
         ConnexionPage c;
 
-        if (QFile::exists("userInfo.xml"))
+        if (QFile::exists("myFile.xml"))
             c.show();
         else
             w.show();

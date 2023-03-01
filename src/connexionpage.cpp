@@ -1,6 +1,7 @@
 #include "headers/connexionpage.h"
 #include "ui_connexionpage.h"
-
+#include "headers/XMLParser.h"
+#include <QXmlStreamReader>
 
 ConnexionPage::ConnexionPage(QWidget *parent) :
     QMainWindow(parent),
@@ -8,8 +9,8 @@ ConnexionPage::ConnexionPage(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->input_password->setEchoMode(QLineEdit::Password);
-    this->setWindowTitle("Connexion");
-    connect(ui->button_connection, &QPushButton::clicked, this, &ConnexionPage::onClick);
+    connect(ui->button_connection, &QPushButton::clicked, this, &ConnexionPage::onConnectionButton_Click);
+    connect(ui->button_inscription, &QPushButton::clicked, this, &ConnexionPage::onInscriptionButton_Click);
 }
 
 ConnexionPage::~ConnexionPage()
@@ -17,62 +18,27 @@ ConnexionPage::~ConnexionPage()
     delete ui;
 }
 
-int ConnexionPage::onClick(){
-    QDomDocument xmlDoc;
+void ConnexionPage::onConnectionButton_Click(){
+    QString typedLogin = ui->input_login->text();
+    QString typedPassword = ui->input_password->text();
+    user foundUser;
 
-        QFile f("userInfo.xml");
-        if (!f.open(QIODevice::ReadOnly))
-        {
-            qDebug() << "Error while opening user file";
-            return 1;
-        }
-        xmlDoc.setContent(&f);
-        f.close();
+    if (XMLParser::CheckConnexion("myFile.xml", foundUser, typedPassword, typedLogin) != 0)
+        // TODO : messages d'erreurs en fonction du retour de CheckConnexion (créer une fonction dans XMLParser)
+        ui->label_error->setText("Mauvais login et/ou mot de passe");
+    else
+    {
+        MainPage *mpg = new MainPage;
+        connect(this, &ConnexionPage::notifyInfoSent, mpg, &MainPage::onInfoSent);
+        mpg->show();
+        emit notifyInfoSent(foundUser); // On transmet les informations de l'utilisateur à la MainPage
+        hide();
 
-        QDomElement XMLRoot = xmlDoc.documentElement();
-        QDomElement XMLUser = XMLRoot.firstChild().toElement();
-        QString typedLogin = ui->input_login->text();
-        QString typedPassword = ui->input_password->text();
-        QString savedLogin = "";
-        QString savedPassword = "";
-        user foundUser;
+    }
+}
 
-        bool found = false;
-
-        while(XMLUser.isNull() == false)
-        {
-            if (XMLUser.tagName() == "User")
-            {
-                while (!XMLUser.isNull() && !found)
-                {
-
-                    savedLogin = XMLUser.attribute("Login", "0");
-                    savedPassword = XMLUser.attribute("Password", "Password");
-                    if ((savedLogin == typedLogin) && (savedPassword == typedPassword))
-                    {
-                        found = true;
-
-                        foundUser.setLogin(savedLogin.toStdString());
-                        foundUser.setPassword(savedPassword.toStdString());
-                        foundUser.setEmail(XMLUser.attribute("Email", "Email").toStdString());
-                        foundUser.setFirstName(XMLUser.attribute("FirstName", "FirstName").toStdString());
-                        foundUser.setLastName(XMLUser.attribute("LastName", "LastName").toStdString());
-                        XMLUser = XMLUser.nextSibling().toElement();
-                    }
-                    XMLUser = XMLUser.nextSibling().toElement();
-                }
-            }
-        }
-        if (!found)
-            ui->label_error->setText("Login failed");
-        else
-        {
-            MainPage *mpg = new MainPage;
-            connect(this, &ConnexionPage::notifyInfoSent, mpg, &MainPage::onInfoSent);
-            mpg->show();
-            emit notifyInfoSent(foundUser);
-            hide();
-
-        }
-        return 0;
+void ConnexionPage::onInscriptionButton_Click(){
+    this->hide();
+    MainWindow* mainwindow = new MainWindow();
+    mainwindow->show();
 }

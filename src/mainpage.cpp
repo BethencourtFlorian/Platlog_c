@@ -1,4 +1,4 @@
-#include "mainpage.h"
+#include "headers/mainpage.h"
 #include "ui_mainpage.h"
 
 MainPage::MainPage(QWidget *parent) :
@@ -16,7 +16,8 @@ MainPage::~MainPage()
 
 void MainPage::onInfoSent(user& user)
 {
-    ui->title->setText(ui->title->text() + " " + QString::fromStdString(user.getFirstName()));
+    // Chaque champ de la vue est remplie avec les informations de l'utilisateur récupérées par la vue Connexion
+    ui->title->setText(QString::fromStdString(user.getFirstName()) + "'s " + ui->title->text());
     ui->info_login->setText(ui->info_login->text() + " " + QString::fromStdString(user.getLogin()));
     ui->info_firstName->setText(ui->info_firstName->text() + " " + QString::fromStdString(user.getFirstName()));
     ui->info_lastName->setText(ui->info_lastName->text() + " " + QString::fromStdString(user.getLastName()));

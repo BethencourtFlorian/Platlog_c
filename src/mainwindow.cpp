@@ -1,7 +1,7 @@
 #include "headers/mainwindow.h"
-
+#include "headers/XMLParser.h"
 #include "qdom.h"
-#include <QFile>
+#include <QString>
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -24,7 +24,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-int MainWindow::storage()
+void MainWindow::storage()
 {
     login = ui->input_login->text();
     password = ui->input_password->text();
@@ -34,45 +34,48 @@ int MainWindow::storage()
 
     if (login.isEmpty() || password.isEmpty() || email.isEmpty() || firstName.isEmpty() || lastName.isEmpty())
     {
-        ui->label_error->setText("Registration failed");
+        ui->label_error->setText("Veuillez remplir tous les champs");
     }
     else
     {
         QDomDocument document;
-        QDomElement root = document.createElement("Users");
+        QDomElement root = document.createElement("QtProject");
         document.appendChild(root);
 
-            QDomElement superUser = document.createElement("User");
-            superUser.setAttribute("Login", "su");
-            superUser.setAttribute("Password", "root");
-            superUser.setAttribute("Email", "");
-            superUser.setAttribute("FirstName", "Admin");
-            superUser.setAttribute("LastName", "");
-            root.appendChild(superUser);
+        QDomElement users = document.createElement("Users");
+        root.appendChild(users);
 
+        QString filePath("myFile.xml");
+        // myFile sera d'abord ouvert en lecture pour récupérer les utilisateurs déjà existants
+        if(XMLParser::CheckUser(document, users, filePath) == 0){
+            // On ajoute le nouvel utilisateur dans le QDomDocument
             QDomElement user = document.createElement("User");
             user.setAttribute("Login", login);
-            user.setAttribute("Password", password);
-            user.setAttribute("Email", email);
-            user.setAttribute("FirstName", firstName);
-            user.setAttribute("LastName", lastName);
-            root.appendChild(user);
+            users.appendChild(user);
 
-        QFile file("userInfo.xml");
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-        {
-            qDebug() << "Failed to open writting";
-            return -1;
+            QDomElement userInfo = document.createElement("UserInfo");
+            userInfo.setAttribute("Password", password);
+            userInfo.setAttribute("Email", email);
+            userInfo.setAttribute("FirstName", firstName);
+            userInfo.setAttribute("LastName", lastName);
+            user.appendChild(userInfo);
         }
-        else {
-            QTextStream stream(&file);
+        else{
+            qDebug() << "Erreur de lecture du fichier";
+        }
+
+        // On ouvre le même fichier, en écriture cette fois-ci pour enregistrer le nouvel utlisateur dans le XML
+        QFile wFile(filePath);
+        if (wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate)){
+            QTextStream stream(&wFile);
             stream << document.toString();
-            file.close();
-            qDebug() << "Finished";
+            wFile.close();
             this->hide();
             ConnexionPage* connexionPage = new ConnexionPage;
             connexionPage->show();
         }
+        else{
+            qDebug() << "Erreur d'écriture du fichier";
+        }
     }
-    return 0;
 }
