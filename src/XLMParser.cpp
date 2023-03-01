@@ -15,10 +15,10 @@ int XMLParser::AddUser(QDomDocument& document, QDomElement newUser, QString file
 
             QDomElement superUser = document.createElement("User");
             superUser.setAttribute("Login", "su");
+            superUser.setAttribute("Password", "root");
             users.appendChild(superUser);
 
             QDomElement userInfo = document.createElement("UserInfo");
-            userInfo.setAttribute("Password", "root");
             userInfo.setAttribute("Email", "");
             userInfo.setAttribute("FirstName", "Admin");
             userInfo.setAttribute("LastName", "");
@@ -72,33 +72,31 @@ int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPa
             while (!user.isNull()) {
                 if (user.isElement()) {
                     QDomElement e = user.toElement();
-                    if(e.hasAttribute("Login")){
+                    if(e.hasAttribute("Login") && e.hasAttribute("Password")){
                         QString newLogin(e.attribute("Login"));
-                        QDomNode userInfo = user.firstChild();
-                        while(!userInfo.isNull()){
-                            QDomElement eInfo = userInfo.toElement();
-                            if(eInfo.tagName()=="UserInfo"){
-                                if(eInfo.hasAttribute("Password")){
-                                    QString newPassword(eInfo.attribute("Password"));
-                                    if(newLogin == typedLogin && newPassword == typedPassword){
-                                        foundUser.setLogin(newLogin.toStdString());
-                                        foundUser.setPassword(newPassword.toStdString());
-                                        foundUser.setEmail(eInfo.attribute("Email").toStdString());
-                                        foundUser.setFirstName(eInfo.attribute("FirstName").toStdString());
-                                        foundUser.setLastName(eInfo.attribute("LastName").toStdString());
-
-                                        return 0;
-                                    }
-                                    else
-                                        break; // Pas besoin de continuer à parcourir les profils si le login est pas bon
+                        QString newPassword(e.attribute("Password"));
+                        if(newLogin == typedLogin && newPassword == typedPassword){
+                            QDomNode userInfo = user.firstChild();
+                            while(!userInfo.isNull()){
+                                QDomElement eInfo = userInfo.toElement();
+                                if(eInfo.tagName()=="UserInfo"){
+                                    foundUser.setLogin(newLogin.toStdString());
+                                    foundUser.setPassword(newPassword.toStdString());
+                                    foundUser.setEmail(eInfo.attribute("Email").toStdString());
+                                    foundUser.setFirstName(eInfo.attribute("FirstName").toStdString());
+                                    foundUser.setLastName(eInfo.attribute("LastName").toStdString());
                                 }
+                                else if(eInfo.tagName() == "UserRights"){
+                                    foundUser.setRights(eInfo.attribute("Read").toInt(), eInfo.attribute("Edit").toInt(), eInfo.attribute("Sudo").toInt());
+                                }
+                                // Else balise profile
+                                userInfo = userInfo.nextSibling();
                             }
-                            // Else balise profile
-                            userInfo = userInfo.nextSibling();
+                            return 0;
                         }
                     }
                     else{
-                        // Pas d'attribut login, problème dans le fichier
+                        // Pas d'attribut login ou password, problème dans le fichier
                         return -1;
                     }
                 }

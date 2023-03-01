@@ -42,9 +42,9 @@ void MainWindow::storage()
         // On ajoute le nouvel utilisateur dans le QDomDocument
         QDomElement user = document.createElement("User");
         user.setAttribute("Login", login);
+        user.setAttribute("Password", password);
 
         QDomElement userInfo = document.createElement("UserInfo");
-        userInfo.setAttribute("Password", password);
         userInfo.setAttribute("Email", email);
         userInfo.setAttribute("FirstName", firstName);
         userInfo.setAttribute("LastName", lastName);
