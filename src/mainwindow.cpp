@@ -16,11 +16,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->input_password->setEchoMode(QLineEdit::Password);
     connect(ui->button_inscription, &QPushButton::clicked, this, &MainWindow::storage);
+    connect(ui->button_back, &QPushButton::clicked, this, &MainWindow::closeWindow);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::closeWindow(){
+    this->hide();
+    ConnexionPage* connexionPage = new ConnexionPage;
+    connexionPage->show();
 }
 
 void MainWindow::storage()
