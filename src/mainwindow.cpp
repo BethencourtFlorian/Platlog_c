@@ -50,6 +50,12 @@ void MainWindow::storage()
         userInfo.setAttribute("LastName", lastName);
         user.appendChild(userInfo);
 
+        QDomElement userRights = document.createElement("UserRights");
+        userRights.setAttribute("Read", 1);
+        userRights.setAttribute("Edit", 0);
+        userRights.setAttribute("Sudo", 0);
+        user.appendChild(userRights);
+
         if(XMLParser::AddUser(document, user, filePath) != 0){
             qDebug() << "Erreur de lecture du fichier";
         }

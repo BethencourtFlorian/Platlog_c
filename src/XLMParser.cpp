@@ -24,6 +24,12 @@ int XMLParser::AddUser(QDomDocument& document, QDomElement newUser, QString file
             userInfo.setAttribute("LastName", "");
             superUser.appendChild(userInfo);
 
+            QDomElement userRights = document.createElement("UserRights");
+            userRights.setAttribute("Read", 1);
+            userRights.setAttribute("Edit", 1);
+            userRights.setAttribute("Sudo", 1);
+            superUser.appendChild(userRights);
+
             // On ajoute le nouvel utilisateur donné en paramètre
             users.appendChild(newUser);
         }
@@ -31,6 +37,7 @@ int XMLParser::AddUser(QDomDocument& document, QDomElement newUser, QString file
             document.setContent(&file, true);
             QDomNode root = document.firstChild();
             QDomNode users = root.firstChild();
+            users.insertAfter(newUser, users.lastChild());
         }
         file.close();
         return 0;
