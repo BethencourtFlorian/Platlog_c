@@ -37,29 +37,20 @@ void MainWindow::storage()
     }
     else
     {
-        QDomDocument document;
-        QDomElement root = document.createElement("QtProject");
-        document.appendChild(root);
-
-        QDomElement users = document.createElement("Users");
-        root.appendChild(users);
-
         QString filePath("myFile.xml");
-        // myFile sera d'abord ouvert en lecture pour récupérer les utilisateurs déjà existants
-        if(XMLParser::CheckUser(document, users, filePath) == 0){
-            // On ajoute le nouvel utilisateur dans le QDomDocument
-            QDomElement user = document.createElement("User");
-            user.setAttribute("Login", login);
-            users.appendChild(user);
+        QDomDocument document;
+        // On ajoute le nouvel utilisateur dans le QDomDocument
+        QDomElement user = document.createElement("User");
+        user.setAttribute("Login", login);
 
-            QDomElement userInfo = document.createElement("UserInfo");
-            userInfo.setAttribute("Password", password);
-            userInfo.setAttribute("Email", email);
-            userInfo.setAttribute("FirstName", firstName);
-            userInfo.setAttribute("LastName", lastName);
-            user.appendChild(userInfo);
-        }
-        else{
+        QDomElement userInfo = document.createElement("UserInfo");
+        userInfo.setAttribute("Password", password);
+        userInfo.setAttribute("Email", email);
+        userInfo.setAttribute("FirstName", firstName);
+        userInfo.setAttribute("LastName", lastName);
+        user.appendChild(userInfo);
+
+        if(XMLParser::AddUser(document, user, filePath) != 0){
             qDebug() << "Erreur de lecture du fichier";
         }
 
