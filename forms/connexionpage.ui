@@ -33,16 +33,12 @@ background-color: rgb(24, 24, 24);</string>
 	font-weight:  bold;
 	font-size: 15px;
 	color: rgb(255, 255, 255);
-	color: #FFF;
 }
 
 QPushButton:hover{
 	
 	background-color: rgb(16, 124, 255);
 }</string>
-   </property>
-   <property name="styleSheet">
-    <string notr="true"/>
    </property>
    <property name="text">
     <string>Log In</string>

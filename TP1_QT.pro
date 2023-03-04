@@ -1,5 +1,6 @@
 QT       += core gui
 QT       += xml
+QT       += sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -13,21 +14,25 @@ SOURCES += \
     main.cpp \
     src/XLMParser.cpp \
     src/connexionpage.cpp \
+    src/dbcreatepage.cpp \
     src/mainpage.cpp \
     src/mainwindow.cpp \
     src/user.cpp
+
 
 HEADERS += \
     headers/XMLParser.h \
     headers/connexionpage.h \
     headers/mainpage.h \
     headers/mainwindow.h \
-    headers/user.h
+    headers/user.h \
+    headers/dbcreatepage.h
 
 FORMS += \
     forms/connexionpage.ui \
     forms/mainpage.ui \
-    forms/mainwindow.ui
+    forms/mainwindow.ui \
+    forms/dbcreatepage.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

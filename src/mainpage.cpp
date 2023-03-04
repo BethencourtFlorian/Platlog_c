@@ -31,3 +31,45 @@ void MainPage::on_button_deconnect_clicked()
     connexionPage->show();
 }
 
+
+void MainPage::on_button_create_database_clicked()
+{
+
+    DBCreatePage* dbCreatePage = new DBCreatePage();
+    dbCreatePage->show();
+    QDir databasePath;
+    QString savePath = databasePath.currentPath()+"/MyDb.db";
+    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE");
+    database.setDatabaseName(savePath);
+    database.open();
+    qDebug() << "Base de donnée initialisée";
+
+    QSqlQuery SqlQuery;
+    SqlQuery.exec("create table test"
+                  "(id integer primary key, "
+                  "firstname varchar(20)");
+
+}
+
+
+void MainPage::on_button_search_database_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Database"), "/home", tr("Data Base Files (*.db)"));
+    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
+    db.setDatabaseName(fileName);
+    db.open();
+
+    QStringList nameList = db.tables();
+    qDebug() << nameList;
+
+    QSqlQuery* query = new QSqlQuery();
+    query->prepare("select * from customers");
+    query->exec();
+
+    QSqlQueryModel * modal = new QSqlTableModel;
+    modal->setQuery(std::move(*query));
+    ui->tableView->setModel(modal);
+    ui->tableView->show();
+
+}
+
