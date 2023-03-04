@@ -73,3 +73,18 @@ void MainPage::on_button_search_database_clicked()
 
 }
 
+
+void MainPage::on_pushButton_clicked()
+{
+    NewProfile* profilePage = new NewProfile(this);
+    connect(this, &MainPage::notifyUsernameProfile, profilePage, &NewProfile::onUsernameSent);
+    connect(profilePage,SIGNAL(destroyed()),this,SLOT(refreshPage()));
+    QString username = (ui->info_login->text()).mid(8);
+    emit notifyUsernameProfile(username);
+    profilePage->show();
+}
+void MainPage::refreshPage()
+{
+    qDebug() << "Refresh XML";
+}
+

@@ -17,6 +17,7 @@ SOURCES += \
     src/dbcreatepage.cpp \
     src/mainpage.cpp \
     src/mainwindow.cpp \
+    src/newprofile.cpp \
     src/user.cpp
 
 
@@ -26,13 +27,15 @@ HEADERS += \
     headers/mainpage.h \
     headers/mainwindow.h \
     headers/user.h \
-    headers/dbcreatepage.h
+    headers/dbcreatepage.h \
+    headers/newprofile.h
 
 FORMS += \
     forms/connexionpage.ui \
     forms/mainpage.ui \
     forms/mainwindow.ui \
-    forms/dbcreatepage.ui
+    forms/dbcreatepage.ui \
+    forms/newprofile.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

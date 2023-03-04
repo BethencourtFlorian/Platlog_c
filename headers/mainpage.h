@@ -10,6 +10,7 @@
 #include "user.h"
 #include "connexionpage.h"
 #include "dbcreatepage.h"
+#include "newprofile.h"
 
 namespace Ui {
 class MainPage;
@@ -31,6 +32,8 @@ public slots:
      * @param user contient les informations de l'utilisateur
      */
     void onInfoSent(user& user);
+    void refreshPage();
+
 
 private slots:
     /**
@@ -42,6 +45,11 @@ private slots:
     void on_button_create_database_clicked();
 
     void on_button_search_database_clicked();
+
+    void on_pushButton_clicked();
+
+signals:
+    void notifyUsernameProfile(QString& username);
 
 private:
     Ui::MainPage *ui;
