@@ -1,91 +1,51 @@
 #include "headers/XMLParser.h"
 #include <QMainWindow>
 
-int XMLParser::CheckUser(QDomDocument& document, QDomElement& users, QString filePath){
+int XMLParser::AddUser(QDomDocument& document, QDomElement newUser, QString filePath){
     QFile file(filePath);
-    if (!file.open(QIODevice::ReadOnly| QIODevice::Text))
+    if (file.open(QIODevice::ReadWrite| QIODevice::Text))
     {
-        // Erreur d'ouverture du fichier
-        return -1;
-    }
-    else {
         if(file.size() == 0){
             // Si le fichier est vide on crée un super utilisateur
+            QDomElement root = document.createElement("QtProject");
+            document.appendChild(root);
+
+            QDomElement users = document.createElement("Users");
+            root.appendChild(users);
+
             QDomElement superUser = document.createElement("User");
             superUser.setAttribute("Login", "su");
+            superUser.setAttribute("Password", "root");
             users.appendChild(superUser);
 
             QDomElement userInfo = document.createElement("UserInfo");
-            userInfo.setAttribute("Password", "root");
             userInfo.setAttribute("Email", "");
             userInfo.setAttribute("FirstName", "Admin");
             userInfo.setAttribute("LastName", "");
             superUser.appendChild(userInfo);
 
-            file.close();
-            return 0;
+            QDomElement userRights = document.createElement("UserRights");
+            userRights.setAttribute("Read", 1);
+            userRights.setAttribute("Edit", 1);
+            userRights.setAttribute("Sudo", 1);
+            superUser.appendChild(userRights);
+
+            // On ajoute le nouvel utilisateur donné en paramètre
+            users.appendChild(newUser);
         }
         else{
-            // Sinon on parcourt la liste des utilisateurs existants et on les rajoute au QDomDocument
-            QString newLogin = "";
-            QXmlStreamReader reader(&file);
-            if (reader.readNextStartElement()) {
-                if (reader.name() == QString("QtProject")){
-                    while(reader.readNextStartElement()){
-                        if(reader.name() ==  QString("Users")){
-                            while(reader.readNextStartElement()){
-                                if(reader.name() ==  QString("User")){
-                                    if(reader.attributes().hasAttribute("Login")){
-                                        newLogin = reader.attributes().value("Login").toString();
-                                        while(reader.readNextStartElement()){
-                                            if(reader.name() ==  QString("UserInfo")){
-                                                if(reader.attributes().hasAttribute("FirstName") &&
-                                                reader.attributes().hasAttribute("LastName") &&
-                                                reader.attributes().hasAttribute("Email") &&
-                                                reader.attributes().hasAttribute("Password")){
-
-                                                    QDomElement user = document.createElement("User");
-                                                    user.setAttribute("Login", newLogin);
-                                                    users.appendChild(user);
-
-                                                    QDomElement userInfo = document.createElement("UserInfo");
-                                                    userInfo.setAttribute("Password", reader.attributes().value("Password").toString());
-                                                    userInfo.setAttribute("Email", reader.attributes().value("Email").toString());
-                                                    userInfo.setAttribute("FirstName", reader.attributes().value("FirstName").toString());
-                                                    userInfo.setAttribute("LastName", reader.attributes().value("LastName").toString());
-                                                    user.appendChild(userInfo);
-
-                                                }
-                                                else{
-                                                    /*
-                                                     * Chaque utilisateur doit posséder les 4 attributs suivants : FirstName, LastName, Email et Password
-                                                     * Situés dans la balise "UserInfo" associée
-                                                    */
-                                                    return -1;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else{
-                                        // Chaque utilisateur doit posséder un attribut Login
-                                        return -1;
-                                    }
-                                reader.skipCurrentElement();
-                                }
-                            }
-                        }
-                        else
-                            reader.skipCurrentElement();
-                    }
-                }
-                else{
-                    // Mauvais fichier
-                    return -1;
-                }
-            }
-            file.close();
-            return 0;
+            document.setContent(&file, true);
+            QDomNode root = document.firstChild();
+            QDomNode users = root.firstChild();
+            users.insertAfter(newUser, users.lastChild());
         }
+        file.close();
+        return 0;
+    }
+    else{
+        // Erreur d'ouverture du fichier
+        qDebug() << "Erreur d'ouverture du fichier";
+        return -1;
     }
 }
 
@@ -103,58 +63,44 @@ int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPa
             return -1;
         }
         else{
-            QXmlStreamReader reader(&file);
-            if (reader.readNextStartElement()) {
-                if (reader.name() == QString("QtProject")){
-                    while(reader.readNextStartElement()){
-                        if(reader.name() ==  QString("Users")){
-                            while(reader.readNextStartElement()){
-                                if(reader.name() ==  QString("User")){
-                                    if(reader.attributes().hasAttribute("Login")){
-                                        QString newLogin = reader.attributes().value("Login").toString();
-                                        while(reader.readNextStartElement()){
-                                            if(reader.name() ==  QString("UserInfo")){
-                                                if(reader.attributes().hasAttribute("FirstName") &&
-                                                reader.attributes().hasAttribute("LastName") &&
-                                                reader.attributes().hasAttribute("Email") &&
-                                                reader.attributes().hasAttribute("Password")){
-                                                    if(newLogin == typedLogin && reader.attributes().value("Password").toString() == typedPassword){
-                                                        // Si on trouve une correspondance, on remplit les informations de l'utilisateur dans foundUser
-                                                        foundUser.setLogin(newLogin.toStdString());
-                                                        foundUser.setPassword(reader.attributes().value("Password").toString().toStdString());
-                                                        foundUser.setEmail(reader.attributes().value("Email").toString().toStdString());
-                                                        foundUser.setFirstName(reader.attributes().value("FirstName").toString().toStdString());
-                                                        foundUser.setLastName(reader.attributes().value("LastName").toString().toStdString());
+            QDomDocument document;
+            document.setContent(&file, true);
+            QDomNode root = document.firstChild();
+            QDomNode users = root.firstChild();
+            QDomNode user = users.firstChild();
 
-                                                        return 0;
-                                                    }
-                                                }
-                                                else{
-                                                    /*
-                                                     * Chaque utilisateur doit posséder les 4 attributs suivants : FirstName, LastName, Email et Password
-                                                     * Situés dans la balise "UserInfo" associée
-                                                    */
-                                                    return -1;
-                                                }
-                                            }
-                                        }
-                                    }
-                                    else{
-                                        // Chaque utilisateur doit posséder un attribut Login
-                                        return -1;
-                                    }
-                                reader.skipCurrentElement();
+            while (!user.isNull()) {
+                if (user.isElement()) {
+                    QDomElement e = user.toElement();
+                    if(e.hasAttribute("Login") && e.hasAttribute("Password")){
+                        QString newLogin(e.attribute("Login"));
+                        QString newPassword(e.attribute("Password"));
+                        if(newLogin == typedLogin && newPassword == typedPassword){
+                            QDomNode userInfo = user.firstChild();
+                            while(!userInfo.isNull()){
+                                QDomElement eInfo = userInfo.toElement();
+                                if(eInfo.tagName()=="UserInfo"){
+                                    foundUser.setLogin(newLogin.toStdString());
+                                    foundUser.setPassword(newPassword.toStdString());
+                                    foundUser.setEmail(eInfo.attribute("Email").toStdString());
+                                    foundUser.setFirstName(eInfo.attribute("FirstName").toStdString());
+                                    foundUser.setLastName(eInfo.attribute("LastName").toStdString());
                                 }
+                                else if(eInfo.tagName() == "UserRights"){
+                                    foundUser.setRights(eInfo.attribute("Read").toInt(), eInfo.attribute("Edit").toInt(), eInfo.attribute("Sudo").toInt());
+                                }
+                                // Else balise profile
+                                userInfo = userInfo.nextSibling();
                             }
+                            return 0;
                         }
-                        else
-                            reader.skipCurrentElement();
+                    }
+                    else{
+                        // Pas d'attribut login ou password, problème dans le fichier
+                        return -1;
                     }
                 }
-                else{
-                    // Mauvais fichier
-                    return -1;
-                }
+                user = user.nextSibling();
             }
             // Aucune correspondance trouvée, mauvais login ou mdp
             file.close();

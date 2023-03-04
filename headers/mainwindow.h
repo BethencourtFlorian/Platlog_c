@@ -19,6 +19,12 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    /**
+     * @brief closeWindow
+     *
+     * Ferme la fenêtre d'inscription et ouvre celle de la connexion
+     */
+    void closeWindow();
 
     /**
      * @brief Incrit le nouvel utilisateur dans le fichier XML.
