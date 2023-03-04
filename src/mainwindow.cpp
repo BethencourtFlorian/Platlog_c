@@ -16,11 +16,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->input_password->setEchoMode(QLineEdit::Password);
     connect(ui->button_inscription, &QPushButton::clicked, this, &MainWindow::storage);
+    connect(ui->button_back, &QPushButton::clicked, this, &MainWindow::closeWindow);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::closeWindow(){
+    this->hide();
+    ConnexionPage* connexionPage = new ConnexionPage;
+    connexionPage->show();
 }
 
 void MainWindow::storage()
@@ -37,29 +44,26 @@ void MainWindow::storage()
     }
     else
     {
-        QDomDocument document;
-        QDomElement root = document.createElement("QtProject");
-        document.appendChild(root);
-
-        QDomElement users = document.createElement("Users");
-        root.appendChild(users);
-
         QString filePath("myFile.xml");
-        // myFile sera d'abord ouvert en lecture pour récupérer les utilisateurs déjà existants
-        if(XMLParser::CheckUser(document, users, filePath) == 0){
-            // On ajoute le nouvel utilisateur dans le QDomDocument
-            QDomElement user = document.createElement("User");
-            user.setAttribute("Login", login);
-            users.appendChild(user);
+        QDomDocument document;
+        // On ajoute le nouvel utilisateur dans le QDomDocument
+        QDomElement user = document.createElement("User");
+        user.setAttribute("Login", login);
+        user.setAttribute("Password", password);
 
-            QDomElement userInfo = document.createElement("UserInfo");
-            userInfo.setAttribute("Password", password);
-            userInfo.setAttribute("Email", email);
-            userInfo.setAttribute("FirstName", firstName);
-            userInfo.setAttribute("LastName", lastName);
-            user.appendChild(userInfo);
-        }
-        else{
+        QDomElement userInfo = document.createElement("UserInfo");
+        userInfo.setAttribute("Email", email);
+        userInfo.setAttribute("FirstName", firstName);
+        userInfo.setAttribute("LastName", lastName);
+        user.appendChild(userInfo);
+
+        QDomElement userRights = document.createElement("UserRights");
+        userRights.setAttribute("Read", 1);
+        userRights.setAttribute("Edit", 0);
+        userRights.setAttribute("Sudo", 0);
+        user.appendChild(userRights);
+
+        if(XMLParser::AddUser(document, user, filePath) != 0){
             qDebug() << "Erreur de lecture du fichier";
         }
 

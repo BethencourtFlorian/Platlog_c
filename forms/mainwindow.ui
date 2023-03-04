@@ -29,7 +29,7 @@ background-color: rgb(24, 24, 24);</string>
    <widget class="QPushButton" name="button_inscription">
     <property name="geometry">
      <rect>
-      <x>360</x>
+      <x>350</x>
       <y>470</y>
       <width>133</width>
       <height>45</height>
@@ -263,6 +263,33 @@ QLineEdit:focus{
     </property>
     <property name="text">
      <string>Sign Up</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="button_back">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>470</y>
+      <width>111</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+	border-radius: 20px;
+	background-color: rgb(255, 33, 33);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(16, 124, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
     </property>
    </widget>
   </widget>

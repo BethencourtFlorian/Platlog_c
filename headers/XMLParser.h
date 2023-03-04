@@ -18,7 +18,7 @@ public:
      * @param filePath Le chemin vers le fichier XML des utilisateurs
      * @return 0 si tout va bien, un code d'erreur sinon
      */
-    static int CheckUser(QDomDocument& document, QDomElement& users, QString filePath);
+    static int AddUser(QDomDocument& document, QDomElement newUser, QString filePath);
     /**
      * @brief Tente une combinaison login/mdp
      *
