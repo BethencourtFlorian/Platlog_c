@@ -108,3 +108,37 @@ int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPa
         }
     }
 }
+
+QDomNodeList XMLParser::getProfiles(QString path, QString username)
+{
+    QDomDocument doc;
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly))
+        qDebug() << "Le fichier n'a pas pu être ouvert";
+    if (!doc.setContent(&file)) {
+        file.close();
+        qDebug() << "Le fichier n'a pas pu être parsé";
+    }
+    file.close();
+
+    QDomElement documentElement = doc.documentElement();
+    QDomNode node = documentElement.firstChild().firstChild();
+
+    while ( !node.isNull())
+    {
+        if (node.isElement())
+        {
+            QDomElement element = node.toElement();
+            qDebug() << "ELEMENT" << element.tagName();
+            qDebug() << "ELEMENT ATTRIBUTE NAME" << element.attribute("Login", "not set");
+
+            if (element.attribute("Login", "not set") == username)
+            {
+                return element.childNodes();
+                //QString first = element.childNodes().at(2).toElement().tagName();
+
+            }
+        }
+        node = node.nextSibling();
+    }
+}

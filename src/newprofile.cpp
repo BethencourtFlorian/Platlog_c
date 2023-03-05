@@ -41,8 +41,7 @@ void NewProfile::on_createProfile_clicked()
         if (node.isElement())
         {
             QDomElement element = node.toElement();
-            qDebug() << "ELEMENT" << element.tagName();
-            qDebug() << "ELEMENT ATTRIBUTE NAME" << element.attribute("Login", "not set");
+
 
             if (element.attribute("Login", "not set") == username)
             {

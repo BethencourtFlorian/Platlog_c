@@ -11,6 +11,7 @@
 #include "connexionpage.h"
 #include "dbcreatepage.h"
 #include "newprofile.h"
+#include "XMLParser.h"
 
 namespace Ui {
 class MainPage;

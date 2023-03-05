@@ -31,6 +31,8 @@ public:
      * @return 0 si tout va bien, un code d'erreur sinon
      */
     static int CheckConnexion(QString filePath, user& foundUser, QString typedPassword, QString typedLogin);
+
+    static QDomNodeList getProfiles(QString path, QString username);
 };
 
 #endif // XMLPARSER_H

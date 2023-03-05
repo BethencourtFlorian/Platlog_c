@@ -7,6 +7,7 @@ MainPage::MainPage(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setWindowTitle("Accueil");
+
 }
 
 MainPage::~MainPage()
@@ -22,6 +23,8 @@ void MainPage::onInfoSent(user& user)
     ui->info_firstName->setText(ui->info_firstName->text() + " " + QString::fromStdString(user.getFirstName()));
     ui->info_lastName->setText(ui->info_lastName->text() + " " + QString::fromStdString(user.getLastName()));
     ui->info_mail->setText(ui->info_mail->text() + " " + QString::fromStdString(user.getEmail()));
+
+    refreshPage();
 }
 
 void MainPage::on_button_deconnect_clicked()
@@ -83,8 +86,22 @@ void MainPage::on_pushButton_clicked()
     emit notifyUsernameProfile(username);
     profilePage->show();
 }
+
 void MainPage::refreshPage()
 {
-    qDebug() << "Refresh XML";
+    QLayoutItem* item;
+    while((item = ui->verticalLayout->takeAt(0)) != 0)
+    {
+        delete item->widget();
+    }
+
+    QDomNodeList profiles = XMLParser::getProfiles("myFile.xml",ui->info_login->text().mid(8));
+    for (int i = 2 ; i < profiles.count() ; i++)
+    {
+        QLabel* newLabel = new QLabel(profiles.at(i).toElement().attribute("id", "not set"));
+        newLabel->setStyleSheet("QLabel { color: white; }");
+        ui->verticalLayout->addWidget(newLabel);
+    }
+    qDebug() << "XML refreshed !";
 }
 
