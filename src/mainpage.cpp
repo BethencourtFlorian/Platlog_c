@@ -25,6 +25,7 @@ void MainPage::onInfoSent(user& user)
     ui->info_mail->setText(ui->info_mail->text() + " " + QString::fromStdString(user.getEmail()));
 
     refreshPage();
+
 }
 
 void MainPage::on_button_deconnect_clicked()
@@ -95,11 +96,18 @@ void MainPage::refreshPage()
         delete item->widget();
     }
 
+
+
     QDomNodeList profiles = XMLParser::getProfiles("myFile.xml",ui->info_login->text().mid(8));
     for (int i = 2 ; i < profiles.count() ; i++)
     {
         QLabel* newLabel = new QLabel(profiles.at(i).toElement().attribute("id", "not set"));
         newLabel->setStyleSheet("QLabel { color: white; }");
+
+        Menu* enu = new Menu();
+        newLabel->setContextMenuPolicy(Qt::CustomContextMenu);
+        connect(newLabel, SIGNAL(customContextMenuRequested(QPoint)), enu, SLOT(showMenu()));
+
         ui->verticalLayout->addWidget(newLabel);
     }
     qDebug() << "XML refreshed !";

@@ -11,6 +11,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/menu.cpp \
     main.cpp \
     src/XLMParser.cpp \
     src/connexionpage.cpp \
@@ -26,6 +27,7 @@ HEADERS += \
     headers/connexionpage.h \
     headers/mainpage.h \
     headers/mainwindow.h \
+    headers/menu.h \
     headers/user.h \
     headers/dbcreatepage.h \
     headers/newprofile.h
