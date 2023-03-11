@@ -35,27 +35,6 @@ void MainPage::on_button_deconnect_clicked()
     connexionPage->show();
 }
 
-
-void MainPage::on_button_create_database_clicked()
-{
-
-    DBCreatePage* dbCreatePage = new DBCreatePage();
-    dbCreatePage->show();
-    QDir databasePath;
-    QString savePath = databasePath.currentPath()+"/MyDb.db";
-    QSqlDatabase database = QSqlDatabase::addDatabase("QSQLITE");
-    database.setDatabaseName(savePath);
-    database.open();
-    qDebug() << "Base de donnée initialisée";
-
-    QSqlQuery SqlQuery;
-    SqlQuery.exec("create table test"
-                  "(id integer primary key, "
-                  "firstname varchar(20)");
-
-}
-
-
 void MainPage::on_button_search_database_clicked()
 {
     QString fileName = QFileDialog::getOpenFileName(this, tr("Open Database"), "/home", tr("Data Base Files (*.db)"));
@@ -80,11 +59,12 @@ void MainPage::on_button_search_database_clicked()
 
 void MainPage::on_pushButton_clicked()
 {
-    NewProfile* profilePage = new NewProfile(this);
-    connect(this, &MainPage::notifyUsernameProfile, profilePage, &NewProfile::onUsernameSent);
+    qDebug() << "onPushButton";
+    Profile* profilePage = new Profile(this);
+    connect(this, &MainPage::notifyLoginProfile, profilePage, &Profile::onLoginSent);
     connect(profilePage,SIGNAL(destroyed()),this,SLOT(refreshPage()));
-    QString username = (ui->info_login->text()).mid(8);
-    emit notifyUsernameProfile(username);
+    QString login = (ui->info_login->text()).mid(8);
+    emit notifyLoginProfile(login);
     profilePage->show();
 }
 

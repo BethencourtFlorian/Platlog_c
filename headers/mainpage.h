@@ -9,8 +9,7 @@
 #include <QFileDialog>
 #include "user.h"
 #include "connexionpage.h"
-#include "dbcreatepage.h"
-#include "newprofile.h"
+#include "profile.h"
 #include "XMLParser.h"
 #include "menu.h"
 
@@ -43,15 +42,12 @@ private slots:
      */
     void on_button_deconnect_clicked();
 
-
-    void on_button_create_database_clicked();
-
     void on_button_search_database_clicked();
 
     void on_pushButton_clicked();
 
 signals:
-    void notifyUsernameProfile(QString& username);
+    void notifyLoginProfile(QString& login);
 
 private:
     Ui::MainPage *ui;
