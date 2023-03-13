@@ -21,7 +21,7 @@ ConnexionPage::~ConnexionPage()
 void ConnexionPage::onConnectionButton_Click(){
     QString typedLogin = ui->input_login->text();
     QString typedPassword = ui->input_password->text();
-    user foundUser;
+    User foundUser;
 
     if (XMLParser::CheckConnexion("myFile.xml", foundUser, typedPassword, typedLogin) != 0)
         // TODO : messages d'erreurs en fonction du retour de CheckConnexion (créer une fonction dans XMLParser)

@@ -1,6 +1,28 @@
 #include "headers/user.h"
 
-user::user()
+list<Profile*> User::getProfiles() const
+{
+    return profiles;
+}
+
+void User::addProfile(Profile* newProfile)
+{
+    //Profile newProfile = Profile(id, loginUser);
+    profiles.push_back(newProfile);
+}
+void User::deleteProfile(QString id)
+{
+    //Chercher le profil dans la liste
+}
+
+void User::clearProfiles(){
+    while (!profiles.empty())
+    {
+        profiles.pop_front();
+    }
+}
+
+User::User()
 {
     login = "new_user";
     password = "password";
@@ -11,7 +33,7 @@ user::user()
     rights[0] = 1; rights[1] = 0; rights[2] = 0;
 }
 
-user::user(string new_login, string new_password, string new_email, string new_firstName, string new_lastName, int* new_rights)
+User::User(QString new_login, QString new_password, QString new_email, QString new_firstName, QString new_lastName, int* new_rights)
 {
     login = new_login;
     password = new_password;
@@ -23,73 +45,73 @@ user::user(string new_login, string new_password, string new_email, string new_f
 }
 
 // Getters
-string user::getLogin(){
+QString User::getLogin(){
     return login;
 }
-string user::getPassword(){
+QString User::getPassword(){
     return password;
 }
-string user::getEmail(){
+QString User::getEmail(){
     return email;
 }
-string user::getFirstName(){
+QString User::getFirstName(){
     return firstName;
 }
-string user::getLastName(){
+QString User::getLastName(){
     return lastName;
 }
 
-int* user::getRights(){
+int* User::getRights(){
     return rights;
 }
 
-int user::getRightRead(){
+int User::getRightRead(){
     return rights[0];
 }
 
-int user::getRightEdit(){
+int User::getRightEdit(){
     return rights[1];
 }
 
-int user::getRightSudo(){
+int User::getRightSudo(){
     return rights[2];
 }
 
 
 //Setters
-void user::setLogin(string new_login){
+void User::setLogin(QString new_login){
     login = new_login;
 }
-void user::setPassword(string new_password){
+void User::setPassword(QString new_password){
     password = new_password;
 }
-void user::setEmail(string new_email){
+void User::setEmail(QString new_email){
     email = new_email;
 }
-void user::setFirstName(string new_firstName){
+void User::setFirstName(QString new_firstName){
     firstName = new_firstName;
 }
-void user::setLastName(string new_lastName){
+void User::setLastName(QString new_lastName){
     lastName = new_lastName;
 }
-void user::setRights(int new_right_read, int new_right_edit, int new_right_sudo){
+void User::setRights(int new_right_read, int new_right_edit, int new_right_sudo){
     setRightEdit(new_right_read);
     setRightRead(new_right_edit);
     setRightSudo(new_right_sudo);
 }
-void user::setRightRead(int new_right_read){
+void User::setRightRead(int new_right_read){
     if(new_right_read >= 1)
         rights[0] = 1;
     else
         rights[0] = 0;
 }
-void user::setRightEdit(int new_right_edit){
+void User::setRightEdit(int new_right_edit){
     if(new_right_edit >= 1)
         rights[1] = 1;
     else
         rights[1] = 0;
 }
-void user::setRightSudo(int new_right_sudo){
+void User::setRightSudo(int new_right_sudo){
     if(new_right_sudo >= 1)
         rights[2] = 1;
     else
