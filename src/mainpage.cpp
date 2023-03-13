@@ -15,17 +15,17 @@ MainPage::~MainPage()
     delete ui;
 }
 
-void MainPage::onInfoSent(user& user)
+void MainPage::onInfoSent(User& sentUser)
 {
+    user = sentUser;
     // Chaque champ de la vue est remplie avec les informations de l'utilisateur récupérées par la vue Connexion
-    ui->title->setText(QString::fromStdString(user.getFirstName()) + "'s " + ui->title->text());
-    ui->info_login->setText(ui->info_login->text() + " " + QString::fromStdString(user.getLogin()));
-    ui->info_firstName->setText(ui->info_firstName->text() + " " + QString::fromStdString(user.getFirstName()));
-    ui->info_lastName->setText(ui->info_lastName->text() + " " + QString::fromStdString(user.getLastName()));
-    ui->info_mail->setText(ui->info_mail->text() + " " + QString::fromStdString(user.getEmail()));
+    ui->title->setText(user.getFirstName() + "'s " + ui->title->text());
+    ui->info_login->setText(ui->info_login->text() + " " + user.getLogin());
+    ui->info_firstName->setText(ui->info_firstName->text() + " " + user.getFirstName());
+    ui->info_lastName->setText(ui->info_lastName->text() + " " + user.getLastName());
+    ui->info_mail->setText(ui->info_mail->text() + " " + user.getEmail());
 
     refreshPage();
-
 }
 
 void MainPage::on_button_deconnect_clicked()
@@ -59,7 +59,6 @@ void MainPage::on_button_search_database_clicked()
 
 void MainPage::on_pushButton_clicked()
 {
-    qDebug() << "onPushButton";
     Profile* profilePage = new Profile(this);
     connect(this, &MainPage::notifyLoginProfile, profilePage, &Profile::onLoginSent);
     connect(profilePage,SIGNAL(destroyed()),this,SLOT(refreshPage()));
@@ -70,26 +69,26 @@ void MainPage::on_pushButton_clicked()
 
 void MainPage::refreshPage()
 {
+    QLayout* layout = ui->verticalLayout;
     QLayoutItem* item;
-    while((item = ui->verticalLayout->takeAt(0)) != 0)
+    while((item = layout->takeAt(0)) != 0)
     {
-        delete item->widget();
+        if(item->widget() != 0)
+            delete item->widget();
+        delete item;
     }
 
-
-
-    QDomNodeList profiles = XMLParser::getProfiles("myFile.xml",ui->info_login->text().mid(8));
-    for (int i = 2 ; i < profiles.count() ; i++)
-    {
-        QLabel* newLabel = new QLabel(profiles.at(i).toElement().attribute("id", "not set"));
+    XMLParser::fillUser("myFile.xml", user);
+    list<Profile*> listProfiles = user.getProfiles();
+    for(auto it = listProfiles.begin(); it != listProfiles.end(); it++){
+        QLabel* newLabel = new QLabel((*it)->getId());
         newLabel->setStyleSheet("QLabel { color: white; }");
 
-        Menu* enu = new Menu();
+        Menu* menu = new Menu();
         newLabel->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(newLabel, SIGNAL(customContextMenuRequested(QPoint)), enu, SLOT(showMenu()));
+        connect(newLabel, SIGNAL(customContextMenuRequested(QPoint)), menu, SLOT(showMenu()));
 
         ui->verticalLayout->addWidget(newLabel);
     }
-    qDebug() << "XML refreshed !";
 }
 

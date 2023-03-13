@@ -30,9 +30,9 @@ public:
      * @param typedLogin Le login rentré dans le formulaire
      * @return 0 si tout va bien, un code d'erreur sinon
      */
-    static int CheckConnexion(QString filePath, user& foundUser, QString typedPassword, QString typedLogin);
+    static int CheckConnexion(QString filePath, User& foundUser, QString typedPassword, QString typedLogin);
 
-    static QDomNodeList getProfiles(QString path, QString username);
+    static void fillUser(QString path, User& user);
 };
 
 #endif // XMLPARSER_H

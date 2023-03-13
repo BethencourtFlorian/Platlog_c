@@ -49,7 +49,7 @@ int XMLParser::AddUser(QDomDocument& document, QDomElement newUser, QString file
     }
 }
 
-int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPassword, QString typedLogin){
+int XMLParser::CheckConnexion(QString filePath, User& foundUser, QString typedPassword, QString typedLogin){
     QFile file(filePath);
     if (!file.open(QIODevice::ReadOnly| QIODevice::Text))
     {
@@ -80,11 +80,11 @@ int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPa
                             while(!userInfo.isNull()){
                                 QDomElement eInfo = userInfo.toElement();
                                 if(eInfo.tagName()=="UserInfo"){
-                                    foundUser.setLogin(newLogin.toStdString());
-                                    foundUser.setPassword(newPassword.toStdString());
-                                    foundUser.setEmail(eInfo.attribute("Email").toStdString());
-                                    foundUser.setFirstName(eInfo.attribute("FirstName").toStdString());
-                                    foundUser.setLastName(eInfo.attribute("LastName").toStdString());
+                                    foundUser.setLogin(newLogin);
+                                    foundUser.setPassword(newPassword);
+                                    foundUser.setEmail(eInfo.attribute("Email"));
+                                    foundUser.setFirstName(eInfo.attribute("FirstName"));
+                                    foundUser.setLastName(eInfo.attribute("LastName"));
                                 }
                                 else if(eInfo.tagName() == "UserRights"){
                                     foundUser.setRights(eInfo.attribute("Read").toInt(), eInfo.attribute("Edit").toInt(), eInfo.attribute("Sudo").toInt());
@@ -109,7 +109,7 @@ int XMLParser::CheckConnexion(QString filePath, user& foundUser, QString typedPa
     }
 }
 
-QDomNodeList XMLParser::getProfiles(QString path, QString username)
+void XMLParser::fillUser(QString path, User& user)
 {
     QDomDocument doc;
     QFile file(path);
@@ -121,24 +121,42 @@ QDomNodeList XMLParser::getProfiles(QString path, QString username)
     }
     file.close();
 
-    QDomElement documentElement = doc.documentElement();
-    QDomNode node = documentElement.firstChild().firstChild();
+    QDomElement root = doc.documentElement();
+    QDomNode userNode = root.firstChild().firstChild(); // <QtProject> -> <Users> -> <User>
 
-    while ( !node.isNull())
+    while ( !userNode.isNull())
     {
-        if (node.isElement())
+        if (userNode.isElement())
         {
-            QDomElement element = node.toElement();
-            qDebug() << "ELEMENT" << element.tagName();
-            qDebug() << "ELEMENT ATTRIBUTE NAME" << element.attribute("Login", "not set");
+            QDomElement userElement = userNode.toElement();
 
-            if (element.attribute("Login", "not set") == username)
+            if (userElement.attribute("Login", "not set") == user.getLogin())
             {
-                return element.childNodes();
-                //QString first = element.childNodes().at(2).toElement().tagName();
-
+                user.clearProfiles();
+                QDomNode infoNode = userNode.firstChild();
+                if(infoNode.isElement()){
+                    while(!infoNode.isNull()){
+                        if(infoNode.nodeName() == "Profiles"){
+                            QDomNode profileNode = infoNode.firstChild();
+                            while(!profileNode.isNull()){
+                                QDomElement profileElement = profileNode.toElement();
+                                Profile* newProfile = new Profile(profileElement.attribute("id"), user.getLogin());
+                                QDomNode dbNode = profileNode.firstChild();
+                                while(!dbNode.isNull()){
+                                    QDomElement dbElement = dbNode.toElement();
+                                    Database* newDatabase = new Database(dbElement.attribute("name"), dbElement.attribute("path"));
+                                    newProfile->addDb(newDatabase);
+                                    dbNode = dbNode.nextSibling();
+                                }
+                                user.addProfile(newProfile);
+                                profileNode = profileNode.nextSibling();
+                            }
+                        }
+                        infoNode = infoNode.nextSibling();
+                    }
+                }
             }
         }
-        node = node.nextSibling();
+        userNode = userNode.nextSibling();
     }
 }
