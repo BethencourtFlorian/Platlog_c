@@ -70,22 +70,18 @@ void MainPage::on_pushButton_clicked()
 
 void MainPage::instanciatePage()
 {
-    QDomNodeList profiles = XMLParser::getProfiles("myFile.xml",ui->info_login->text().mid(8));
+    XMLParser::fillUser("myFile.xml", user);
+    list<Profile*> listProfiles = user.getProfiles();
 
     ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->treeWidget->setHeaderHidden(true);
-    for (int i = 2 ; i < profiles.count() ; i++)
+
+    for(auto it = listProfiles.begin(); it != listProfiles.end(); it++)
     {
-        QLabel* newLabel = new QLabel(profiles.at(i).toElement().attribute("id", "not set"));
+        QLabel* newLabel = new QLabel((*it)->getId());
 
         QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
-        QTreeWidgetItem* database = new QTreeWidgetItem();
-
         treeNode->setText(0, newLabel->text());
-        database->setText(0, "database");
-
-        treeNode->addChild(database);
-
     }
 }
 
