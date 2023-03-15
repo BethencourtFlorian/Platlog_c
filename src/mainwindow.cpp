@@ -63,6 +63,9 @@ void MainWindow::storage()
         userRights.setAttribute("Sudo", 0);
         user.appendChild(userRights);
 
+        QDomElement profiles = document.createElement("Profiles");
+        user.appendChild(profiles);
+
         if(XMLParser::AddUser(document, user, filePath) != 0){
             qDebug() << "Erreur de lecture du fichier";
         }
