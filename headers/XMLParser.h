@@ -5,6 +5,8 @@
 #include <QFile>
 #include <qdom.h>
 #include "user.h"
+#include "profile.h"
+#include "database.h"
 
 class XMLParser{
 public:
@@ -32,7 +34,9 @@ public:
      */
     static int CheckConnexion(QString filePath, User& foundUser, QString typedPassword, QString typedLogin);
 
-    static void fillUser(QString path, User& user);
+    static void FillUser(QString path, User& user);
+
+    static std::list<User*> GetUsers(QString filePath);
 };
 
 #endif // XMLPARSER_H

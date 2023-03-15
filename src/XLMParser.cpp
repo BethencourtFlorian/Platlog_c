@@ -66,8 +66,7 @@ int XMLParser::CheckConnexion(QString filePath, User& foundUser, QString typedPa
             QDomDocument document;
             document.setContent(&file, true);
             QDomNode root = document.firstChild();
-            QDomNode users = root.firstChild();
-            QDomNode user = users.firstChild();
+            QDomNode user = root.firstChild().firstChild();
 
             while (!user.isNull()) {
                 if (user.isElement()) {
@@ -109,7 +108,7 @@ int XMLParser::CheckConnexion(QString filePath, User& foundUser, QString typedPa
     }
 }
 
-void XMLParser::fillUser(QString path, User& user)
+void XMLParser::FillUser(QString path, User& user)
 {
     QDomDocument doc;
     QFile file(path);
@@ -159,4 +158,62 @@ void XMLParser::fillUser(QString path, User& user)
         }
         userNode = userNode.nextSibling();
     }
+}
+
+std::list<User*> XMLParser::GetUsers(QString filePath){
+    list<User*> listUsers;
+
+    QDomDocument doc;
+    QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly))
+        qDebug() << "Le fichier n'a pas pu être ouvert";
+    if (!doc.setContent(&file)) {
+        file.close();
+        qDebug() << "Le fichier n'a pas pu être parsé";
+    }
+    file.close();
+
+    QDomElement root = doc.documentElement();
+    QDomNode userNode = root.firstChild().firstChild(); // <QtProject> -> <Users> -> <User>
+
+    while (!userNode.isNull()) {
+        if (userNode.isElement()){
+            User* user = new User();
+            QDomElement e = userNode.toElement();
+            QDomNode infoNode = userNode.firstChild();
+            while(!infoNode.isNull()){
+                QDomElement eInfo = infoNode.toElement();
+                if(eInfo.tagName()=="UserInfo"){
+                    user->setLogin(e.attribute("Login", "Not_set"));
+                    user->setPassword(e.attribute("Password", "Not_set"));
+                    user->setEmail(eInfo.attribute("Email", "Not_set"));
+                    user->setFirstName(eInfo.attribute("FirstName", "Not_set"));
+                    user->setLastName(eInfo.attribute("LastName", "Not_set"));
+                }
+                else if(eInfo.tagName() == "UserRights"){
+                    user->setRights(eInfo.attribute("Read").toInt(), eInfo.attribute("Edit").toInt(), eInfo.attribute("Sudo").toInt());
+                }
+                else if(eInfo.tagName() == "Profiles"){
+                    QDomNode profileNode = infoNode.firstChild();
+                    while(!profileNode.isNull()){
+                        QDomElement profileElement = profileNode.toElement();
+                        Profile* profile = new Profile(profileElement.attribute("id", "Not_set"), e.attribute("Login", "Not_set"));
+                        QDomNode dbNode = profileNode.firstChild();
+                        while(!dbNode.isNull()){
+                            QDomElement dbElement = dbNode.toElement();
+                            Database* database = new Database(dbElement.attribute("name", "Not_set"), dbElement.attribute("path", "Not_set"));
+                            profile->addDb(database);
+                            dbNode = dbNode.nextSibling();
+                        }
+                        user->addProfile(profile);
+                        profileNode = profileNode.nextSibling();
+                    }
+                }
+                infoNode = infoNode.nextSibling();
+            }
+            listUsers.push_back(user);
+        }
+        userNode = userNode.nextSibling();
+    }
+    return listUsers;
 }
