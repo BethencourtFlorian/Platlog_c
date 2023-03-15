@@ -15,17 +15,17 @@ MainPage::~MainPage()
     delete ui;
 }
 
-void MainPage::onInfoSent(user& user)
+void MainPage::onInfoSent(User& sentUser)
 {
+    user = sentUser;
     // Chaque champ de la vue est remplie avec les informations de l'utilisateur récupérées par la vue Connexion
-    ui->title->setText(QString::fromStdString(user.getFirstName()) + "'s " + ui->title->text());
-    ui->info_login->setText(ui->info_login->text() + " " + QString::fromStdString(user.getLogin()));
-    ui->info_firstName->setText(ui->info_firstName->text() + " " + QString::fromStdString(user.getFirstName()));
-    ui->info_lastName->setText(ui->info_lastName->text() + " " + QString::fromStdString(user.getLastName()));
-    ui->info_mail->setText(ui->info_mail->text() + " " + QString::fromStdString(user.getEmail()));
+    ui->title->setText(user.getFirstName() + "'s " + ui->title->text());
+    ui->info_login->setText(ui->info_login->text() + " " + user.getLogin());
+    ui->info_firstName->setText(ui->info_firstName->text() + " " + user.getFirstName());
+    ui->info_lastName->setText(ui->info_lastName->text() + " " + user.getLastName());
+    ui->info_mail->setText(ui->info_mail->text() + " " + user.getEmail());
 
     instanciatePage();
-
 }
 
 void MainPage::on_button_deconnect_clicked()
@@ -70,39 +70,30 @@ void MainPage::on_pushButton_clicked()
 
 void MainPage::instanciatePage()
 {
-    QDomNodeList profiles = XMLParser::getProfiles("myFile.xml",ui->info_login->text().mid(8));
+    XMLParser::fillUser("myFile.xml", user);
+    list<Profile*> listProfiles = user.getProfiles();
 
     ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     ui->treeWidget->setHeaderHidden(true);
-    for (int i = 2 ; i < profiles.count() ; i++)
+
+    for(auto it = listProfiles.begin(); it != listProfiles.end(); it++)
     {
-        QLabel* newLabel = new QLabel(profiles.at(i).toElement().attribute("id", "not set"));
+        QLabel* newLabel = new QLabel((*it)->getId());
 
         QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
-        QTreeWidgetItem* database = new QTreeWidgetItem();
-
         treeNode->setText(0, newLabel->text());
-        database->setText(0, "database");
-
-        treeNode->addChild(database);
-
     }
 }
 
 void MainPage::refreshPage()
 {
-    QDomNodeList profiles = XMLParser::getProfiles("myFile.xml",ui->info_login->text().mid(8));
+    XMLParser::fillUser("myFile.xml", user);
+    list<Profile*> listProfiles = user.getProfiles();
 
-    QLabel* newLabel = new QLabel(profiles.at(profiles.count() - 1).toElement().attribute("id", "not set"));
+    QLabel* newLabel = new QLabel(listProfiles.back()->getId());
 
     QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
-    QTreeWidgetItem* database = new QTreeWidgetItem();
-
     treeNode->setText(0, newLabel->text());
-    database->setText(0, "database");
-
-    treeNode->addChild(database);
-
 }
 
 void MainPage::on_pushButton_2_clicked()

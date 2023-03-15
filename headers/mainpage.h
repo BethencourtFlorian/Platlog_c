@@ -32,7 +32,7 @@ public slots:
      * Avec les informations de l'utilisateur passé en paramètre
      * @param user contient les informations de l'utilisateur
      */
-    void onInfoSent(user& user);
+    void onInfoSent(User& user);
     void instanciatePage();
     void refreshPage();
 
@@ -52,6 +52,7 @@ signals:
 
 private:
     Ui::MainPage *ui;
+    User user;
 };
 
 #endif // MAINPAGE_H

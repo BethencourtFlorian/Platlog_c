@@ -39,7 +39,7 @@ signals:
      * @brief Envoie les informations de l'utilisateur à la MainPage
      * @param user contient les informations de l'utilisateur
      */
-    void notifyInfoSent(user& user);
+    void notifyInfoSent(User& user);
 
 private:
     Ui::ConnexionPage *ui;

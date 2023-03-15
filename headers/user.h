@@ -1,20 +1,23 @@
 #ifndef USER_H
 #define USER_H
 
-#include <string>
+#include <QString>
+#include <list>
+#include "profile.h"
 
 using namespace std;
 
-class user
+class User
 {
 private:
-    string login;
-    string password;
-    string email;
-    string firstName;
-    string lastName;
+    QString login;
+    QString password;
+    QString email;
+    QString firstName;
+    QString lastName;
 
     int rights[3];
+    std::list<Profile*> profiles;
 public:
     /**
      * @brief Constructeur par défaut
@@ -29,7 +32,7 @@ public:
      *     Dans l'ordre des droits on a Lecture, Edition et Super utilisateur\n
      *     Par défaut la lecture seulement est autorisée soit [1,0,0]
      */
-    user();
+    User();
     /**
      * @brief Constructeur par paramètre
      *
@@ -41,34 +44,34 @@ public:
      * @param new_lastName
      * @param new_rights
      */
-    user(string new_login, string new_password, string new_email, string new_firstName, string new_lastName, int* new_rights);
+    User(QString new_login, QString new_password, QString new_email, QString new_firstName, QString new_lastName, int* new_rights);
 
     // Getters
     /**
      * @brief Renvoie le login de l'utilisateur
-     * @return Une String contenant le login
+     * @return Une QString contenant le login
      */
-    string getLogin();
+    QString getLogin();
     /**
      * @brief Renvoie le mot de passe de l'utilisateur
-     * @return Une String contenant le mot de passe
+     * @return Une QString contenant le mot de passe
      */
-    string getPassword();
+    QString getPassword();
     /**
      * @brief Renvoie l'email de l'utilisateur
-     * @return Une String contenant l'email
+     * @return Une QString contenant l'email
      */
-    string getEmail();
+    QString getEmail();
     /**
      * @brief Renvoie le prénom de l'utilisateur
-     * @return Une String contenant le prénom
+     * @return Une QString contenant le prénom
      */
-    string getFirstName();
+    QString getFirstName();
     /**
      * @brief Renvoie le nom de l'utilisateur
-     * @return Une String contenant le nom
+     * @return Une QString contenant le nom
      */
-    string getLastName();
+    QString getLastName();
     /**
      * @brief Renvoie la liste des droits de l'utilisateur
      * @return Une liste d'entiers contenant les droits [READ,EDIT,SUDO], 0 ou 1
@@ -93,29 +96,29 @@ public:
     //Setters
     /**
      * @brief Modifie le login de l'utilisateur
-     * @param new_login Une String contenant le nouveau login
+     * @param new_login Une QString contenant le nouveau login
      */
-    void setLogin(string new_login);
+    void setLogin(QString new_login);
     /**
      * @brief Modifie le mot de passe de l'utilisateur
-     * @param new_password Une String contenant le nouveau mot de passe
+     * @param new_password Une QString contenant le nouveau mot de passe
      */
-    void setPassword(string new_password);
+    void setPassword(QString new_password);
     /**
      * @brief Modifie l'email de l'utilisateur
-     * @param new_email Une String contenant le nouvel email
+     * @param new_email Une QString contenant le nouvel email
      */
-    void setEmail(string new_email);
+    void setEmail(QString new_email);
     /**
      * @brief Modifie le prénom de l'utilisateur
-     * @param new_firstName Une String contenant le nouveau prénom
+     * @param new_firstName Une QString contenant le nouveau prénom
      */
-    void setFirstName(string new_firstName);
+    void setFirstName(QString new_firstName);
     /**
      * @brief Modifie le nom de l'utilisateur
-     * @param new_lastName Une String contenant le nouveau nom
+     * @param new_lastName Une QString contenant le nouveau nom
      */
-    void setLastName(string new_lastName);
+    void setLastName(QString new_lastName);
 
     /**
      * @brief Modifie la liste des droits de l'utilisateur
@@ -137,6 +140,11 @@ public:
      * @param Un entier (0 ou 1) pour indiquer ou pas l'autorisation
      */
     void setRightSudo(int new_right_sudo);
+
+    std::list<Profile*> getProfiles() const;
+    void addProfile(Profile* newProfile);
+    void deleteProfile(QString id);
+    void clearProfiles();
 };
 
 #endif // USER_H

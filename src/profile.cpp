@@ -10,11 +10,31 @@ Profile::Profile(QWidget *parent) :
     ui->setupUi(this);
 }
 
+Profile::Profile(const Profile& source){
+    id = source.id;
+    loginUser = source.loginUser;
+}
+
 Profile::~Profile()
 {
     delete ui;
 }
 
+Profile::Profile(QString newId, QString newLoginUser){
+    id = newId;
+    loginUser = newLoginUser;
+}
+
+Profile &Profile::operator=(const Profile& source)
+{
+    id = source.id;
+    loginUser = source.loginUser;
+    return *this;
+}
+
+void Profile::addDb(Database* db){
+    databases.push_back(db);
+}
 
 void Profile::onLoginSent(QString& loginPassed)
 {
@@ -41,19 +61,23 @@ void Profile::on_createProfile_clicked()
         if (user.isElement())
         {
             QDomElement userElement = user.toElement();
-
             if (userElement.attribute("Login", "not set") == loginUser)
             {
-                QDomElement profile = doc.createElement("Profile");
-                profile.setAttribute("id", ui->input_profile->text());
-                id = ui->input_profile->text(); // Optionnel ?
-                userElement.appendChild(profile);
+                QDomNode info = user.firstChild();
+                while(!info.isNull()){
+                    if(info.nodeName() == "Profiles"){
+                        QDomElement profile = doc.createElement("Profile");
+                        profile.setAttribute("id", ui->input_profile->text());
+                        info.toElement().appendChild(profile);
 
-                if (file.open( QIODevice::WriteOnly | QIODevice::Text))
-                {
-                    QTextStream stream(&file);
-                    stream << doc.toString();
-                    file.close();
+                        if (file.open( QIODevice::WriteOnly | QIODevice::Text))
+                        {
+                            QTextStream stream(&file);
+                            stream << doc.toString();
+                            file.close();
+                        }
+                    }
+                    info = info.nextSibling();
                 }
             }
         }
@@ -61,5 +85,25 @@ void Profile::on_createProfile_clicked()
     }
     emit destroyed();
     hide();
+}
+
+QString Profile::getId() const
+{
+    return id;
+}
+
+void Profile::setId(const QString &newId)
+{
+    id = newId;
+}
+
+QString Profile::getLoginUser() const
+{
+    return loginUser;
+}
+
+void Profile::setLoginUser(const QString &newLoginUser)
+{
+    loginUser = newLoginUser;
 }
 
