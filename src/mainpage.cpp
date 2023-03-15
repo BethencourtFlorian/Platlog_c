@@ -105,4 +105,8 @@ void MainPage::refreshPage()
 
 }
 
+void MainPage::on_pushButton_2_clicked()
+{
+
+}
 
