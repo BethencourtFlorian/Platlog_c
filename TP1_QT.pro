@@ -15,10 +15,9 @@ SOURCES += \
     main.cpp \
     src/XLMParser.cpp \
     src/connexionpage.cpp \
-    src/dbcreatepage.cpp \
     src/mainpage.cpp \
     src/mainwindow.cpp \
-    src/newprofile.cpp \
+    src/profile.cpp \
     src/user.cpp
 
 
@@ -29,15 +28,13 @@ HEADERS += \
     headers/mainwindow.h \
     headers/menu.h \
     headers/user.h \
-    headers/dbcreatepage.h \
-    headers/newprofile.h
+    headers/profile.h
 
 FORMS += \
     forms/connexionpage.ui \
     forms/mainpage.ui \
     forms/mainwindow.ui \
-    forms/dbcreatepage.ui \
-    forms/newprofile.ui
+    forms/profile.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

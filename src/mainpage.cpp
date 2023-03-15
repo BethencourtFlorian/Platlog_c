@@ -24,7 +24,7 @@ void MainPage::onInfoSent(user& user)
     ui->info_lastName->setText(ui->info_lastName->text() + " " + QString::fromStdString(user.getLastName()));
     ui->info_mail->setText(ui->info_mail->text() + " " + QString::fromStdString(user.getEmail()));
 
-    refreshPage();
+    instanciatePage();
 
 }
 
@@ -34,6 +34,7 @@ void MainPage::on_button_deconnect_clicked()
     ConnexionPage* connexionPage = new ConnexionPage();
     connexionPage->show();
 }
+
 
 void MainPage::on_button_search_database_clicked()
 {
@@ -59,37 +60,49 @@ void MainPage::on_button_search_database_clicked()
 
 void MainPage::on_pushButton_clicked()
 {
-    qDebug() << "onPushButton";
     Profile* profilePage = new Profile(this);
-    connect(this, &MainPage::notifyLoginProfile, profilePage, &Profile::onLoginSent);
+    connect(this, &MainPage::notifyUsernameProfile, profilePage, &Profile::onLoginSent);
     connect(profilePage,SIGNAL(destroyed()),this,SLOT(refreshPage()));
-    QString login = (ui->info_login->text()).mid(8);
-    emit notifyLoginProfile(login);
+    QString username = (ui->info_login->text()).mid(8);
+    emit notifyUsernameProfile(username);
     profilePage->show();
+}
+
+void MainPage::instanciatePage()
+{
+    QDomNodeList profiles = XMLParser::getProfiles("myFile.xml",ui->info_login->text().mid(8));
+
+    ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->treeWidget->setHeaderHidden(true);
+    for (int i = 2 ; i < profiles.count() ; i++)
+    {
+        QLabel* newLabel = new QLabel(profiles.at(i).toElement().attribute("id", "not set"));
+
+        QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
+        QTreeWidgetItem* database = new QTreeWidgetItem();
+
+        treeNode->setText(0, newLabel->text());
+        database->setText(0, "database");
+
+        treeNode->addChild(database);
+
+    }
 }
 
 void MainPage::refreshPage()
 {
-    QLayoutItem* item;
-    while((item = ui->verticalLayout->takeAt(0)) != 0)
-    {
-        delete item->widget();
-    }
-
-
-
     QDomNodeList profiles = XMLParser::getProfiles("myFile.xml",ui->info_login->text().mid(8));
-    for (int i = 2 ; i < profiles.count() ; i++)
-    {
-        QLabel* newLabel = new QLabel(profiles.at(i).toElement().attribute("id", "not set"));
-        newLabel->setStyleSheet("QLabel { color: white; }");
 
-        Menu* enu = new Menu();
-        newLabel->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(newLabel, SIGNAL(customContextMenuRequested(QPoint)), enu, SLOT(showMenu()));
+    QLabel* newLabel = new QLabel(profiles.at(profiles.count() - 1).toElement().attribute("id", "not set"));
 
-        ui->verticalLayout->addWidget(newLabel);
-    }
-    qDebug() << "XML refreshed !";
+    QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
+    QTreeWidgetItem* database = new QTreeWidgetItem();
+
+    treeNode->setText(0, newLabel->text());
+    database->setText(0, "database");
+
+    treeNode->addChild(database);
+
 }
+
 
