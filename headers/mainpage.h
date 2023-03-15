@@ -32,9 +32,9 @@ public slots:
      * Avec les informations de l'utilisateur passé en paramètre
      * @param user contient les informations de l'utilisateur
      */
-    void onInfoSent(User& sentUser);
+    void onInfoSent(user& user);
+    void instanciatePage();
     void refreshPage();
-
 
 private slots:
     /**
@@ -42,12 +42,13 @@ private slots:
      */
     void on_button_deconnect_clicked();
 
+
     void on_button_search_database_clicked();
 
     void on_pushButton_clicked();
 
 signals:
-    void notifyLoginProfile(QString& login);
+    void notifyUsernameProfile(QString& username);
 
 private:
     Ui::MainPage *ui;

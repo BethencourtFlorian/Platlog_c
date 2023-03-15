@@ -251,16 +251,20 @@ QPushButton:hover{
     <string>Create Profile</string>
    </property>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QTreeWidget" name="treeWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>50</x>
      <y>90</y>
-     <width>221</width>
-     <height>191</height>
+     <width>256</width>
+     <height>192</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout"/>
+   <column>
+    <property name="text">
+     <string notr="true">1</string>
+    </property>
+   </column>
   </widget>
  </widget>
  <resources/>

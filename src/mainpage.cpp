@@ -25,7 +25,7 @@ void MainPage::onInfoSent(User& sentUser)
     ui->info_lastName->setText(ui->info_lastName->text() + " " + user.getLastName());
     ui->info_mail->setText(ui->info_mail->text() + " " + user.getEmail());
 
-    refreshPage();
+    instanciatePage();
 }
 
 void MainPage::on_button_deconnect_clicked()
@@ -34,6 +34,7 @@ void MainPage::on_button_deconnect_clicked()
     ConnexionPage* connexionPage = new ConnexionPage();
     connexionPage->show();
 }
+
 
 void MainPage::on_button_search_database_clicked()
 {
@@ -60,35 +61,43 @@ void MainPage::on_button_search_database_clicked()
 void MainPage::on_pushButton_clicked()
 {
     Profile* profilePage = new Profile(this);
-    connect(this, &MainPage::notifyLoginProfile, profilePage, &Profile::onLoginSent);
+    connect(this, &MainPage::notifyUsernameProfile, profilePage, &Profile::onLoginSent);
     connect(profilePage,SIGNAL(destroyed()),this,SLOT(refreshPage()));
-    QString login = (ui->info_login->text()).mid(8);
-    emit notifyLoginProfile(login);
+    QString username = (ui->info_login->text()).mid(8);
+    emit notifyUsernameProfile(username);
     profilePage->show();
+}
+
+void MainPage::instanciatePage()
+{
+    QDomNodeList profiles = XMLParser::getProfiles("myFile.xml",ui->info_login->text().mid(8));
+
+    ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    ui->treeWidget->setHeaderHidden(true);
+    for (int i = 2 ; i < profiles.count() ; i++)
+    {
+        QLabel* newLabel = new QLabel(profiles.at(i).toElement().attribute("id", "not set"));
+
+        QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
+        QTreeWidgetItem* database = new QTreeWidgetItem();
+
+        treeNode->setText(0, newLabel->text());
+        database->setText(0, "database");
+
+        treeNode->addChild(database);
+
+    }
 }
 
 void MainPage::refreshPage()
 {
-    QLayout* layout = ui->verticalLayout;
-    QLayoutItem* item;
-    while((item = layout->takeAt(0)) != 0)
-    {
-        if(item->widget() != 0)
-            delete item->widget();
-        delete item;
-    }
-
     XMLParser::fillUser("myFile.xml", user);
     list<Profile*> listProfiles = user.getProfiles();
-    for(auto it = listProfiles.begin(); it != listProfiles.end(); it++){
-        QLabel* newLabel = new QLabel((*it)->getId());
-        newLabel->setStyleSheet("QLabel { color: white; }");
 
-        Menu* menu = new Menu();
-        newLabel->setContextMenuPolicy(Qt::CustomContextMenu);
-        connect(newLabel, SIGNAL(customContextMenuRequested(QPoint)), menu, SLOT(showMenu()));
+    QLabel* newLabel = new QLabel(listProfiles.back()->getId());
 
-        ui->verticalLayout->addWidget(newLabel);
-    }
+    QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
+    treeNode->setText(0, newLabel->text());
 }
+
 
