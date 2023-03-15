@@ -107,3 +107,6 @@ void Profile::setLoginUser(const QString &newLoginUser)
     loginUser = newLoginUser;
 }
 
+std::list<Database*> Profile::getDatabases(){
+    return databases;
+}

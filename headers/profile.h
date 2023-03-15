@@ -30,6 +30,7 @@ public:
     void setId(const QString &newId);
     QString getLoginUser() const;
     void setLoginUser(const QString &newLoginUser);
+    std::list<Database*> getDatabases();
 
 public slots:
     void onLoginSent(QString& login);

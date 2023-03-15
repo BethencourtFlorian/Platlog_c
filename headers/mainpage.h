@@ -10,6 +10,7 @@
 #include "user.h"
 #include "connexionpage.h"
 #include "profile.h"
+#include "database.h"
 #include "XMLParser.h"
 #include "menu.h"
 
@@ -49,6 +50,7 @@ private slots:
 
 signals:
     void notifyUsernameProfile(QString& username);
+    void notifyDbSent(QSqlDatabase& db);
 
 private:
     Ui::MainPage *ui;

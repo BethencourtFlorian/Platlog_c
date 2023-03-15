@@ -38,23 +38,15 @@ void MainPage::on_button_deconnect_clicked()
 
 void MainPage::on_button_search_database_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Database"), "/home", tr("Data Base Files (*.db)"));
+    // TODO : CHange default path
+    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Database"), "C:/Users/Florian/Downloads/chinook", tr("Data Base Files (*.db)"));
     QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName(fileName);
-    db.open();
 
-    QStringList nameList = db.tables();
-    qDebug() << nameList;
-
-    QSqlQuery* query = new QSqlQuery();
-    query->prepare("select * from customers");
-    query->exec();
-
-    QSqlQueryModel * modal = new QSqlTableModel;
-    modal->setQuery(std::move(*query));
-    ui->tableView->setModel(modal);
-    ui->tableView->show();
-
+    Database *dbPage = new Database;
+    connect(this, &MainPage::notifyDbSent, dbPage, &Database::onDbSent);
+    dbPage->show();
+    emit notifyDbSent(db); // On transmet la base de données à la page Database
 }
 
 
@@ -70,7 +62,7 @@ void MainPage::on_pushButton_clicked()
 
 void MainPage::instanciatePage()
 {
-    XMLParser::fillUser("myFile.xml", user);
+    XMLParser::FillUser("myFile.xml", user);
     list<Profile*> listProfiles = user.getProfiles();
 
     ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -82,12 +74,22 @@ void MainPage::instanciatePage()
 
         QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
         treeNode->setText(0, newLabel->text());
+
+        list<Database*> listDatabases = (*it)->getDatabases();
+        for(auto itd = listDatabases.begin(); itd != listDatabases.end(); itd++)
+        {
+            QLabel* newLabelD = new QLabel((*itd)->getName());
+
+            QTreeWidgetItem* databaseNode = new QTreeWidgetItem();
+            databaseNode->setText(0, newLabelD->text());
+            treeNode->addChild(databaseNode);
+        }
     }
 }
 
 void MainPage::refreshPage()
 {
-    XMLParser::fillUser("myFile.xml", user);
+    XMLParser::FillUser("myFile.xml", user);
     list<Profile*> listProfiles = user.getProfiles();
 
     QLabel* newLabel = new QLabel(listProfiles.back()->getId());

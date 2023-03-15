@@ -3,6 +3,10 @@
 
 #include <QObject>
 #include <QDialog>
+#include <QSqlDatabase>
+#include <QSqlQuery>
+#include <QSqlTableModel>
+#include <QSqlError>
 
 namespace Ui {
 class Database;
@@ -24,6 +28,13 @@ public:
     QString getPath() const;
     void setName(const QString &newName);
     void setPath(const QString &newPath);
+
+    void showQuery(QString query);
+
+public slots:
+    void onDbSent(QSqlDatabase& db);
+    void on_pushButton_clicked();
+    void on_defaultButton_clicked();
 
 private:
     Ui::Database *ui;
