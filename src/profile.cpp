@@ -36,6 +36,11 @@ void Profile::addDb(Database* db){
     databases.push_back(db);
 }
 
+std::list<Database*> Profile::getDbs()
+{
+    return databases;
+}
+
 void Profile::onLoginSent(QString& loginPassed)
 {
     loginUser = loginPassed;
@@ -83,7 +88,7 @@ void Profile::on_createProfile_clicked()
         }
         user = user.nextSibling();
     }
-    emit destroyed();
+    emit destroyedProfile();
     hide();
 }
 

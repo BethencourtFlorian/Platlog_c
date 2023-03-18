@@ -269,6 +269,36 @@ QPushButton:hover{
     </property>
    </column>
   </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>380</x>
+     <y>180</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	
+	
+	
+	background-color: rgb(209, 194, 34);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(185, 1, 5);
+}</string>
+   </property>
+   <property name="text">
+    <string>Add Database</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -5,6 +5,15 @@ list<Profile*> User::getProfiles() const
     return profiles;
 }
 
+Profile* User::getProfile(int _i)
+{
+    list<Profile*>::iterator it = profiles.begin();
+    for (int i = 0 ; i < _i ; i++){
+        it++;
+    }
+    return *it;
+}
+
 void User::addProfile(Profile* newProfile)
 {
     //Profile newProfile = Profile(id, loginUser);

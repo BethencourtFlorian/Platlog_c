@@ -62,7 +62,7 @@ void MainPage::on_pushButton_clicked()
 {
     Profile* profilePage = new Profile(this);
     connect(this, &MainPage::notifyUsernameProfile, profilePage, &Profile::onLoginSent);
-    connect(profilePage,SIGNAL(destroyed()),this,SLOT(refreshPage()));
+    connect(profilePage,SIGNAL(destroyedProfile()),this,SLOT(refreshProfile()));
     QString username = (ui->info_login->text()).mid(8);
     emit notifyUsernameProfile(username);
     profilePage->show();
@@ -79,13 +79,19 @@ void MainPage::instanciatePage()
     for(auto it = listProfiles.begin(); it != listProfiles.end(); it++)
     {
         QLabel* newLabel = new QLabel((*it)->getId());
-
         QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
         treeNode->setText(0, newLabel->text());
+        list<Database*> listDatabases = (*it)->getDbs();
+        for (auto it2 = listDatabases.begin() ; it2 != listDatabases.end(); it2++)
+        {
+            QLabel* newLabel = new QLabel((*it2)->getName());
+            QTreeWidgetItem* databaseNode = new QTreeWidgetItem(treeNode);
+            databaseNode->setText(0, newLabel->text());
+        }
     }
 }
 
-void MainPage::refreshPage()
+void MainPage::refreshProfile()
 {
     XMLParser::fillUser("myFile.xml", user);
     list<Profile*> listProfiles = user.getProfiles();
@@ -96,8 +102,33 @@ void MainPage::refreshPage()
     treeNode->setText(0, newLabel->text());
 }
 
+void MainPage::refreshDB(unsigned int idProfile)
+{
+    XMLParser::fillUser("myFile.xml", user);
+    list<Database*> listDatabases = user.getProfile(idProfile)->getDbs();
+    QLabel* newLabel = new QLabel(listDatabases.back()->getName());
+    QTreeWidgetItem* treeNode = ui->treeWidget->findItems(user.getProfile(idProfile)->getId(), Qt::MatchContains,  0)[0];
+    QTreeWidgetItem* databaseNode = new QTreeWidgetItem(treeNode);
+    databaseNode->setText(0, newLabel->text());
+
+}
+
+
+
 void MainPage::on_pushButton_2_clicked()
 {
+    DatabaseAdd* databaseAddPage = new DatabaseAdd();
+    if (ui->treeWidget->selectedItems().empty()){
+        connect(this, &MainPage::notifyUser, databaseAddPage, &DatabaseAdd::onUserSent);
+        emit notifyUser(user);
+    }
 
+    else
+    {
+       connect(this, &MainPage::notifyUserWithSelected, databaseAddPage, &DatabaseAdd::onUserWithSelectedSent);
+       emit notifyUserWithSelected(user, ui->treeWidget->currentItem()->text(0));
+    }
+    connect(databaseAddPage,&DatabaseAdd::destroyedDB,this,&MainPage::refreshDB);
+    databaseAddPage->show();
 }
 

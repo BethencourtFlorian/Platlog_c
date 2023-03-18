@@ -11,6 +11,7 @@
 #include "connexionpage.h"
 #include "profile.h"
 #include "XMLParser.h"
+#include "databaseadd.h"
 #include "menu.h"
 
 namespace Ui {
@@ -34,7 +35,8 @@ public slots:
      */
     void onInfoSent(User& user);
     void instanciatePage();
-    void refreshPage();
+    void refreshProfile();
+    void refreshDB(unsigned int idProfile);
 
 private slots:
     /**
@@ -47,8 +49,12 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_pushButton_2_clicked();
+
 signals:
     void notifyUsernameProfile(QString& username);
+    void notifyUser(User& user);
+    void notifyUserWithSelected(User& user, QString selectedItem);
 
 private:
     Ui::MainPage *ui;
