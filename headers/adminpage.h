@@ -7,12 +7,16 @@
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include <QFileDialog>
+#include <QTreeWidgetItem>
+#include <QStandardItemModel>
+#include <QStandardItem>
 #include "user.h"
 #include "connexionpage.h"
 #include "profile.h"
 #include "database.h"
 #include "XMLParser.h"
 #include "menu.h"
+#include "comboboxdelegate.h"
 
 namespace Ui {
 class AdminPage;
@@ -24,6 +28,8 @@ class AdminPage : public QDialog
 public:
     explicit AdminPage(QWidget *parent = nullptr);
     ~AdminPage();
+
+    User* getUserWithLogin(QString login);
 
 public slots:
     void onInfoSent(User& user);
@@ -38,9 +44,12 @@ private slots:
 
     void on_createUserButton_clicked();
 
+    void onTreeNode_Clicked(QTreeWidgetItem *item, int column);
+
 private:
     Ui::AdminPage *ui;
     User user;
+    list<User*> listUsers;
 };
 
 #endif // ADMINPAGE_H
