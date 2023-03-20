@@ -12,6 +12,7 @@ CONFIG += c++17
 
 SOURCES += \
     src/adminpage.cpp \
+    src/comboboxdelegate.cpp \
     src/database.cpp \
     src/menu.cpp \
     main.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
 HEADERS += \
     headers/XMLParser.h \
     headers/adminpage.h \
+    headers/comboboxdelegate.h \
     headers/connexionpage.h \
     headers/database.h \
     headers/mainpage.h \
