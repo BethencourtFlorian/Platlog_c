@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QFileDialog>
 #include "user.h"
+#include "XMLParser.h"
 
 namespace Ui {
 class DatabaseAdd;

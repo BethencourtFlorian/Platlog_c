@@ -36,27 +36,6 @@ void MainPage::on_button_deconnect_clicked()
 }
 
 
-void MainPage::on_button_search_database_clicked()
-{
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Database"), "/home", tr("Data Base Files (*.db)"));
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(fileName);
-    db.open();
-
-    QStringList nameList = db.tables();
-    qDebug() << nameList;
-
-    QSqlQuery* query = new QSqlQuery();
-    query->prepare("select * from customers");
-    query->exec();
-
-    QSqlQueryModel * modal = new QSqlTableModel;
-    modal->setQuery(std::move(*query));
-    ui->tableView->setModel(modal);
-    ui->tableView->show();
-
-}
-
 
 void MainPage::on_pushButton_clicked()
 {
@@ -113,8 +92,6 @@ void MainPage::refreshDB(unsigned int idProfile)
 
 }
 
-
-
 void MainPage::on_pushButton_2_clicked()
 {
     DatabaseAdd* databaseAddPage = new DatabaseAdd();
@@ -130,5 +107,79 @@ void MainPage::on_pushButton_2_clicked()
     }
     connect(databaseAddPage,&DatabaseAdd::destroyedDB,this,&MainPage::refreshDB);
     databaseAddPage->show();
+}
+
+
+void MainPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
+{
+    if (item->parent())
+    {
+        Database* db = XMLParser::searchDatabase("myFile.xml", user, item->parent()->text(column), item->text(column));
+        QSqlDatabase SQLdb = QSqlDatabase::addDatabase("QSQLITE", "DBCONN");
+
+        SQLdb.setDatabaseName(db->getPath());
+        SQLdb.open();
+
+        QSqlQuery query(QSqlDatabase::database("DBCONN"));
+        query.prepare("SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%'");
+        query.exec();
+
+        QSqlQueryModel * modal = new QSqlTableModel;
+        modal->setQuery(std::move(query));
+        ui->listTable->setModel(modal);
+        ui->listTable->show();
+
+        SQLdb.close();
+    }
+    QSqlDatabase::removeDatabase("DBCONN");
+
+}
+
+
+void MainPage::on_pushButton_3_clicked()
+{
+    if (!ui->treeWidget->selectedItems().empty()){
+
+        QMessageBox::StandardButton reply;
+
+        if (ui->treeWidget->currentItem()->parent() && !ui->treeWidget->currentItem()->parent()->parent())
+        {
+            reply = QMessageBox::warning(this, tr("Alerte"),
+            "Voulez vous vraiment supprimer la base de données " + ui->treeWidget->currentItem()->text(0) + " ?", QMessageBox::Yes | QMessageBox::No);
+
+            if (reply == QMessageBox::Yes)
+            {
+                XMLParser::deleteDatabaseById("myFile.xml",
+                                              user,
+                                              ui->treeWidget->currentItem()->parent()->text(0),
+                                              ui->treeWidget->currentItem()->text(0));
+
+                ui->treeWidget->currentItem()->parent()->removeChild(ui->treeWidget->currentItem());
+
+            }
+
+        }
+        else if (!ui->treeWidget->currentItem()->parent())
+        {
+            reply = QMessageBox::warning(this, tr("Alerte"),
+            "Voulez vous vraiment supprimer le profil " + ui->treeWidget->currentItem()->text(0) + " ainsi que toutes ses bases de données ?", QMessageBox::Yes | QMessageBox::No);
+
+            if (reply == QMessageBox::Yes)
+            {
+                XMLParser::deleteProfileById("myFile.xml",
+                                              user,
+                                              ui->treeWidget->currentItem()->text(0));
+                if (ui->treeWidget->currentItem()->childCount() != 0)
+                {
+                    for (int i = 0 ; i < ui->treeWidget->currentItem()->childCount() ; i++)
+                    {
+                        ui->treeWidget->currentItem()->removeChild(ui->treeWidget->currentItem()->child(i));
+                    }
+                }
+
+                delete ui->treeWidget->currentItem();
+            }
+        }
+    }
 }
 

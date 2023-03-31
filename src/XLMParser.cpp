@@ -109,6 +109,128 @@ int XMLParser::CheckConnexion(QString filePath, User& foundUser, QString typedPa
     }
 }
 
+void XMLParser::AddDatabase(QString path, User& user, Database& database, int idProfile)
+{
+    QDomDocument doc;
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly))
+        qDebug() << "Le fichier n'a pas pu être ouvert";
+    if (!doc.setContent(&file)) {
+        file.close();
+        qDebug() << "Le fichier n'a pas pu être parsé";
+    }
+    file.close();
+
+    QDomElement root = doc.documentElement();
+    QDomNode userBal = root.firstChild().firstChild(); // <QtProject> -> <Users> -> <User>
+
+    while (!userBal.isNull())
+    {
+        if (userBal.isElement())
+        {
+            QDomElement userElement = userBal.toElement();
+            if (userElement.attribute("Login", "not set") == user.getLogin())
+            {
+                QDomNode info = userBal.firstChild(); // <User> -> <UserInfo>
+                while(!info.isNull()){
+                    if(info.nodeName() == "Profiles"){
+                        QDomNode profile = info.firstChild(); // <Profiles> -> <Profile>
+                        while (!profile.isNull())
+                        {
+                            if (profile.isElement())
+                            {
+                                QDomElement profileElement = profile.toElement();
+                                //ui->comboBox->currentIndex())->getId()
+                                if (profileElement.attribute("id", "not set") == user.getProfile(idProfile)->getId())
+                                {
+                                    QDomElement db = doc.createElement("DB");
+                                    //ui->input_DBName->text()
+                                    //ui->inputURL->text()
+                                    db.setAttribute("name", database.getName());
+                                    db.setAttribute("path", database.getPath());
+                                    profile.toElement().appendChild(db);
+
+                                    if (file.open( QIODevice::WriteOnly | QIODevice::Text))
+                                    {
+                                        QTextStream stream(&file);
+                                        stream << doc.toString();
+                                        file.close();
+                                    }
+                                }
+                            }
+                            profile = profile.nextSibling();
+                        }
+                    }
+                    info = info.nextSibling();
+                }
+            }
+        }
+        userBal = userBal.nextSibling();
+    }
+}
+
+
+Database* XMLParser::searchDatabase(QString path, User& user, QString profileName, QString databaseName)
+{
+    QDomDocument doc;
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly))
+        qDebug() << "Le fichier n'a pas pu être ouvert";
+    if (!doc.setContent(&file)) {
+        file.close();
+        qDebug() << "Le fichier n'a pas pu être parsé";
+    }
+    file.close();
+
+    QDomElement root = doc.documentElement();
+    QDomNode userBal = root.firstChild().firstChild(); // <QtProject> -> <Users> -> <User>
+
+    while (!userBal.isNull())
+    {
+        if (userBal.isElement())
+        {
+            QDomElement userElement = userBal.toElement();
+            if (userElement.attribute("Login", "not set") == user.getLogin())
+            {
+                QDomNode info = userBal.firstChild(); // <User> -> <UserInfo>
+                while(!info.isNull()){
+                    if(info.nodeName() == "Profiles"){
+                        QDomNode profile = info.firstChild(); // <Profiles> -> <Profile>
+                        while (!profile.isNull())
+                        {
+                            if (profile.isElement())
+                            {
+                                QDomElement profileElement = profile.toElement();
+                                //ui->comboBox->currentIndex())->getId()
+                                if (profileElement.attribute("id", "not set") == profileName)
+                                {
+                                    QDomNode dbs = profile.firstChild();
+                                    while (!dbs.isNull())
+                                    {
+                                        if (dbs.isElement())
+                                        {
+                                            QDomElement dbElement = dbs.toElement();
+                                            if (dbElement.attribute("name", "not set") == databaseName)
+                                            {
+                                                return new Database(databaseName, dbElement.attribute("path", "not set"));
+                                            }
+                                        }
+                                        dbs = dbs.nextSibling();
+                                    }
+                                }
+                            }
+                            profile = profile.nextSibling();
+                        }
+                    }
+                    info = info.nextSibling();
+                }
+            }
+        }
+        userBal = userBal.nextSibling();
+    }
+}
+
+
 void XMLParser::fillUser(QString path, User& user)
 {
     QDomDocument doc;
@@ -158,5 +280,127 @@ void XMLParser::fillUser(QString path, User& user)
             }
         }
         userNode = userNode.nextSibling();
+    }
+}
+
+void XMLParser::deleteProfileById(QString path, User& user, QString profileName)
+{
+    QDomDocument doc;
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly))
+        qDebug() << "Le fichier n'a pas pu être ouvert";
+    if (!doc.setContent(&file)) {
+        file.close();
+        qDebug() << "Le fichier n'a pas pu être parsé";
+    }
+    file.close();
+
+    QDomElement root = doc.documentElement();
+    QDomNode userBal = root.firstChild().firstChild(); // <QtProject> -> <Users> -> <User>
+
+    while (!userBal.isNull())
+    {
+        if (userBal.isElement())
+        {
+            QDomElement userElement = userBal.toElement();
+            if (userElement.attribute("Login", "not set") == user.getLogin())
+            {
+                QDomNode info = userBal.firstChild(); // <User> -> <UserInfo>
+                while(!info.isNull()){
+                    if(info.nodeName() == "Profiles"){
+                        QDomNode profile = info.firstChild(); // <Profiles> -> <Profile>
+                        while (!profile.isNull())
+                        {
+                            if (profile.isElement())
+                            {
+                                QDomElement profileElement = profile.toElement();
+                                //ui->comboBox->currentIndex())->getId()
+                                if (profileElement.attribute("id", "not set") == profileName)
+                                {
+                                    info.removeChild(profileElement);
+                                    if (file.open( QIODevice::WriteOnly | QIODevice::Text))
+                                    {
+                                        QTextStream stream(&file);
+                                        stream << doc.toString();
+                                        file.close();
+                                        return;
+                                    }
+                                }
+                            }
+                            profile = profile.nextSibling();
+                        }
+                    }
+                    info = info.nextSibling();
+                }
+            }
+        }
+        userBal = userBal.nextSibling();
+    }
+}
+
+void XMLParser::deleteDatabaseById(QString path, User& user, QString profileName, QString databaseName)
+{
+    QDomDocument doc;
+    QFile file(path);
+    if (!file.open(QIODevice::ReadOnly))
+        qDebug() << "Le fichier n'a pas pu être ouvert";
+    if (!doc.setContent(&file)) {
+        file.close();
+        qDebug() << "Le fichier n'a pas pu être parsé";
+    }
+    file.close();
+
+    QDomElement root = doc.documentElement();
+    QDomNode userBal = root.firstChild().firstChild(); // <QtProject> -> <Users> -> <User>
+
+    while (!userBal.isNull())
+    {
+        if (userBal.isElement())
+        {
+            QDomElement userElement = userBal.toElement();
+            if (userElement.attribute("Login", "not set") == user.getLogin())
+            {
+                QDomNode info = userBal.firstChild(); // <User> -> <UserInfo>
+                while(!info.isNull()){
+                    if(info.nodeName() == "Profiles"){
+                        QDomNode profile = info.firstChild(); // <Profiles> -> <Profile>
+                        while (!profile.isNull())
+                        {
+                            if (profile.isElement())
+                            {
+                                QDomElement profileElement = profile.toElement();
+                                //ui->comboBox->currentIndex())->getId()
+                                if (profileElement.attribute("id", "not set") == profileName)
+                                {
+                                    QDomNode dbs = profile.firstChild();
+                                    while (!dbs.isNull())
+                                    {
+                                        if (dbs.isElement())
+                                        {
+                                            QDomElement dbElement = dbs.toElement();
+                                            if (dbElement.attribute("name", "not set") == databaseName)
+                                            {
+                                                profileElement.removeChild(dbElement);
+                                                if (file.open( QIODevice::WriteOnly | QIODevice::Text))
+                                                {
+                                                    QTextStream stream(&file);
+                                                    stream << doc.toString();
+                                                    file.close();
+                                                    return;
+                                                }
+                                            }
+                                        }
+                                        dbs = dbs.nextSibling();
+                                    }
+                                }
+                            }
+                            profile = profile.nextSibling();
+                        }
+                    }
+                    info = info.nextSibling();
+                }
+            }
+        }
+        userBal = userBal.nextSibling();
     }
 }

@@ -19,6 +19,10 @@ public:
      * @return 0 si tout va bien, un code d'erreur sinon
      */
     static int AddUser(QDomDocument& document, QDomElement newUser, QString filePath);
+
+    static void AddDatabase(QString path, User& user, Database& database, int idProfile);
+
+    static Database* searchDatabase(QString path, User& user, QString profileName, QString databaseName);
     /**
      * @brief Tente une combinaison login/mdp
      *
@@ -33,6 +37,10 @@ public:
     static int CheckConnexion(QString filePath, User& foundUser, QString typedPassword, QString typedLogin);
 
     static void fillUser(QString path, User& user);
+
+    static void deleteProfileById(QString filePath, User& user, QString profileName);
+
+    static void deleteDatabaseById(QString filePath, User& user, QString profileName, QString databaseName);
 };
 
 #endif // XMLPARSER_H

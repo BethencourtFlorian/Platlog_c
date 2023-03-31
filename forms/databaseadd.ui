@@ -26,7 +26,7 @@
     <string>ADD DATABASE</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="input_DBName">
    <property name="geometry">
     <rect>
      <x>200</x>
@@ -55,7 +55,7 @@
     <string>Search</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_2">
+  <widget class="QLineEdit" name="inputURL">
    <property name="geometry">
     <rect>
      <x>260</x>
@@ -95,6 +95,19 @@
      <width>82</width>
      <height>28</height>
     </rect>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label_error">
+   <property name="geometry">
+    <rect>
+     <x>130</x>
+     <y>340</y>
+     <width>261</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
    </property>
   </widget>
  </widget>

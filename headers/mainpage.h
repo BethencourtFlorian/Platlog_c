@@ -7,6 +7,8 @@
 #include <QSqlQuery>
 #include <QSqlTableModel>
 #include <QFileDialog>
+#include <QTreeWidgetItem>
+#include <QMessageBox>
 #include "user.h"
 #include "connexionpage.h"
 #include "profile.h"
@@ -45,11 +47,14 @@ private slots:
     void on_button_deconnect_clicked();
 
 
-    void on_button_search_database_clicked();
-
     void on_pushButton_clicked();
 
     void on_pushButton_2_clicked();
+
+
+    void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
+
+    void on_pushButton_3_clicked();
 
 signals:
     void notifyUsernameProfile(QString& username);
