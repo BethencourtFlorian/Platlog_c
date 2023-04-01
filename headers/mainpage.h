@@ -12,6 +12,7 @@
 #include "user.h"
 #include "connexionpage.h"
 #include "profile.h"
+#include "database.h"
 #include "XMLParser.h"
 #include "databaseadd.h"
 #include "menu.h"
@@ -45,19 +46,15 @@ private slots:
      * @brief Renvoie vers la page de connexion
      */
     void on_button_deconnect_clicked();
-
-
     void on_pushButton_clicked();
-
     void on_pushButton_2_clicked();
-
-
-    void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
-
     void on_pushButton_3_clicked();
+    void on_treeWidget_itemClicked(QTreeWidgetItem *item, int column);
+    void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
 signals:
     void notifyUsernameProfile(QString& username);
+    void notifyDbSent(QSqlDatabase& db);
     void notifyUser(User& user);
     void notifyUserWithSelected(User& user, QString selectedItem);
 

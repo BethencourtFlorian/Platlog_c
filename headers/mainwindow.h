@@ -5,8 +5,7 @@
 #include <QMainWindow>
 #include <QCryptographicHash.h>
 #include "connexionpage.h"
-
-
+#include "user.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -17,7 +16,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(int XML = 1, QWidget *parent = nullptr);
     ~MainWindow();
     /**
      * @brief closeWindow
@@ -31,6 +30,9 @@ public:
      */
     void storage();
 
+signals:
+    void notifyCloseSignup(User* user);
+
 private:
     Ui::MainWindow *ui;
 
@@ -39,5 +41,7 @@ private:
     QString email;
     QString firstName;
     QString lastName;
+
+    int XML;
 };
 #endif // MAINWINDOW_H

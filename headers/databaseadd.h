@@ -15,7 +15,7 @@ class DatabaseAdd : public QWidget
     Q_OBJECT
 
 public:
-    explicit DatabaseAdd(QWidget *parent = nullptr);
+    explicit DatabaseAdd(int XML = 1,QWidget *parent = nullptr);
     ~DatabaseAdd();
 
 public slots:
@@ -28,9 +28,11 @@ private slots:
     void on_pushButton_2_clicked();
 
 signals:
+    void sendNewDatabase(Database* database);
     void destroyedDB(unsigned int idProfile);
 
 private:
+    int XML;
     Ui::DatabaseAdd *ui;
     User user;
 };

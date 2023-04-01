@@ -4,7 +4,7 @@
 Database::Database(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Database),
-    name("MyDB"),
+    name(""),
     path("")
 {
     ui->setupUi(this);
@@ -25,6 +25,26 @@ Database &Database::operator=(const Database& source)
     name = source.name;
     path = source.path;
     return *this;
+}
+
+void Database::onDbSent(QSqlDatabase& db){
+    if(db.open()){
+        showQuery("SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';");
+
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->lineEdit->setPlaceholderText("Insérer votre requête SQL");
+        ui->tableView->show();
+    }
+    else
+        qDebug() << "db pas ouverte";
+}
+
+void Database::on_pushButton_clicked(){
+    showQuery(ui->lineEdit->text());
+}
+
+void Database::on_defaultButton_clicked(){
+    showQuery("SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';");
 }
 
 Database::~Database()
@@ -64,5 +84,3 @@ void Database::showQuery(QString queryString){
         ui->tableView->setModel(modal);
     }
 }
-
-
