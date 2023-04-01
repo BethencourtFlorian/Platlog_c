@@ -13,6 +13,21 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+	font: 8pt &quot;Segoe UI&quot;;
+	background-color: rgb(23,23,23);
+	color: white;
+}
+QLineEdit
+{
+	background: transparent;
+	border: none;
+	color: #717072;
+	border-bottom: 1px solid #717072;
+}
+</string>
+  </property>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
@@ -21,6 +36,10 @@
      <width>111</width>
      <height>21</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(209, 194, 34);
+font-weight: bold;</string>
    </property>
    <property name="text">
     <string>ADD DATABASE</string>
@@ -34,6 +53,9 @@
      <width>131</width>
      <height>28</height>
     </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
    </property>
    <property name="text">
     <string/>

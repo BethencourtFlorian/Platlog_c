@@ -13,6 +13,13 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">font: 8pt &quot;Segoe UI&quot;;
+
+background-color: rgb(23,23,23);
+color: white
+</string>
+  </property>
   <widget class="QLabel" name="title">
    <property name="geometry">
     <rect>
