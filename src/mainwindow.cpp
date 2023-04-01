@@ -26,8 +26,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeWindow(){
     this->hide();
-    ConnexionPage* connexionPage = new ConnexionPage;
-    connexionPage->show();
 }
 
 void MainWindow::storage()
@@ -77,8 +75,7 @@ void MainWindow::storage()
             stream << document.toString();
             wFile.close();
             this->hide();
-            ConnexionPage* connexionPage = new ConnexionPage;
-            connexionPage->show();
+            emit notifyCloseSignup();
         }
         else{
             qDebug() << "Erreur d'écriture du fichier";

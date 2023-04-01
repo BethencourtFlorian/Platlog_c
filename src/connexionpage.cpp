@@ -46,7 +46,6 @@ void ConnexionPage::onConnectionButton_Click(){
 }
 
 void ConnexionPage::onInscriptionButton_Click(){
-    this->hide();
     MainWindow* mainwindow = new MainWindow();
     mainwindow->show();
 }

@@ -4,7 +4,7 @@
 Database::Database(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::Database),
-    name("MyDB"),
+    name(""),
     path("")
 {
     ui->setupUi(this);

@@ -17,7 +17,7 @@ class Profile : public QDialog
     Q_OBJECT
 
 public:
-    explicit Profile(QWidget *parent = nullptr);
+    explicit Profile(QWidget *parent = nullptr, int XML = 1);
     Profile(const Profile&);
     Profile(QString id, QString loginUser);
     ~Profile();
@@ -25,6 +25,8 @@ public:
     Profile &operator=(const Profile& source);
 
     void addDb(Database* db);
+
+    void addProfileXML();
 
     QString getId() const;
     void setId(const QString &newId);
@@ -40,12 +42,14 @@ private slots:
 
 signals:
     void destroyed();
+    void sendNewId(QString id);
 
 private:
     Ui::Profile *ui;
     QString id;
     QString loginUser;
     std::list<Database*> databases;
+    int XML = 1;
 };
 
 #endif // PROFILE_H

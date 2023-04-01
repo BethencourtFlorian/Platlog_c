@@ -6,8 +6,6 @@
 #include <QCryptographicHash.h>
 #include "connexionpage.h"
 
-
-
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -30,6 +28,9 @@ public:
      * @brief Incrit le nouvel utilisateur dans le fichier XML.
      */
     void storage();
+
+signals:
+    void notifyCloseSignup();
 
 private:
     Ui::MainWindow *ui;

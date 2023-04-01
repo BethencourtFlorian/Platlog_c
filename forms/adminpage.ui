@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
   <widget class="QLabel" name="title">
    <property name="geometry">
     <rect>
@@ -82,8 +85,8 @@
   <widget class="QPushButton" name="button_deconnect">
    <property name="geometry">
     <rect>
-     <x>550</x>
-     <y>450</y>
+     <x>580</x>
+     <y>460</y>
      <width>121</width>
      <height>41</height>
     </rect>
@@ -110,8 +113,8 @@ QPushButton:hover{
   <widget class="QPushButton" name="createUserButton">
    <property name="geometry">
     <rect>
-     <x>70</x>
-     <y>450</y>
+     <x>30</x>
+     <y>460</y>
      <width>121</width>
      <height>41</height>
     </rect>
@@ -162,7 +165,7 @@ QPushButton:hover{
      <x>20</x>
      <y>90</y>
      <width>256</width>
-     <height>341</height>
+     <height>340</height>
     </rect>
    </property>
    <attribute name="headerVisible">
@@ -195,21 +198,134 @@ QPushButton:hover{
     <string>Last Name :</string>
    </property>
   </widget>
-  <widget class="QWidget" name="verticalLayoutWidget">
+  <widget class="QPushButton" name="addProfileButton">
    <property name="geometry">
     <rect>
-     <x>290</x>
-     <y>90</y>
-     <width>421</width>
-     <height>341</height>
+     <x>190</x>
+     <y>460</y>
+     <width>121</width>
+     <height>41</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout">
-    <item>
-     <widget class="QTableView" name="tableView"/>
-    </item>
-   </layout>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	
+	background-color: rgb(255, 15, 19);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(185, 1, 5);
+}
+
+QPushButton:disabled{
+	background-color: rgb(224,224,235);
+}</string>
+   </property>
+   <property name="text">
+    <string>Add Profile</string>
+   </property>
   </widget>
+  <widget class="QPushButton" name="addDatabaseButton">
+   <property name="geometry">
+    <rect>
+     <x>370</x>
+     <y>460</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	
+	background-color: rgb(255, 15, 19);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(185, 1, 5);
+}
+
+QPushButton:disabled{
+	background-color: rgb(224,224,235);
+}</string>
+   </property>
+   <property name="text">
+    <string>Add Database</string>
+   </property>
+  </widget>
+  <widget class="QTableView" name="tableView">
+   <property name="geometry">
+    <rect>
+     <x>310</x>
+     <y>90</y>
+     <width>391</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QHeaderView {
+background: rgb(255, 255, 255);
+}
+QHeaderView::section {
+background: rgb(255, 255, 127);
+}
+
+</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="deleteButton">
+   <property name="geometry">
+    <rect>
+     <x>440</x>
+     <y>320</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	
+	background-color: rgb(255, 15, 19);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(185, 1, 5);
+}
+
+QPushButton:disabled{
+	background-color: rgb(224,224,235);
+}</string>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+  </widget>
+  <zorder>tableView</zorder>
+  <zorder>title</zorder>
+  <zorder>info_mail</zorder>
+  <zorder>info_login</zorder>
+  <zorder>button_deconnect</zorder>
+  <zorder>info_firstName</zorder>
+  <zorder>treeWidget</zorder>
+  <zorder>info_lastName</zorder>
+  <zorder>addDatabaseButton</zorder>
+  <zorder>addProfileButton</zorder>
+  <zorder>createUserButton</zorder>
+  <zorder>deleteButton</zorder>
  </widget>
  <resources/>
  <connections/>

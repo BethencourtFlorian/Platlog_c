@@ -1,13 +1,15 @@
 #include "headers/profile.h"
 #include "ui_profile.h"
 
-Profile::Profile(QWidget *parent) :
+Profile::Profile(QWidget *parent, int XMLPassed) :
     QDialog(parent),
     ui(new Ui::Profile),
     id(""),
     loginUser("")
 {
+    XML = XMLPassed;
     ui->setupUi(this);
+    ui->input_profile->setPlaceholderText("Nom");
 }
 
 Profile::Profile(const Profile& source){
@@ -41,8 +43,7 @@ void Profile::onLoginSent(QString& loginPassed)
     loginUser = loginPassed;
 }
 
-void Profile::on_createProfile_clicked()
-{
+void Profile::addProfileXML(){
     QDomDocument doc;
     QFile file("myFile.xml");
     if (!file.open(QIODevice::ReadOnly))
@@ -82,6 +83,19 @@ void Profile::on_createProfile_clicked()
             }
         }
         user = user.nextSibling();
+    }
+}
+
+void Profile::on_createProfile_clicked()
+{
+    if(XML){
+        addProfileXML();
+    }
+    else{
+        QString id(ui->input_profile->text());
+        if(id == "")
+            id == QString("default_id");
+        emit sendNewId(id);
     }
     emit destroyed();
     hide();
