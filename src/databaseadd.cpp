@@ -1,11 +1,15 @@
 #include "headers/databaseadd.h"
 #include "ui_databaseadd.h"
 
-DatabaseAdd::DatabaseAdd(QWidget *parent) :
+DatabaseAdd::DatabaseAdd(int XMLPassed, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::DatabaseAdd)
 {
+    XML = XMLPassed;
     ui->setupUi(this);
+    if(XML == 0){
+        ui->comboBox->hide();
+    }
 }
 
 DatabaseAdd::~DatabaseAdd()
@@ -53,8 +57,13 @@ void DatabaseAdd::on_pushButton_2_clicked()
     else
     {
         Database* db = new Database(ui->input_DBName->text(), ui->inputURL->text());
-        XMLParser::AddDatabase("myFile.xml",user, *db, ui->comboBox->currentIndex());
-        emit destroyedDB(ui->comboBox->currentIndex());
+        if(XML == 1){
+            XMLParser::AddDatabase("myFile.xml",user, *db, ui->comboBox->currentIndex());
+            emit destroyedDB(ui->comboBox->currentIndex());
+        }
+        else
+            emit sendNewDatabase(db);
+
         hide();
     }
 }

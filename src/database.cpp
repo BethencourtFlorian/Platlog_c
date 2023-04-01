@@ -27,19 +27,6 @@ Database &Database::operator=(const Database& source)
     return *this;
 }
 
-void Database::showQuery(QString queryString){
-    QSqlQuery* query = new QSqlQuery();
-    bool selectQuery = queryString.startsWith("SELECT", Qt::CaseInsensitive);
-    query->prepare(queryString);
-    if (!query->exec())
-        qDebug() << query->lastError().text();
-    else if(selectQuery){
-        QSqlQueryModel * modal = new QSqlTableModel;
-        modal->setQuery(std::move(*query));
-        ui->tableView->setModel(modal);
-    }
-}
-
 void Database::onDbSent(QSqlDatabase& db){
     db.open();
 
@@ -95,5 +82,4 @@ void Database::showQuery(QString queryString){
         ui->tableView->setModel(modal);
     }
 }
-
 

@@ -108,6 +108,67 @@ int XMLParser::CheckConnexion(QString filePath, User& foundUser, QString typedPa
     }
 }
 
+void XMLParser::saveChanges(QString path, list<User *> listUsers){
+    QDomDocument document;
+    QDomElement root = document.createElement("QtProject");
+    document.appendChild(root);
+
+    QDomElement users = document.createElement("Users");
+    root.appendChild(users);
+
+    for(auto itu = listUsers.begin(); itu != listUsers.end(); itu++)
+    {
+        User* user = *itu;
+
+        QDomElement userElement = document.createElement("User");
+        userElement.setAttribute("Login", user->getLogin());
+        userElement.setAttribute("Password", user->getPassword());
+        users.appendChild(userElement);
+
+        QDomElement userInfo = document.createElement("UserInfo");
+        userInfo.setAttribute("Email", user->getEmail());
+        userInfo.setAttribute("FirstName", user->getFirstName());
+        userInfo.setAttribute("LastName", user->getLastName());
+        userElement.appendChild(userInfo);
+
+        QDomElement userRights = document.createElement("UserRights");
+        userRights.setAttribute("Read", user->getRightRead());
+        userRights.setAttribute("Edit", user->getRightEdit());
+        userRights.setAttribute("Sudo", user->getRightSudo());
+        userElement.appendChild(userRights);
+
+        QDomElement userProfiles = document.createElement("Profiles");
+        userElement.appendChild(userProfiles);
+
+        list<Profile*> listProfiles = user->getProfiles();
+        for(auto itp = listProfiles.begin(); itp != listProfiles.end(); itp++)
+        {
+            Profile* profile = *itp;
+            QDomElement profileElement = document.createElement("Profile");
+            profileElement.setAttribute("Id", profile->getId());
+            userProfiles.appendChild(profileElement);
+
+            list<Database*> listDatabases = profile->getDatabases();
+            for(auto itd = listDatabases.begin(); itd != listDatabases.end(); itd++)
+            {
+                Database* database = *itd;
+
+                QDomElement databaseElement = document.createElement("DB");
+                databaseElement.setAttribute("Name", database->getName());
+                databaseElement.setAttribute("Path", database->getPath());
+                profileElement.appendChild(databaseElement);
+            }
+        }
+    }
+
+    QFile wFile(path);
+    if (wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate)){
+        QTextStream stream(&wFile);
+        stream << document.toString();
+        wFile.close();
+    }
+}
+
 void XMLParser::AddDatabase(QString path, User& user, Database& database, int idProfile)
 {
     QDomDocument doc;
@@ -140,13 +201,13 @@ void XMLParser::AddDatabase(QString path, User& user, Database& database, int id
                             {
                                 QDomElement profileElement = profile.toElement();
                                 //ui->comboBox->currentIndex())->getId()
-                                if (profileElement.attribute("id", "not set") == user.getProfile(idProfile)->getId())
+                                if (profileElement.attribute("Id", "not set") == user.getProfile(idProfile)->getId())
                                 {
                                     QDomElement db = doc.createElement("DB");
                                     //ui->input_DBName->text()
                                     //ui->inputURL->text()
-                                    db.setAttribute("name", database.getName());
-                                    db.setAttribute("path", database.getPath());
+                                    db.setAttribute("Name", database.getName());
+                                    db.setAttribute("Path", database.getPath());
                                     profile.toElement().appendChild(db);
 
                                     if (file.open( QIODevice::WriteOnly | QIODevice::Text))
@@ -201,7 +262,7 @@ Database* XMLParser::searchDatabase(QString path, User& user, QString profileNam
                             {
                                 QDomElement profileElement = profile.toElement();
                                 //ui->comboBox->currentIndex())->getId()
-                                if (profileElement.attribute("id", "not set") == profileName)
+                                if (profileElement.attribute("Id", "not set") == profileName)
                                 {
                                     QDomNode dbs = profile.firstChild();
                                     while (!dbs.isNull())
@@ -209,9 +270,9 @@ Database* XMLParser::searchDatabase(QString path, User& user, QString profileNam
                                         if (dbs.isElement())
                                         {
                                             QDomElement dbElement = dbs.toElement();
-                                            if (dbElement.attribute("name", "not set") == databaseName)
+                                            if (dbElement.attribute("Name", "not set") == databaseName)
                                             {
-                                                return new Database(databaseName, dbElement.attribute("path", "not set"));
+                                                return new Database(databaseName, dbElement.attribute("Path", "not set"));
                                             }
                                         }
                                         dbs = dbs.nextSibling();
@@ -227,6 +288,7 @@ Database* XMLParser::searchDatabase(QString path, User& user, QString profileNam
         }
         userBal = userBal.nextSibling();
     }
+    return nullptr;
 }
 
 
@@ -261,11 +323,11 @@ void XMLParser::fillUser(QString path, User& user)
                             QDomNode profileNode = infoNode.firstChild();
                             while(!profileNode.isNull()){
                                 QDomElement profileElement = profileNode.toElement();
-                                Profile* newProfile = new Profile(profileElement.attribute("id"), user.getLogin());
+                                Profile* newProfile = new Profile(profileElement.attribute("Id"), user.getLogin());
                                 QDomNode dbNode = profileNode.firstChild();
                                 while(!dbNode.isNull()){
                                     QDomElement dbElement = dbNode.toElement();
-                                    Database* newDatabase = new Database(dbElement.attribute("name"), dbElement.attribute("path"));
+                                    Database* newDatabase = new Database(dbElement.attribute("Name"), dbElement.attribute("Path"));
                                     newProfile->addDb(newDatabase);
                                     dbNode = dbNode.nextSibling();
                                 }
@@ -287,6 +349,15 @@ std::list<User*> XMLParser::GetUsers(QString filePath){
 
     QDomDocument doc;
     QFile file(filePath);
+    if (!file.open(QIODevice::ReadOnly))
+        qDebug() << "Le fichier n'a pas pu être ouvert";
+    if (!doc.setContent(&file)) {
+        file.close();
+        qDebug() << "Le fichier n'a pas pu être parsé";
+    }
+    file.close();
+
+    QDomElement root = doc.documentElement();
     QDomNode userNode = root.firstChild().firstChild(); // <QtProject> -> <Users> -> <User>
 
     while (!userNode.isNull()) {
@@ -310,11 +381,11 @@ std::list<User*> XMLParser::GetUsers(QString filePath){
                     QDomNode profileNode = infoNode.firstChild();
                     while(!profileNode.isNull()){
                         QDomElement profileElement = profileNode.toElement();
-                        Profile* profile = new Profile(profileElement.attribute("id", "Not_set"), e.attribute("Login", "Not_set"));
+                        Profile* profile = new Profile(profileElement.attribute("Id", "Not_set"), e.attribute("Login", "Not_set"));
                         QDomNode dbNode = profileNode.firstChild();
                         while(!dbNode.isNull()){
                             QDomElement dbElement = dbNode.toElement();
-                            Database* database = new Database(dbElement.attribute("name", "Not_set"), dbElement.attribute("path", "Not_set"));
+                            Database* database = new Database(dbElement.attribute("Name", "Not_set"), dbElement.attribute("Path", "Not_set"));
                             profile->addDb(database);
                             dbNode = dbNode.nextSibling();
                         }
@@ -364,7 +435,7 @@ void XMLParser::deleteProfileById(QString path, User& user, QString profileName)
                             {
                                 QDomElement profileElement = profile.toElement();
                                 //ui->comboBox->currentIndex())->getId()
-                                if (profileElement.attribute("id", "not set") == profileName)
+                                if (profileElement.attribute("Id", "not set") == profileName)
                                 {
                                     info.removeChild(profileElement);
                                     if (file.open( QIODevice::WriteOnly | QIODevice::Text))
@@ -419,7 +490,7 @@ void XMLParser::deleteDatabaseById(QString path, User& user, QString profileName
                             {
                                 QDomElement profileElement = profile.toElement();
                                 //ui->comboBox->currentIndex())->getId()
-                                if (profileElement.attribute("id", "not set") == profileName)
+                                if (profileElement.attribute("Id", "not set") == profileName)
                                 {
                                     QDomNode dbs = profile.firstChild();
                                     while (!dbs.isNull())
@@ -427,7 +498,7 @@ void XMLParser::deleteDatabaseById(QString path, User& user, QString profileName
                                         if (dbs.isElement())
                                         {
                                             QDomElement dbElement = dbs.toElement();
-                                            if (dbElement.attribute("name", "not set") == databaseName)
+                                            if (dbElement.attribute("Name", "not set") == databaseName)
                                             {
                                                 profileElement.removeChild(dbElement);
                                                 if (file.open( QIODevice::WriteOnly | QIODevice::Text))

@@ -85,7 +85,7 @@
   <widget class="QPushButton" name="button_deconnect">
    <property name="geometry">
     <rect>
-     <x>580</x>
+     <x>640</x>
      <y>460</y>
      <width>121</width>
      <height>41</height>
@@ -113,7 +113,7 @@ QPushButton:hover{
   <widget class="QPushButton" name="createUserButton">
    <property name="geometry">
     <rect>
-     <x>30</x>
+     <x>10</x>
      <y>460</y>
      <width>121</width>
      <height>41</height>
@@ -123,7 +123,7 @@ QPushButton:hover{
     <string notr="true">QPushButton{
 	border-radius: 20px;
 	
-	background-color: rgb(255, 15, 19);
+	background-color: rgb(0, 170, 255);
 	font-weight:  bold;
 	font-size: 15px;
 	color: rgb(255, 255, 255);
@@ -201,7 +201,7 @@ QPushButton:hover{
   <widget class="QPushButton" name="addProfileButton">
    <property name="geometry">
     <rect>
-     <x>190</x>
+     <x>160</x>
      <y>460</y>
      <width>121</width>
      <height>41</height>
@@ -211,7 +211,7 @@ QPushButton:hover{
     <string notr="true">QPushButton{
 	border-radius: 20px;
 	
-	background-color: rgb(255, 15, 19);
+	background-color: rgb(0, 170, 255);
 	font-weight:  bold;
 	font-size: 15px;
 	color: rgb(255, 255, 255);
@@ -233,7 +233,7 @@ QPushButton:disabled{
   <widget class="QPushButton" name="addDatabaseButton">
    <property name="geometry">
     <rect>
-     <x>370</x>
+     <x>310</x>
      <y>460</y>
      <width>121</width>
      <height>41</height>
@@ -243,7 +243,7 @@ QPushButton:disabled{
     <string notr="true">QPushButton{
 	border-radius: 20px;
 	
-	background-color: rgb(255, 15, 19);
+	background-color: rgb(0, 170, 255);
 	font-weight:  bold;
 	font-size: 15px;
 	color: rgb(255, 255, 255);
@@ -314,6 +314,38 @@ QPushButton:disabled{
     <string>Delete</string>
    </property>
   </widget>
+  <widget class="QPushButton" name="saveButton">
+   <property name="geometry">
+    <rect>
+     <x>480</x>
+     <y>460</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	
+	background-color: rgb(10, 176, 29);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(185, 1, 5);
+}
+
+QPushButton:disabled{
+	background-color: rgb(224,224,235);
+}</string>
+   </property>
+   <property name="text">
+    <string>Save changes</string>
+   </property>
+  </widget>
   <zorder>tableView</zorder>
   <zorder>title</zorder>
   <zorder>info_mail</zorder>
@@ -326,6 +358,7 @@ QPushButton:disabled{
   <zorder>addProfileButton</zorder>
   <zorder>createUserButton</zorder>
   <zorder>deleteButton</zorder>
+  <zorder>saveButton</zorder>
  </widget>
  <resources/>
  <connections/>

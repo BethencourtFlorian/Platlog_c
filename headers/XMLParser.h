@@ -44,6 +44,8 @@ public:
     static void deleteProfileById(QString filePath, User& user, QString profileName);
 
     static void deleteDatabaseById(QString filePath, User& user, QString profileName, QString databaseName);
+
+    static void saveChanges(QString path, list<User*> listUsers);
 };
 
 #endif // XMLPARSER_H

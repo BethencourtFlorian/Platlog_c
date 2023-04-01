@@ -73,7 +73,7 @@ void Profile::addProfileXML(){
                 while(!info.isNull()){
                     if(info.nodeName() == "Profiles"){
                         QDomElement profile = doc.createElement("Profile");
-                        profile.setAttribute("id", ui->input_profile->text());
+                        profile.setAttribute("Id", ui->input_profile->text());
                         info.toElement().appendChild(profile);
 
                         if (file.open( QIODevice::WriteOnly | QIODevice::Text))

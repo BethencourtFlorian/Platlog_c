@@ -47,7 +47,7 @@ void MainPage::on_pushButton_clicked()
 
 void MainPage::instanciatePage()
 {
-    XMLParser::FillUser("myFile.xml", user);
+    XMLParser::fillUser("myFile.xml", user);
     list<Profile*> listProfiles = user.getProfiles();
 
     ui->treeWidget->setContextMenuPolicy(Qt::CustomContextMenu);
@@ -70,7 +70,7 @@ void MainPage::instanciatePage()
 
 void MainPage::refreshProfile()
 {
-    XMLParser::FillUser("myFile.xml", user);
+    XMLParser::fillUser("myFile.xml", user);
     list<Profile*> listProfiles = user.getProfiles();
 
     QLabel* newLabel = new QLabel(listProfiles.back()->getId());

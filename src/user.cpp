@@ -104,8 +104,8 @@ void User::setLastName(QString new_lastName){
     lastName = new_lastName;
 }
 void User::setRights(int new_right_read, int new_right_edit, int new_right_sudo){
-    setRightEdit(new_right_read);
-    setRightRead(new_right_edit);
+    setRightRead(new_right_read);
+    setRightEdit(new_right_edit);
     setRightSudo(new_right_sudo);
 }
 void User::setRightRead(int new_right_read){

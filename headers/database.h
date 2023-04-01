@@ -31,8 +31,6 @@ public:
     void setPath(const QString &newPath);
     void showQuery(QString queryString);
 
-    void showQuery(QString query);
-
 public slots:
     void onDbSent(QSqlDatabase& db);
     void on_pushButton_clicked();

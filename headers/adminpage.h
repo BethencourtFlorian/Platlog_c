@@ -52,6 +52,7 @@ private slots:
     void on_createUserButton_clicked();
     void on_addProfileButton_clicked();
     void on_addDatabaseButton_clicked();
+    void on_saveButton_clicked();
     void on_deleteButton_clicked();
 
     void onTreeNode_Clicked(QTreeWidgetItem *item, int column);
@@ -59,7 +60,9 @@ private slots:
     void onProfileChanged(QStandardItem* item);
     void onDatabaseChanged(QStandardItem* item);
     void openFileDialog(const QModelIndex& index);
+    void addUserTree(User* user);
     void addProfileTree(QString id);
+    void addDatabaseTree(Database* database);
 
 private:
     Ui::AdminPage *ui;
