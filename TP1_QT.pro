@@ -11,6 +11,9 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    src/adminpage.cpp \
+    src/comboboxdelegate.cpp \
+    src/databaseadd.cpp \
     src/database.cpp \
     src/menu.cpp \
     main.cpp \
@@ -23,7 +26,10 @@ SOURCES += \
 
 
 HEADERS += \
+    headers/databaseadd.h \
     headers/XMLParser.h \
+    headers/adminpage.h \
+    headers/comboboxdelegate.h \
     headers/connexionpage.h \
     headers/database.h \
     headers/mainpage.h \
@@ -33,6 +39,8 @@ HEADERS += \
     headers/profile.h
 
 FORMS += \
+    forms/adminpage.ui \
+    forms/databaseadd.ui \
     forms/connexionpage.ui \
     forms/database.ui \
     forms/mainpage.ui \

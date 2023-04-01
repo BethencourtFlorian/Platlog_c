@@ -28,17 +28,24 @@ void ConnexionPage::onConnectionButton_Click(){
         ui->label_error->setText("Mauvais login et/ou mot de passe");
     else
     {
-        MainPage *mpg = new MainPage;
-        connect(this, &ConnexionPage::notifyInfoSent, mpg, &MainPage::onInfoSent);
-        mpg->show();
-        emit notifyInfoSent(foundUser); // On transmet les informations de l'utilisateur à la MainPage
+        if(foundUser.getRightSudo() != 1){
+            // Si pas admin
+            MainPage *mpg = new MainPage;
+            connect(this, &ConnexionPage::notifyInfoSent, mpg, &MainPage::onInfoSent);
+            mpg->show();
+            emit notifyInfoSent(foundUser); // On transmet les informations de l'utilisateur à la MainPage
+        }
+        else{
+            AdminPage *apg = new AdminPage;
+            connect(this, &ConnexionPage::notifyInfoSent, apg, &AdminPage::onInfoSent);
+            apg->show();
+            emit notifyInfoSent(foundUser); // On transmet les informations de l'utilisateur à l' AdminPage
+        }
         hide();
-
     }
 }
 
 void ConnexionPage::onInscriptionButton_Click(){
-    this->hide();
     MainWindow* mainwindow = new MainWindow();
     mainwindow->show();
 }

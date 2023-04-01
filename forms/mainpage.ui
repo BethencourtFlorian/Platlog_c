@@ -15,7 +15,11 @@
   </property>
   <property name="styleSheet">
    <string notr="true">font: 8pt &quot;Segoe UI&quot;;
-background-color: rgb(24, 24, 24);</string>
+
+background-color: rgb(23,23,23);
+color: white
+
+</string>
   </property>
   <widget class="QLabel" name="title">
    <property name="geometry">
@@ -128,7 +132,7 @@ background-color: rgb(24, 24, 24);</string>
   <widget class="QPushButton" name="button_deconnect">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>540</x>
      <y>420</y>
      <width>121</width>
      <height>41</height>
@@ -153,80 +157,10 @@ QPushButton:hover{
     <string>Log out</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="button_create_database">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>350</y>
-     <width>121</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-	border-radius: 20px;
-	
-	background-color: rgb(255, 15, 19);
-	font-weight:  bold;
-	font-size: 15px;
-	color: rgb(255, 255, 255);
-}
-
-QPushButton:hover{
-	
-	background-color: rgb(185, 1, 5);
-}</string>
-   </property>
-   <property name="text">
-    <string>Create Database</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="button_search_database">
-   <property name="geometry">
-    <rect>
-     <x>30</x>
-     <y>420</y>
-     <width>121</width>
-     <height>41</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">QPushButton{
-	border-radius: 20px;
-	
-	
-	background-color: rgb(33, 255, 96);
-	font-weight:  bold;
-	font-size: 15px;
-	color: rgb(255, 255, 255);
-}
-
-QPushButton:hover{
-	
-	background-color: rgb(185, 1, 5);
-}</string>
-   </property>
-   <property name="text">
-    <string>Search Database</string>
-   </property>
-  </widget>
-  <widget class="QTableView" name="tableView">
-   <property name="geometry">
-    <rect>
-     <x>460</x>
-     <y>300</y>
-     <width>211</width>
-     <height>161</height>
-    </rect>
-   </property>
-   <property name="styleSheet">
-    <string notr="true">color: rgb(39, 24, 255);</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>180</x>
+     <x>50</x>
      <y>350</y>
      <width>121</width>
      <height>41</height>
@@ -260,11 +194,88 @@ QPushButton:hover{
      <height>192</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
    <column>
     <property name="text">
      <string notr="true">1</string>
     </property>
    </column>
+  </widget>
+  <widget class="QPushButton" name="pushButton_2">
+   <property name="geometry">
+    <rect>
+     <x>50</x>
+     <y>420</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	
+	
+	
+	background-color: rgb(209, 194, 34);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(185, 1, 5);
+}</string>
+   </property>
+   <property name="text">
+    <string>Add Database</string>
+   </property>
+  </widget>
+  <widget class="QListView" name="listTable">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>100</y>
+     <width>211</width>
+     <height>171</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">color: rgb(255, 255, 255);</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton_3">
+   <property name="geometry">
+    <rect>
+     <x>210</x>
+     <y>350</y>
+     <width>121</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	
+	
+	
+	
+	background-color: rgb(255, 17, 21);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(185, 1, 5);
+}</string>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
   </widget>
  </widget>
  <resources/>

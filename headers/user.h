@@ -142,6 +142,7 @@ public:
     void setRightSudo(int new_right_sudo);
 
     std::list<Profile*> getProfiles() const;
+    Profile* getProfile(int _i);
     void addProfile(Profile* newProfile);
     void deleteProfile(QString id);
     void clearProfiles();

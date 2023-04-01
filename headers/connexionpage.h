@@ -6,6 +6,7 @@
 #include <QFile>
 #include "mainwindow.h"
 #include "mainpage.h"
+#include "adminpage.h"
 #include "user.h"
 #include <QMainWindow>
 

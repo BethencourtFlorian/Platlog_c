@@ -4,7 +4,7 @@
 #include <QString>
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(int XMLPassed, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
     , login("")
@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     , firstName("")
     , lastName("")
 {
+    XML = XMLPassed;
     ui->setupUi(this);
     ui->input_password->setEchoMode(QLineEdit::Password);
     connect(ui->button_inscription, &QPushButton::clicked, this, &MainWindow::storage);
@@ -26,8 +27,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeWindow(){
     this->hide();
-    ConnexionPage* connexionPage = new ConnexionPage;
-    connexionPage->show();
 }
 
 void MainWindow::storage()
@@ -71,17 +70,23 @@ void MainWindow::storage()
         }
 
         // On ouvre le même fichier, en écriture cette fois-ci pour enregistrer le nouvel utlisateur dans le XML
-        QFile wFile(filePath);
-        if (wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate)){
-            QTextStream stream(&wFile);
-            stream << document.toString();
-            wFile.close();
-            this->hide();
-            ConnexionPage* connexionPage = new ConnexionPage;
-            connexionPage->show();
+        if(XML){
+            QFile wFile(filePath);
+            if (wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate)){
+                QTextStream stream(&wFile);
+                stream << document.toString();
+                wFile.close();
+                this->hide();
+            }
+            else{
+                qDebug() << "Erreur d'écriture du fichier";
+            }
         }
         else{
-            qDebug() << "Erreur d'écriture du fichier";
+            int rights[] = {1,0,0};
+            User* newUser = new User(login, password, email, firstName, lastName, rights);
+            emit notifyCloseSignup(newUser);
+            this->hide();
         }
     }
 }
