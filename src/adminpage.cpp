@@ -231,12 +231,14 @@ void AdminPage::openFileDialog(const QModelIndex& index){
     QTreeWidgetItem* databaseNode = (ui->treeWidget->selectedItems().back());
     if(databaseNode->parent() != nullptr){
         if(databaseNode->parent()->parent() != nullptr && index.column() == 1){
-            QString path = QFileDialog::getOpenFileName(this, tr("Open Database"), index.data().toString(), tr("Data Base Files (*.db)"));
-            User* user = getUserWithLogin(databaseNode->parent()->parent()->text(0));
-            Profile* profile = getProfileWithId(databaseNode->parent()->text(0), user);
-            Database* database = getDatabaseWithName(databaseNode->text(0), profile);
-            database->setPath(path);
-            fillTableWithDatabase(database);
+            QString path = QFileDialog::getOpenFileName(this, tr("Open Database"), index.data().toString(), tr("Data Base Files (*.db) (*.SQLite)"));
+            if(path != ""){
+                User* user = getUserWithLogin(databaseNode->parent()->parent()->text(0));
+                Profile* profile = getProfileWithId(databaseNode->parent()->text(0), user);
+                Database* database = getDatabaseWithName(databaseNode->text(0), profile);
+                database->setPath(path);
+                fillTableWithDatabase(database);
+            }
         }
     }
 }
