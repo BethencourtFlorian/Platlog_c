@@ -133,6 +133,20 @@ void MainPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
 
 }
 
+void MainPage::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column)
+{
+    if (item->parent())
+    {
+        Database* db = XMLParser::searchDatabase("myFile.xml", user, item->parent()->text(column), item->text(column));
+        QSqlDatabase SQLdb = QSqlDatabase::addDatabase("QSQLITE");
+        SQLdb.setDatabaseName(db->getPath());
+        Database *dbPage = new Database;
+        connect(this, &MainPage::notifyDbSent, dbPage, &Database::onDbSent);
+        dbPage->show();
+        emit notifyDbSent(SQLdb); // On transmet la base de données à la page Database
+    }
+}
+
 
 void MainPage::on_pushButton_3_clicked()
 {

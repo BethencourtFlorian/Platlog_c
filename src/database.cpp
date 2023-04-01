@@ -28,13 +28,15 @@ Database &Database::operator=(const Database& source)
 }
 
 void Database::onDbSent(QSqlDatabase& db){
-    db.open();
+    if(db.open()){
+        showQuery("SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';");
 
-    showQuery("SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';");
-
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->lineEdit->setPlaceholderText("Insérer votre requête SQL");
-    ui->tableView->show();
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+        ui->lineEdit->setPlaceholderText("Insérer votre requête SQL");
+        ui->tableView->show();
+    }
+    else
+        qDebug() << "db pas ouverte";
 }
 
 void Database::on_pushButton_clicked(){
@@ -82,4 +84,3 @@ void Database::showQuery(QString queryString){
         ui->tableView->setModel(modal);
     }
 }
-
