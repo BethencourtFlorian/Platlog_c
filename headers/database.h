@@ -5,6 +5,7 @@
 #include <QDialog>
 #include <QSqlDatabase>
 #include <QSqlQuery>
+#include <QSqlQueryModel>
 #include <QSqlTableModel>
 #include <QSqlError>
 
@@ -28,6 +29,7 @@ public:
     QString getPath() const;
     void setName(const QString &newName);
     void setPath(const QString &newPath);
+    void showQuery(QString queryString);
 
     void showQuery(QString query);
 

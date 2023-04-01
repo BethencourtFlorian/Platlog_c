@@ -13,6 +13,7 @@ CONFIG += c++17
 SOURCES += \
     src/adminpage.cpp \
     src/comboboxdelegate.cpp \
+    src/databaseadd.cpp \
     src/database.cpp \
     src/menu.cpp \
     main.cpp \
@@ -25,6 +26,7 @@ SOURCES += \
 
 
 HEADERS += \
+    headers/databaseadd.h \
     headers/XMLParser.h \
     headers/adminpage.h \
     headers/comboboxdelegate.h \
@@ -38,6 +40,7 @@ HEADERS += \
 
 FORMS += \
     forms/adminpage.ui \
+    forms/databaseadd.ui \
     forms/connexionpage.ui \
     forms/database.ui \
     forms/mainpage.ui \

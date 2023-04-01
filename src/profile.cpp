@@ -38,6 +38,11 @@ void Profile::addDb(Database* db){
     databases.push_back(db);
 }
 
+std::list<Database*> Profile::getDbs()
+{
+    return databases;
+}
+
 void Profile::onLoginSent(QString& loginPassed)
 {
     loginUser = loginPassed;
@@ -97,7 +102,7 @@ void Profile::on_createProfile_clicked()
             id == QString("default_id");
         emit sendNewId(id);
     }
-    emit destroyed();
+    emit destroyedProfile();
     hide();
 }
 

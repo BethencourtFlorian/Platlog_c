@@ -25,6 +25,7 @@ public:
     Profile &operator=(const Profile& source);
 
     void addDb(Database* db);
+    std::list<Database*> getDbs();
 
     void addProfileXML();
 
@@ -41,8 +42,8 @@ private slots:
     void on_createProfile_clicked();
 
 signals:
-    void destroyed();
     void sendNewId(QString id);
+    void destroyedProfile();
 
 private:
     Ui::Profile *ui;

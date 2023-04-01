@@ -82,3 +82,18 @@ void Database::setPath(const QString &newPath)
 {
     path = newPath;
 }
+
+void Database::showQuery(QString queryString){
+    QSqlQuery* query = new QSqlQuery();
+    bool selectQuery = queryString.startsWith("SELECT", Qt::CaseInsensitive);
+    query->prepare(queryString);
+    if (!query->exec())
+        qDebug() << query->lastError().text();
+    else if(selectQuery){
+        QSqlQueryModel * modal = new QSqlTableModel;
+        modal->setQuery(std::move(*query));
+        ui->tableView->setModel(modal);
+    }
+}
+
+

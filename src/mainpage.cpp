@@ -35,26 +35,11 @@ void MainPage::on_button_deconnect_clicked()
     connexionPage->show();
 }
 
-
-void MainPage::on_button_search_database_clicked()
-{
-    // TODO : CHange default path
-    QString fileName = QFileDialog::getOpenFileName(this, tr("Open Database"), "C:/Users/Florian/Downloads/chinook", tr("Data Base Files (*.db)"));
-    QSqlDatabase db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setDatabaseName(fileName);
-
-    Database *dbPage = new Database;
-    connect(this, &MainPage::notifyDbSent, dbPage, &Database::onDbSent);
-    dbPage->show();
-    emit notifyDbSent(db); // On transmet la base de données à la page Database
-}
-
-
 void MainPage::on_pushButton_clicked()
 {
     Profile* profilePage = new Profile(this);
     connect(this, &MainPage::notifyUsernameProfile, profilePage, &Profile::onLoginSent);
-    connect(profilePage,SIGNAL(destroyed()),this,SLOT(refreshPage()));
+    connect(profilePage,SIGNAL(destroyedProfile()),this,SLOT(refreshProfile()));
     QString username = (ui->info_login->text()).mid(8);
     emit notifyUsernameProfile(username);
     profilePage->show();
@@ -71,23 +56,19 @@ void MainPage::instanciatePage()
     for(auto it = listProfiles.begin(); it != listProfiles.end(); it++)
     {
         QLabel* newLabel = new QLabel((*it)->getId());
-
         QTreeWidgetItem* treeNode = new QTreeWidgetItem(ui->treeWidget);
         treeNode->setText(0, newLabel->text());
-
-        list<Database*> listDatabases = (*it)->getDatabases();
-        for(auto itd = listDatabases.begin(); itd != listDatabases.end(); itd++)
+        list<Database*> listDatabases = (*it)->getDbs();
+        for (auto it2 = listDatabases.begin() ; it2 != listDatabases.end(); it2++)
         {
-            QLabel* newLabelD = new QLabel((*itd)->getName());
-
-            QTreeWidgetItem* databaseNode = new QTreeWidgetItem();
-            databaseNode->setText(0, newLabelD->text());
-            treeNode->addChild(databaseNode);
+            QLabel* newLabel = new QLabel((*it2)->getName());
+            QTreeWidgetItem* databaseNode = new QTreeWidgetItem(treeNode);
+            databaseNode->setText(0, newLabel->text());
         }
     }
 }
 
-void MainPage::refreshPage()
+void MainPage::refreshProfile()
 {
     XMLParser::FillUser("myFile.xml", user);
     list<Profile*> listProfiles = user.getProfiles();
@@ -98,4 +79,105 @@ void MainPage::refreshPage()
     treeNode->setText(0, newLabel->text());
 }
 
+void MainPage::refreshDB(unsigned int idProfile)
+{
+    XMLParser::fillUser("myFile.xml", user);
+    list<Database*> listDatabases = user.getProfile(idProfile)->getDbs();
+    QLabel* newLabel = new QLabel(listDatabases.back()->getName());
+    QTreeWidgetItem* treeNode = ui->treeWidget->findItems(user.getProfile(idProfile)->getId(), Qt::MatchContains,  0)[0];
+    QTreeWidgetItem* databaseNode = new QTreeWidgetItem(treeNode);
+    databaseNode->setText(0, newLabel->text());
+
+}
+
+void MainPage::on_pushButton_2_clicked()
+{
+    DatabaseAdd* databaseAddPage = new DatabaseAdd();
+    if (ui->treeWidget->selectedItems().empty()){
+        connect(this, &MainPage::notifyUser, databaseAddPage, &DatabaseAdd::onUserSent);
+        emit notifyUser(user);
+    }
+
+    else
+    {
+       connect(this, &MainPage::notifyUserWithSelected, databaseAddPage, &DatabaseAdd::onUserWithSelectedSent);
+       emit notifyUserWithSelected(user, ui->treeWidget->currentItem()->text(0));
+    }
+    connect(databaseAddPage,&DatabaseAdd::destroyedDB,this,&MainPage::refreshDB);
+    databaseAddPage->show();
+}
+
+
+void MainPage::on_treeWidget_itemClicked(QTreeWidgetItem *item, int column)
+{
+    if (item->parent())
+    {
+        Database* db = XMLParser::searchDatabase("myFile.xml", user, item->parent()->text(column), item->text(column));
+        QSqlDatabase SQLdb = QSqlDatabase::addDatabase("QSQLITE", "DBCONN");
+
+        SQLdb.setDatabaseName(db->getPath());
+        SQLdb.open();
+
+        QSqlQuery query(QSqlDatabase::database("DBCONN"));
+        query.prepare("SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%'");
+        query.exec();
+
+        QSqlQueryModel * modal = new QSqlTableModel;
+        modal->setQuery(std::move(query));
+        ui->listTable->setModel(modal);
+        ui->listTable->show();
+
+        SQLdb.close();
+    }
+    QSqlDatabase::removeDatabase("DBCONN");
+
+}
+
+
+void MainPage::on_pushButton_3_clicked()
+{
+    if (!ui->treeWidget->selectedItems().empty()){
+
+        QMessageBox::StandardButton reply;
+
+        if (ui->treeWidget->currentItem()->parent() && !ui->treeWidget->currentItem()->parent()->parent())
+        {
+            reply = QMessageBox::warning(this, tr("Alerte"),
+            "Voulez vous vraiment supprimer la base de données " + ui->treeWidget->currentItem()->text(0) + " ?", QMessageBox::Yes | QMessageBox::No);
+
+            if (reply == QMessageBox::Yes)
+            {
+                XMLParser::deleteDatabaseById("myFile.xml",
+                                              user,
+                                              ui->treeWidget->currentItem()->parent()->text(0),
+                                              ui->treeWidget->currentItem()->text(0));
+
+                ui->treeWidget->currentItem()->parent()->removeChild(ui->treeWidget->currentItem());
+
+            }
+
+        }
+        else if (!ui->treeWidget->currentItem()->parent())
+        {
+            reply = QMessageBox::warning(this, tr("Alerte"),
+            "Voulez vous vraiment supprimer le profil " + ui->treeWidget->currentItem()->text(0) + " ainsi que toutes ses bases de données ?", QMessageBox::Yes | QMessageBox::No);
+
+            if (reply == QMessageBox::Yes)
+            {
+                XMLParser::deleteProfileById("myFile.xml",
+                                              user,
+                                              ui->treeWidget->currentItem()->text(0));
+                if (ui->treeWidget->currentItem()->childCount() != 0)
+                {
+                    for (int i = 0 ; i < ui->treeWidget->currentItem()->childCount() ; i++)
+                    {
+                        ui->treeWidget->currentItem()->removeChild(ui->treeWidget->currentItem()->child(i));
+                    }
+                }
+
+                delete ui->treeWidget->currentItem();
+            }
+        }
+    }
+}
 
