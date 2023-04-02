@@ -524,3 +524,47 @@ void XMLParser::deleteDatabaseById(QString path, User& user, QString profileName
         userBal = userBal.nextSibling();
     }
 }
+
+void XMLParser::editUserInfo(QString path, QString oldLogin, User userUpdated){
+    QFile file(path);
+    if (file.open(QIODevice::ReadOnly| QIODevice::Text)){
+        if(file.size() != 0){
+            QDomDocument document;
+            document.setContent(&file, true);
+            QDomNode root = document.firstChild();
+            QDomNode user = root.firstChild().firstChild();
+
+            while (!user.isNull()) {
+                if (user.isElement()) {
+                    QDomElement e = user.toElement();
+                    if(e.hasAttribute("Login")){
+                        QString login(e.attribute("Login"));
+                        if(login == oldLogin){
+                            QDomNode userInfo = user.firstChild();
+                            while(!userInfo.isNull()){
+                                QDomElement eInfo = userInfo.toElement();
+                                if(eInfo.tagName()=="UserInfo"){
+                                    e.setAttribute("Login", userUpdated.getLogin());
+                                    e.setAttribute("Password", userUpdated.getPassword());
+                                    eInfo.setAttribute("Email", userUpdated.getEmail());
+                                    eInfo.setAttribute("FirstName", userUpdated.getFirstName());
+                                    eInfo.setAttribute("LastName", userUpdated.getLastName());
+                                }
+                                userInfo = userInfo.nextSibling();
+                            }
+                        }
+                    }
+                }
+                user = user.nextSibling();
+            }
+            // Aucune correspondance trouvée, mauvais login ou mdp
+            file.close();
+            QFile wFile(path);
+            if (wFile.open(QIODevice::WriteOnly| QIODevice::Text | QIODevice::Truncate)){
+                QTextStream stream(&wFile);
+                stream << document.toString();
+                wFile.close();
+            }
+        }
+    }
+}

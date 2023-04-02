@@ -14,6 +14,7 @@ MainWindow::MainWindow(int XMLPassed, QWidget *parent)
     , lastName("")
 {
     XML = XMLPassed;
+    this->setWindowTitle("Sign Up");
     ui->setupUi(this);
     ui->input_password->setEchoMode(QLineEdit::Password);
     connect(ui->button_inscription, &QPushButton::clicked, this, &MainWindow::storage);
@@ -27,6 +28,27 @@ MainWindow::~MainWindow()
 
 void MainWindow::closeWindow(){
     this->hide();
+}
+
+void MainWindow::onEditionSent(User user){
+    login = user.getLogin();
+    ui->button_inscription->setText("Update Account");
+    disconnect(ui->button_inscription, &QPushButton::clicked, this, &MainWindow::storage);
+    connect(ui->button_inscription, &QPushButton::clicked, this, emitUpdatedUser);
+    ui->input_login->setText(user.getLogin());
+    ui->input_password->setText(user.getPassword());
+    ui->input_email->setText(user.getEmail());
+    ui->input_prenom->setText(user.getFirstName());
+    ui->input_nom->setText(user.getLastName());
+}
+
+void MainWindow::emitUpdatedUser(){
+    QString filePath("myFile.xml");
+    int rights[3] = {1,1,0};
+    User userUpdated(ui->input_login->text(), ui->input_password->text(), ui->input_email->text(), ui->input_prenom->text(), ui->input_nom->text(), rights);
+    XMLParser::editUserInfo(filePath, login, userUpdated);
+    emit notifyUpdatedUser(userUpdated);
+    this->close();
 }
 
 void MainWindow::storage()

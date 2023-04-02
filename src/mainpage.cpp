@@ -6,7 +6,7 @@ MainPage::MainPage(QWidget *parent) :
     ui(new Ui::MainPage)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Accueil");
+    this->setWindowTitle("Home");
 
 }
 
@@ -33,6 +33,15 @@ void MainPage::on_button_deconnect_clicked()
     this->hide();
     ConnexionPage* connexionPage = new ConnexionPage();
     connexionPage->show();
+}
+
+void MainPage::on_button_update_clicked()
+{
+    MainWindow* editionInfo = new MainWindow();
+    connect(this, &MainPage::notifyUserEdit, editionInfo, &MainWindow::onEditionSent);
+    connect(editionInfo, &MainWindow::notifyUpdatedUser, this, &MainPage::editInfoUser);
+    emit notifyUserEdit(user);
+    editionInfo->show();
 }
 
 void MainPage::on_pushButton_clicked()
@@ -195,5 +204,19 @@ void MainPage::on_pushButton_3_clicked()
             }
         }
     }
+}
+
+void MainPage::editInfoUser(User userUpdated){
+    user.setLogin(userUpdated.getLogin());
+    user.setPassword(userUpdated.getPassword());
+    user.setEmail(userUpdated.getEmail());
+    user.setFirstName(userUpdated.getFirstName());
+    user.setLastName(userUpdated.getLastName());
+
+    ui->title->setText(user.getFirstName() + "'s Homepage");
+    ui->info_login->setText("Login : " + user.getLogin());
+    ui->info_firstName->setText("First Name : " + user.getFirstName());
+    ui->info_lastName->setText("Last Name : " + user.getLastName());
+    ui->info_mail->setText("Email : " + user.getEmail());
 }
 

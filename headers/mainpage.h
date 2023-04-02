@@ -60,6 +60,11 @@ private slots:
     void on_button_deconnect_clicked();
 
     /**
+     * @brief Renvoie vers la page de création d'utilisateur (pré-remplie)
+     */
+    void on_button_update_clicked();
+
+    /**
      * @brief Renvoie vers la page d'ajout d'un profil
      */
     void on_pushButton_clicked();
@@ -88,6 +93,12 @@ private slots:
      */
     void on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column);
 
+    /**
+     * @brief Listener de la modification du User via la page d'inscription
+     * @param userUpdated utilisateur contenant les nouvelles informations
+     */
+    void editInfoUser(User userUpdated);
+
 signals:
 
     /**
@@ -114,6 +125,12 @@ signals:
      * @param selectedItem nom du profil sélectionné dans la TreeView
      */
     void notifyUserWithSelected(User& user, QString selectedItem);
+
+    /**
+     * @brief signal transférant un utilisateur à la page d'inscription pour mettre à jour ses informations
+     * @param user utilisateur à transférer
+     */
+    void notifyUserEdit(User user);
 
 private:
     Ui::MainPage *ui;

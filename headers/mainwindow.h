@@ -37,6 +37,27 @@ signals:
      */
     void notifyCloseSignup(User* user);
 
+    /**
+     * @brief Gère le transfert d'un utilisateur à la fin de l'inscription
+     * @param user utilisateur à transmettre
+     */
+    void notifyUpdatedUser(User user);
+
+public slots:
+    /**
+     * @brief Listener de la modification du User via la page principale
+     * @param user utilisateur contenant les informations & modifier
+     */
+    void onEditionSent(User user);
+
+private slots:
+    /**
+     * @brief Modifie le XML avec les nouvelles informations du user
+     * @param oldLogin string pour trouver l'utilisateur à modifier
+     * Elle est appelée via le bouton d'inscription une fois le signal notifyUpdatedUser reçu
+     */
+    void emitUpdatedUser();
+
 private:
     Ui::MainWindow *ui;
 

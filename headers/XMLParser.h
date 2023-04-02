@@ -103,6 +103,16 @@ public:
      * @return void
      */
     static void saveChanges(QString path, list<User*> listUsers);
+
+    /**
+     * @brief Permet de recharger le contenu du fichier XML dans les objets utilisateurs, profils et bases de données
+     *
+     * @param path chemin d'accès au fichier XML
+     * @param oldLogin string pour trouver l'utilisateur à modifier
+     * @param userUpdated utilisateur contenant les nouvelles informations
+     * @return void
+     */
+    static void editUserInfo(QString path, QString oldLogin, User userUpdated);
 };
 
 #endif // XMLPARSER_H
