@@ -32,11 +32,11 @@ void Database::onDbSent(QSqlDatabase& db){
         showQuery("SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';");
 
         ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        ui->lineEdit->setPlaceholderText("Insérer votre requête SQL");
+        ui->lineEdit->setPlaceholderText("Insert your SQL query");
         ui->tableView->show();
     }
     else
-        qDebug() << "db pas ouverte";
+        qDebug() << "DB not opened";
 }
 
 void Database::on_pushButton_clicked(){
@@ -81,6 +81,8 @@ void Database::showQuery(QString queryString){
     else if(selectQuery){
         QSqlQueryModel * modal = new QSqlTableModel;
         modal->setQuery(std::move(*query));
+        ui->tableView->setAlternatingRowColors(true);
+        ui->tableView->horizontalHeader()->setDefaultAlignment(Qt::AlignCenter);
         ui->tableView->setModel(modal);
     }
 }
