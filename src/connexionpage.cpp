@@ -25,7 +25,7 @@ void ConnexionPage::onConnectionButton_Click(){
 
     if (XMLParser::CheckConnexion("myFile.xml", foundUser, typedPassword, typedLogin) != 0)
         // TODO : messages d'erreurs en fonction du retour de CheckConnexion (créer une fonction dans XMLParser)
-        ui->label_error->setText("Mauvais login et/ou mot de passe");
+        ui->label_error->setText("Wrong login and/or password");
     else
     {
         if(foundUser.getRightSudo() != 1){

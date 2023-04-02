@@ -283,7 +283,7 @@ void AdminPage::on_saveButton_clicked(){
 
     QMessageBox msgBox;
     msgBox.addButton(tr("Ok"), QMessageBox::ActionRole);
-    msgBox.setText("Vos modifications ont bien été enregistrées.");
+    msgBox.setText("Your changes have been successfully saved");
     msgBox.exec();
 }
 
@@ -295,25 +295,25 @@ void AdminPage::on_deleteButton_clicked(){
     Database* databaseClicked = new Database();
 
     QMessageBox msgBox;
-    QPushButton *confirm = msgBox.addButton(tr("Confirmer"), QMessageBox::ActionRole);
+    QPushButton *confirm = msgBox.addButton(tr("Confirm"), QMessageBox::ActionRole);
     QPushButton *cancel = msgBox.addButton(QMessageBox::Abort);
 
     if(node->parent() == nullptr){
         userClicked = getUserWithLogin(node->text(0));
-        msgBox.setText("Etes vous sûr de vouloir supprimer cet utilisateur ?");
-        msgBox.setInformativeText("Tous ses profils et les bases de données associées seront également supprimées.");
+        msgBox.setText("Are you sure you want to delete this user ?");
+        msgBox.setInformativeText("All their profiles and associated databases will also be deleted.");
     }
     // Si on clique sur un profil
     else if(node->parent()->parent() == nullptr){
         profileClicked =  getProfileWithId(node->text(0), getUserWithLogin(node->parent()->text(0)));
-        msgBox.setText("Etes vous sûr de vouloir supprimer ce profil ?");
-        msgBox.setInformativeText("Toutes les bases de données associées seront également supprimées.");
+        msgBox.setText("Are you sure you want to delete this profile?");
+        msgBox.setInformativeText("All their profiles and associated databases will also be deleted.");
     }
     // Si on clique sur une base de données
     else{
         databaseClicked = getDatabaseWithName(node->text(0), getProfileWithId(node->parent()->text(0), getUserWithLogin(node->parent()->parent()->text(0))));
-        msgBox.setText("Etes vous sûr de vouloir supprimer cette base de données du profil ?");
-        msgBox.setInformativeText("Cela n'impactera pas le fichier présent sur le disque");
+        msgBox.setText("Are you sure you want to delete this profile database ?");
+        msgBox.setInformativeText("This will not affect the file on disk");
     }
 
     msgBox.exec();

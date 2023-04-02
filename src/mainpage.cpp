@@ -156,8 +156,8 @@ void MainPage::on_pushButton_3_clicked()
 
         if (ui->treeWidget->currentItem()->parent() && !ui->treeWidget->currentItem()->parent()->parent())
         {
-            reply = QMessageBox::warning(this, tr("Alerte"),
-            "Voulez vous vraiment supprimer la base de données " + ui->treeWidget->currentItem()->text(0) + " ?", QMessageBox::Yes | QMessageBox::No);
+            reply = QMessageBox::warning(this, tr("Alert"),
+            "Do you want to delete the database " + ui->treeWidget->currentItem()->text(0) + " ?", QMessageBox::Yes | QMessageBox::No);
 
             if (reply == QMessageBox::Yes)
             {
@@ -173,8 +173,8 @@ void MainPage::on_pushButton_3_clicked()
         }
         else if (!ui->treeWidget->currentItem()->parent())
         {
-            reply = QMessageBox::warning(this, tr("Alerte"),
-            "Voulez vous vraiment supprimer le profil " + ui->treeWidget->currentItem()->text(0) + " ainsi que toutes ses bases de données ?", QMessageBox::Yes | QMessageBox::No);
+            reply = QMessageBox::warning(this, tr("Alert"),
+            "Do you want to delete the profile " + ui->treeWidget->currentItem()->text(0) + " as well as all its databases ?", QMessageBox::Yes | QMessageBox::No);
 
             if (reply == QMessageBox::Yes)
             {

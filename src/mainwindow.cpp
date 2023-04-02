@@ -39,7 +39,7 @@ void MainWindow::storage()
 
     if (login.isEmpty() || password.isEmpty() || email.isEmpty() || firstName.isEmpty() || lastName.isEmpty())
     {
-        ui->label_error->setText("Veuillez remplir tous les champs");
+        ui->label_error->setText("You must fill all of the fields");
     }
     else
     {
