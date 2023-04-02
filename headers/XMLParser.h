@@ -22,7 +22,26 @@ public:
      */
     static int AddUser(QDomDocument& document, QDomElement newUser, QString filePath);
 
+    /**
+     * @brief Ajoute une base de données à un profil
+     *
+     * @param path chemin d'accès au fichier XML
+     * @param user utilisateur actuellement connecté au logiciel
+     * @param database base de données à insérer
+     * @param idProfile identifiant de profil dans le fichier XML
+     * @return void
+     */
     static void AddDatabase(QString path, User& user, Database& database, int idProfile);
+
+    /**
+     * @brief Retrouve une base de données dans le fichier XML, puis la retourne
+     *
+     * @param path chemin d'accès au fichier XML
+     * @param user utilisateur actuellement connecté au logiciel
+     * @param profileName nom du profil de l'utilisateur
+     * @param databaseName nom de la base de données à retrouver
+     * @return Database* pointeur vers la base de données (url et nom)
+     */
 
     static Database* searchDatabase(QString path, User& user, QString profileName, QString databaseName);
     /**
@@ -38,13 +57,51 @@ public:
      */
     static int CheckConnexion(QString filePath, User& foundUser, QString typedPassword, QString typedLogin);
 
+    /**
+     * @brief Retourne la liste des utilisateurs créés depuis le fichier XML
+     *
+     * @param filePath chemin d'accès au fichier XML
+     * @return filePath liste des utilisateurs du fichier XML
+     */
     static std::list<User*> GetUsers(QString filePath);
+
+    /**
+     * @brief Permet de remplir un objet user avec les profils/base de données du fichier XML
+     *
+     * @param path chemin d'accès au fichier XML
+     * @param user utilisateur à remplir avec les profils et bases de données correspondants.
+     * @return void
+     */
     static void fillUser(QString path, User& user);
 
+    /**
+     * @brief Supprime un profil ainsi que ses bases de données pour un fichier XML
+     *
+     * @param filePath chemin d'accès au fichier XML
+     * @param user utilisateur possédant le profil à supprimer
+     * @param profileName nom du profil à supprimer
+     * @return void
+     */
     static void deleteProfileById(QString filePath, User& user, QString profileName);
 
+    /**
+     * @brief Supprime la base de données d'un profil pour un fichier XML
+     *
+     * @param filePath chemin d'accès au fichier XML
+     * @param user utilisateur possédant la base de données à supprimer
+     * @param profileName nom du profil possédant la base de données à supprimer
+     * @param databaseName nom de la base de données à supprimer
+     * @return void
+     */
     static void deleteDatabaseById(QString filePath, User& user, QString profileName, QString databaseName);
 
+    /**
+     * @brief Permet de recharger le contenu du fichier XML dans les objets utilisateurs, profils et bases de données
+     *
+     * @param path chemin d'accès au fichier XML
+     * @param listUsers liste d'utilisateurs à mettre à jour selon le fichier XML
+     * @return void
+     */
     static void saveChanges(QString path, list<User*> listUsers);
 };
 

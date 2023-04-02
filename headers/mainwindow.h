@@ -31,6 +31,10 @@ public:
     void storage();
 
 signals:
+    /**
+     * @brief Gère le transfert d'un utilisateur à la fin de l'inscription
+     * @param user utilisateur à transmettre
+     */
     void notifyCloseSignup(User* user);
 
 private:
