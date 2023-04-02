@@ -19,6 +19,17 @@ AdminPage::~AdminPage()
     delete ui;
 }
 
+QString convertRight(int right){
+    if(right == 1){
+        return QString("True");
+    }
+    if(right == 0){
+        return QString("False");
+    }
+    else
+        return QString("");
+}
+
 User* AdminPage::getUserWithLogin(QString login){
     for(auto it = listUsers.begin(); it != listUsers.end(); it++)
     {
@@ -49,17 +60,6 @@ Database* AdminPage::getDatabaseWithName(QString name, Profile* profile){
         }
     }
     return nullptr;
-}
-
-QString convertRight(int right){
-    if(right == 1){
-        return QString("True");
-    }
-    if(right == 0){
-        return QString("False");
-    }
-    else
-        return QString("");
 }
 
 void AdminPage::fillTableWithUser(User *user){
@@ -126,6 +126,164 @@ void AdminPage::fillTableWithDatabase(Database *database){
         ui->tableView->resizeColumnsToContents();
         ui->tableView->viewport()->update();
     }
+}
+
+void AdminPage::onInfoSent(User& sentUser)
+{
+    user = sentUser;
+    // Chaque champ de la vue est remplie avec les informations de l'utilisateur récupérées par la vue Connexion
+    ui->title->setText(user.getFirstName() + "'s " + ui->title->text());
+    ui->info_login->setText(ui->info_login->text() + " " + user.getLogin());
+    ui->info_firstName->setText(ui->info_firstName->text() + " " + user.getFirstName());
+    ui->info_lastName->setText(ui->info_lastName->text() + " " + user.getLastName());
+    ui->info_mail->setText(ui->info_mail->text() + " " + user.getEmail());
+
+    instanciatePage();
+}
+
+void AdminPage::instanciatePage()
+{
+    ui->treeWidget->clear();
+    listUsers = XMLParser::GetUsers("myFile.xml");
+
+    for(auto it = listUsers.begin(); it != listUsers.end(); it++)
+    {
+        QLabel* newLabel = new QLabel((*it)->getLogin());
+
+        QTreeWidgetItem* userNode = new QTreeWidgetItem(ui->treeWidget);
+        userNode->setText(0, newLabel->text());
+
+        list<Profile*> listProfiles = (*it)->getProfiles();
+        for(auto itp = listProfiles.begin(); itp != listProfiles.end(); itp++)
+        {
+            QLabel* newLabelP = new QLabel((*itp)->getId());
+
+            QTreeWidgetItem* profileNode = new QTreeWidgetItem();
+            profileNode->setText(0, newLabelP->text());
+
+            list<Database*> listDatabases = (*itp)->getDatabases();
+            for(auto itd = listDatabases.begin(); itd != listDatabases.end(); itd++)
+            {
+                QLabel* newLabelD = new QLabel((*itd)->getName());
+
+                QTreeWidgetItem* databaseNode = new QTreeWidgetItem();
+                databaseNode->setText(0, newLabelD->text());
+                profileNode->addChild(databaseNode);
+            }
+            userNode->addChild(profileNode);
+        }
+    }
+}
+
+void AdminPage::on_button_deconnect_clicked()
+{
+    this->hide();
+    ConnexionPage* connexionPage = new ConnexionPage();
+    connexionPage->show();
+}
+
+void AdminPage::on_addProfileButton_clicked()
+{
+    Profile* profile = new Profile(this, 0);
+    connect(profile, &Profile::sendNewId, this, &AdminPage::addProfileTree);
+    profile->show();
+}
+
+void AdminPage::on_addDatabaseButton_clicked()
+{
+    DatabaseAdd* dbAdd = new DatabaseAdd(0);
+    connect(dbAdd, &DatabaseAdd::sendNewDatabase, this, &AdminPage::addDatabaseTree);
+    dbAdd->show();
+}
+
+void AdminPage::on_createUserButton_clicked()
+{
+    MainWindow* mainWindow = new MainWindow(0);
+    connect(mainWindow, &MainWindow::notifyCloseSignup, this, &AdminPage::addUserTree);
+    mainWindow->show();
+}
+
+void AdminPage::on_deleteButton_clicked(){
+    QTreeWidgetItem* node = (ui->treeWidget->selectedItems().back());
+
+    User* userClicked = new User();
+    Profile* profileClicked = new Profile();
+    Database* databaseClicked = new Database();
+
+    QMessageBox msgBox;
+    QPushButton *confirm = msgBox.addButton(tr("Confirmer"), QMessageBox::ActionRole);
+    QPushButton *cancel = msgBox.addButton(QMessageBox::Abort);
+
+    if(node->parent() == nullptr){
+        userClicked = getUserWithLogin(node->text(0));
+        msgBox.setText("Etes vous sûr de vouloir supprimer cet utilisateur ?");
+        msgBox.setInformativeText("Tous ses profils et les bases de données associées seront également supprimées.");
+    }
+    // Si on clique sur un profil
+    else if(node->parent()->parent() == nullptr){
+        profileClicked =  getProfileWithId(node->text(0), getUserWithLogin(node->parent()->text(0)));
+        msgBox.setText("Etes vous sûr de vouloir supprimer ce profil ?");
+        msgBox.setInformativeText("Toutes les bases de données associées seront également supprimées.");
+    }
+    // Si on clique sur une base de données
+    else{
+        databaseClicked = getDatabaseWithName(node->text(0), getProfileWithId(node->parent()->text(0), getUserWithLogin(node->parent()->parent()->text(0))));
+        msgBox.setText("Etes vous sûr de vouloir supprimer cette base de données du profil ?");
+        msgBox.setInformativeText("Cela n'impactera pas le fichier présent sur le disque");
+    }
+
+    msgBox.exec();
+
+    if(msgBox.clickedButton() == confirm){
+        delete node;
+        ui->deleteButton->hide();
+        ui->tableView->setModel(new QStandardItemModel());
+        ui->tableView->viewport()->update();
+        // Si on a cliqué sur une bdd
+        if(databaseClicked->getName() != ""){
+            list<Database*> listDatabases = profileClicked->getDatabases();
+            listDatabases.remove(databaseClicked);
+        }
+        // Si on a cliqué sur un profil
+        else if(profileClicked->getId() != ""){
+            list<Database*> listDatabases = profileClicked->getDatabases();
+            for(long unsigned int i = 0; i < listDatabases.size(); i++){
+                listDatabases.pop_back();
+            }
+
+            list<Profile*> listProfiles = userClicked->getProfiles();
+            listProfiles.remove(profileClicked);
+        }
+        // Si on a cliqué sur un user
+        else{
+            list<Profile*> listProfiles = userClicked->getProfiles();
+            for(auto it = listProfiles.begin(); it != listProfiles.end(); it++)
+            {
+                list<Database*> listDatabases = (*it)->getDatabases();
+                for(long unsigned int i = 0; i < listDatabases.size(); i++){
+                    listDatabases.pop_back();
+                }
+            }
+
+            for(long unsigned int i = 0; i < listProfiles.size(); i++){
+                listProfiles.pop_back();
+            }
+            listUsers.remove(userClicked);
+        }
+    }
+    else if(msgBox.clickedButton() == cancel){
+        msgBox.hide();
+    }
+}
+
+void AdminPage::on_saveButton_clicked(){
+    QString filePath("myFile.xml");
+    XMLParser::saveChanges(filePath, listUsers);
+
+    QMessageBox msgBox;
+    msgBox.addButton(tr("Ok"), QMessageBox::ActionRole);
+    msgBox.setText("Vos modifications ont bien été enregistrées.");
+    msgBox.exec();
 }
 
 void AdminPage::onTreeNode_Clicked(QTreeWidgetItem *item, int column){
@@ -243,121 +401,11 @@ void AdminPage::openFileDialog(const QModelIndex& index){
     }
 }
 
-void AdminPage::onInfoSent(User& sentUser)
-{
-    user = sentUser;
-    // Chaque champ de la vue est remplie avec les informations de l'utilisateur récupérées par la vue Connexion
-    ui->title->setText(user.getFirstName() + "'s " + ui->title->text());
-    ui->info_login->setText(ui->info_login->text() + " " + user.getLogin());
-    ui->info_firstName->setText(ui->info_firstName->text() + " " + user.getFirstName());
-    ui->info_lastName->setText(ui->info_lastName->text() + " " + user.getLastName());
-    ui->info_mail->setText(ui->info_mail->text() + " " + user.getEmail());
-
-    instanciatePage();
-}
-
-void AdminPage::on_button_deconnect_clicked()
-{
-    this->hide();
-    ConnexionPage* connexionPage = new ConnexionPage();
-    connexionPage->show();
-}
-
-void AdminPage::on_createUserButton_clicked()
-{
-    MainWindow* mainWindow = new MainWindow(0);
-    connect(mainWindow, &MainWindow::notifyCloseSignup, this, &AdminPage::addUserTree);
-    mainWindow->show();
-}
-
-void AdminPage::on_addProfileButton_clicked()
-{
-    Profile* profile = new Profile(this, 0);
-    connect(profile, &Profile::sendNewId, this, &AdminPage::addProfileTree);
-    profile->show();
-}
-
-void AdminPage::on_saveButton_clicked(){
-    QString filePath("myFile.xml");
-    XMLParser::saveChanges(filePath, listUsers);
-
-    QMessageBox msgBox;
-    msgBox.addButton(tr("Ok"), QMessageBox::ActionRole);
-    msgBox.setText("Vos modifications ont bien été enregistrées.");
-    msgBox.exec();
-}
-
-void AdminPage::on_deleteButton_clicked(){
-    QTreeWidgetItem* node = (ui->treeWidget->selectedItems().back());
-
-    User* userClicked = new User();
-    Profile* profileClicked = new Profile();
-    Database* databaseClicked = new Database();
-
-    QMessageBox msgBox;
-    QPushButton *confirm = msgBox.addButton(tr("Confirmer"), QMessageBox::ActionRole);
-    QPushButton *cancel = msgBox.addButton(QMessageBox::Abort);
-
-    if(node->parent() == nullptr){
-        userClicked = getUserWithLogin(node->text(0));
-        msgBox.setText("Etes vous sûr de vouloir supprimer cet utilisateur ?");
-        msgBox.setInformativeText("Tous ses profils et les bases de données associées seront également supprimées.");
-    }
-    // Si on clique sur un profil
-    else if(node->parent()->parent() == nullptr){
-        profileClicked =  getProfileWithId(node->text(0), getUserWithLogin(node->parent()->text(0)));
-        msgBox.setText("Etes vous sûr de vouloir supprimer ce profil ?");
-        msgBox.setInformativeText("Toutes les bases de données associées seront également supprimées.");
-    }
-    // Si on clique sur une base de données
-    else{
-        databaseClicked = getDatabaseWithName(node->text(0), getProfileWithId(node->parent()->text(0), getUserWithLogin(node->parent()->parent()->text(0))));
-        msgBox.setText("Etes vous sûr de vouloir supprimer cette base de données du profil ?");
-        msgBox.setInformativeText("Cela n'impactera pas le fichier présent sur le disque");
-    }
-
-    msgBox.exec();
-
-    if(msgBox.clickedButton() == confirm){
-        delete node;
-        ui->deleteButton->hide();
-        ui->tableView->setModel(new QStandardItemModel());
-        ui->tableView->viewport()->update();
-        // Si on a cliqué sur une bdd
-        if(databaseClicked->getName() != ""){
-            list<Database*> listDatabases = profileClicked->getDatabases();
-            listDatabases.remove(databaseClicked);
-        }
-        // Si on a cliqué sur un profil
-        else if(profileClicked->getId() != ""){
-            list<Database*> listDatabases = profileClicked->getDatabases();
-            for(long unsigned int i = 0; i < listDatabases.size(); i++){
-                listDatabases.pop_back();
-            }
-
-            list<Profile*> listProfiles = userClicked->getProfiles();
-            listProfiles.remove(profileClicked);
-        }
-        // Si on a cliqué sur un user
-        else{
-            list<Profile*> listProfiles = userClicked->getProfiles();
-            for(auto it = listProfiles.begin(); it != listProfiles.end(); it++)
-            {
-                list<Database*> listDatabases = (*it)->getDatabases();
-                for(long unsigned int i = 0; i < listDatabases.size(); i++){
-                    listDatabases.pop_back();
-                }
-            }
-
-            for(long unsigned int i = 0; i < listProfiles.size(); i++){
-                listProfiles.pop_back();
-            }
-            listUsers.remove(userClicked);
-        }
-    }
-    else if(msgBox.clickedButton() == cancel){
-        msgBox.hide();
-    }
+void AdminPage::addUserTree(User* user){
+    listUsers.push_back(user);
+    QLabel* newLabel = new QLabel(user->getLogin());
+    QTreeWidgetItem* userNode = new QTreeWidgetItem(ui->treeWidget);
+    userNode->setText(0, newLabel->text());
 }
 
 void AdminPage::addProfileTree(QString id){
@@ -377,20 +425,6 @@ void AdminPage::addProfileTree(QString id){
     userNode->addChild(newProfileNode);
 }
 
-void AdminPage::addUserTree(User* user){
-    listUsers.push_back(user);
-    QLabel* newLabel = new QLabel(user->getLogin());
-    QTreeWidgetItem* userNode = new QTreeWidgetItem(ui->treeWidget);
-    userNode->setText(0, newLabel->text());
-}
-
-void AdminPage::on_addDatabaseButton_clicked()
-{
-    DatabaseAdd* dbAdd = new DatabaseAdd(0);
-    connect(dbAdd, &DatabaseAdd::sendNewDatabase, this, &AdminPage::addDatabaseTree);
-    dbAdd->show();
-}
-
 void AdminPage::addDatabaseTree(Database *database){
     QTreeWidgetItem* profileNode = (ui->treeWidget->selectedItems().back());
     // On selectionne forcement un profil (le bouton est désactivé quand on clique sur un user)
@@ -406,38 +440,4 @@ void AdminPage::addDatabaseTree(Database *database){
     QTreeWidgetItem* dbNode = new QTreeWidgetItem();
     dbNode->setText(0, dbLabel->text());
     profileNode->addChild(dbNode);
-}
-
-void AdminPage::instanciatePage()
-{
-    ui->treeWidget->clear();
-    listUsers = XMLParser::GetUsers("myFile.xml");
-
-    for(auto it = listUsers.begin(); it != listUsers.end(); it++)
-    {
-        QLabel* newLabel = new QLabel((*it)->getLogin());
-
-        QTreeWidgetItem* userNode = new QTreeWidgetItem(ui->treeWidget);
-        userNode->setText(0, newLabel->text());
-
-        list<Profile*> listProfiles = (*it)->getProfiles();
-        for(auto itp = listProfiles.begin(); itp != listProfiles.end(); itp++)
-        {
-            QLabel* newLabelP = new QLabel((*itp)->getId());
-
-            QTreeWidgetItem* profileNode = new QTreeWidgetItem();
-            profileNode->setText(0, newLabelP->text());
-
-            list<Database*> listDatabases = (*itp)->getDatabases();
-            for(auto itd = listDatabases.begin(); itd != listDatabases.end(); itd++)
-            {
-                QLabel* newLabelD = new QLabel((*itd)->getName());
-
-                QTreeWidgetItem* databaseNode = new QTreeWidgetItem();
-                databaseNode->setText(0, newLabelD->text());
-                profileNode->addChild(databaseNode);
-            }
-            userNode->addChild(profileNode);
-        }
-    }
 }

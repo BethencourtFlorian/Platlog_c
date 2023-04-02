@@ -48,18 +48,20 @@ private slots:
      * @brief Renvoie vers la page de connexion
      */
     void on_button_deconnect_clicked();
-
-    void on_createUserButton_clicked();
     void on_addProfileButton_clicked();
     void on_addDatabaseButton_clicked();
-    void on_saveButton_clicked();
+    void on_createUserButton_clicked();
     void on_deleteButton_clicked();
+    void on_saveButton_clicked();
 
     void onTreeNode_Clicked(QTreeWidgetItem *item, int column);
+
     void onUserChanged(QStandardItem* item);
     void onProfileChanged(QStandardItem* item);
     void onDatabaseChanged(QStandardItem* item);
+
     void openFileDialog(const QModelIndex& index);
+
     void addUserTree(User* user);
     void addProfileTree(QString id);
     void addDatabaseTree(Database* database);
