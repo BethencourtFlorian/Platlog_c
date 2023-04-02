@@ -12,11 +12,49 @@
   </property>
   <property name="font">
    <font>
-    <pointsize>9</pointsize>
+    <family>Segoe UI</family>
+    <pointsize>8</pointsize>
+    <italic>false</italic>
+    <bold>false</bold>
    </font>
   </property>
   <property name="windowTitle">
    <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">*{
+font: 8pt &quot;Segoe UI&quot;;
+background-color: rgb(24, 24, 24);
+color: white;
+}
+
+QTableView {
+	gridline-color: white;
+	border-color: rgb(224, 224, 224);
+    font: 10px;
+}
+
+QHeaderView::section {
+	text-align: left;
+    
+	background-color: rgb(13, 142, 227);
+	border: 1px solid #04AA6D;
+    color: white;
+    height: 35px;
+    font: 14px;
+}
+
+QTableView::item:alternate{
+	
+	background-color: rgb(209, 209, 209);
+	color: black;
+}
+
+QTableView::item{
+	background-color: white;
+	color: black;
+}
+</string>
   </property>
   <widget class="QTableView" name="tableView">
    <property name="geometry">
@@ -28,7 +66,7 @@
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true">color: rgb(39, 24, 255);</string>
+    <string notr="true"/>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">
@@ -51,7 +89,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>Exécuter</string>
+    <string>Execute</string>
    </property>
   </widget>
   <widget class="QPushButton" name="defaultButton">
@@ -65,12 +103,15 @@
    </property>
    <property name="font">
     <font>
-     <pointsize>9</pointsize>
+     <family>Segoe UI</family>
+     <pointsize>8</pointsize>
+     <italic>false</italic>
+     <bold>false</bold>
     </font>
    </property>
    <property name="text">
-    <string>Afficher
-les tables</string>
+    <string>Show
+Tables</string>
    </property>
   </widget>
  </widget>

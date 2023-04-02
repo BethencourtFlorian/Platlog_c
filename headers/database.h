@@ -23,7 +23,6 @@ public:
     Database(QString newName, QString newPath);
     Database(const Database& source);
     Database &operator=(const Database& source);
-
     ~Database();
 
     QString getName() const;
@@ -35,11 +34,28 @@ public:
     void setPath(const QString &newPath);
     void setRead(const int &newRead);
     void setEdit(const int &newEdit);
+
+    /**
+     * @brief Affiche le résultat de la requête sur la base de données en fonction de la requête saisie
+     * @param queryString requête entrée par l'utilisateur
+     */
     void showQuery(QString queryString);
 
 public slots:
+    /**
+     * @brief Gère la réception d'une base de données à manipuler
+     * @param db base de données reçue
+     */
     void onDbSent(QSqlDatabase& db);
+
+    /**
+     * @brief Gère l'affichage du résultat de la requête
+     */
     void on_pushButton_clicked();
+
+    /**
+     * @brief Gère l'affichage des tables de la base de données
+     */
     void on_defaultButton_clicked();
 
 private:

@@ -141,10 +141,37 @@ public:
      */
     void setRightSudo(int new_right_sudo);
 
+    /**
+     * @brief Retourne la liste des profiles pour un utilisateur
+     * @return std::list<Profile*> liste des profils de l'utilisateur
+     */
     std::list<Profile*> getProfiles() const;
+
+    /**
+     * @brief Retourne un profile donné pour un utilisateur
+     * @param _i ID du profil à retourner
+     * @return std::list<Profile*> liste des profils de l'utilisateur
+     */
     Profile* getProfile(int _i);
+
+    /**
+     * @brief Ajoute un profil à l'utilisateur courant
+     * @param newProfile profil à ajouter
+     * @return void
+     */
     void addProfile(Profile* newProfile);
+
+    /**
+     * @brief Supprime un profil de l'utilisateur courant
+     * @param id ID du profil à supprimer
+     * @return void
+     */
     void deleteProfile(QString id);
+
+    /**
+     * @brief Supprime tous les profils pour un utilisateur
+     * @return void
+     */
     void clearProfiles();
 };
 
