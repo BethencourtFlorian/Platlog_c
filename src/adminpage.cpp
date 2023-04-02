@@ -6,7 +6,7 @@ AdminPage::AdminPage(QWidget *parent) :
     ui(new Ui::AdminPage)
 {
     ui->setupUi(this);
-    this->setWindowTitle("Accueil");
+    this->setWindowTitle("Admin Homepage");
     connect(ui->treeWidget, &QTreeWidget::itemClicked, this, &AdminPage::onTreeNode_Clicked);
     connect(ui->tableView, &QTableView::doubleClicked, this, &AdminPage::openFileDialog);
     ui->addProfileButton->setDisabled(true);

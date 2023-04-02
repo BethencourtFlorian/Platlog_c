@@ -9,6 +9,7 @@ Profile::Profile(QWidget *parent, int XMLPassed) :
 {
     XML = XMLPassed;
     ui->setupUi(this);
+    this->setWindowTitle("Add a profile");
     ui->input_profile->setPlaceholderText("Nom");
 }
 

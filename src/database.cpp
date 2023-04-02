@@ -8,6 +8,7 @@ Database::Database(QWidget *parent) :
     path("")
 {
     ui->setupUi(this);
+    this->setWindowTitle("Database viewer");
 }
 
 Database::Database(QString newName, QString newPath){
@@ -35,11 +36,13 @@ Database &Database::operator=(const Database& source)
 void Database::onDbSent(QSqlDatabase& db){
     if(db.open() && getRead() == 1){
         showQuery("SELECT name FROM sqlite_schema WHERE type ='table' AND name NOT LIKE 'sqlite_%';");
-
-        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-        ui->lineEdit->setPlaceholderText("Insert your SQL query");
-        ui->tableView->show();
     }
+    if(getEdit() != 1){
+        ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    }
+
+    ui->lineEdit->setPlaceholderText("Insert your SQL query");
+    ui->tableView->show();
 }
 
 void Database::on_pushButton_clicked(){

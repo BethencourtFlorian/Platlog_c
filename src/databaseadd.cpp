@@ -7,6 +7,7 @@ DatabaseAdd::DatabaseAdd(int XMLPassed, QWidget *parent) :
 {
     XML = XMLPassed;
     ui->setupUi(this);
+    this->setWindowTitle("Add a database");
     if(XML == 0){
         ui->comboBox->hide();
     }
