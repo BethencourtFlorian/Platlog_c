@@ -24,7 +24,7 @@
   <property name="styleSheet">
    <string notr="true">*{
 font: 8pt &quot;Segoe UI&quot;;
-background-color: rgb(24, 24, 24);
+background-color: rgb(255,255,255);
 color: white;
 }
 
@@ -59,14 +59,16 @@ QTableView::item{
   <widget class="QTableView" name="tableView">
    <property name="geometry">
     <rect>
-     <x>50</x>
+     <x>40</x>
      <y>120</y>
      <width>800</width>
      <height>450</height>
     </rect>
    </property>
    <property name="styleSheet">
-    <string notr="true"/>
+    <string notr="true">QTableView{
+	border: 1px solid black;
+}</string>
    </property>
   </widget>
   <widget class="QLineEdit" name="lineEdit">
@@ -78,6 +80,14 @@ QTableView::item{
      <height>40</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit{
+	color: black;
+}</string>
+   </property>
+   <property name="placeholderText">
+    <string>  Insert your SQL query here</string>
+   </property>
   </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
@@ -88,6 +98,20 @@ QTableView::item{
      <height>40</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	background-color: rgb(33, 185, 255);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(16, 124, 255);
+}</string>
+   </property>
    <property name="text">
     <string>Execute</string>
    </property>
@@ -97,21 +121,34 @@ QTableView::item{
     <rect>
      <x>750</x>
      <y>30</y>
-     <width>100</width>
-     <height>60</height>
+     <width>121</width>
+     <height>41</height>
     </rect>
    </property>
    <property name="font">
     <font>
      <family>Segoe UI</family>
-     <pointsize>8</pointsize>
+     <pointsize>-1</pointsize>
      <italic>false</italic>
-     <bold>false</bold>
+     <bold>true</bold>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+	border-radius: 20px;
+	background-color: rgb(33, 185, 255);
+	font-weight:  bold;
+	font-size: 15px;
+	color: rgb(255, 255, 255);
+}
+
+QPushButton:hover{
+	
+	background-color: rgb(16, 124, 255);
+}</string>
+   </property>
    <property name="text">
-    <string>Show
-Tables</string>
+    <string>Show tables</string>
    </property>
   </widget>
  </widget>

@@ -15,7 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">font: 8pt &quot;Segoe UI&quot;;
-background-color: rgb(24, 24, 24);</string>
+background-color: rgb(255,255,255);</string>
   </property>
   <widget class="QPushButton" name="button_connection">
    <property name="geometry">
@@ -57,7 +57,7 @@ QPushButton:hover{
     <string notr="true">QLineEdit {
 	border: 2px solid rgb(37,39,48);	
 	border-radius: 20px;
-	color: #FFF;
+	color: #AAA;
 	padding-left: 20px;
 	padding-right:20px;
 	background-color: rgb(34,36,44);
@@ -89,7 +89,7 @@ QLineEdit:focus{
     <string notr="true">QLineEdit {
 	border: 2px solid rgb(37,39,48);	
 	border-radius: 20px;
-	color: #FFF;
+	color: #AAA;
 	padding-left: 20px;
 	padding-right:20px;
 	background-color: rgb(34,36,44);
@@ -175,6 +175,12 @@ QPushButton:hover{
    </property>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>input_login</tabstop>
+  <tabstop>input_password</tabstop>
+  <tabstop>button_connection</tabstop>
+  <tabstop>button_inscription</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

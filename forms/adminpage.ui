@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">*{
 font: 8pt &quot;Segoe UI&quot;;
-background-color: rgb(24, 24, 24);
+background-color: rgb(255,255,255);
 }
 
 QTreeWidget{
@@ -178,6 +178,13 @@ QPushButton:hover{
      <height>340</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QTreeWidget{
+	font-size: 13px;
+	color: rgb(0,0,0);
+	border: 1px solid black;
+}</string>
+   </property>
    <attribute name="headerVisible">
     <bool>false</bool>
    </attribute>
@@ -283,10 +290,13 @@ QPushButton:disabled{
    </property>
    <property name="styleSheet">
     <string notr="true">QHeaderView {
-background: rgb(24,24,24);
+background: rgb(255, 255, 255);
 }
 QHeaderView::section {
 background: rgb(255, 255, 127);
+}
+QTableView{
+border: 1px solid black;
 }
 
 </string>

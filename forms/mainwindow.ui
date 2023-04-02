@@ -23,7 +23,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">font: 8pt &quot;Segoe UI&quot;;
-background-color: rgb(24, 24, 24);</string>
+background-color: rgb(255,255,255);</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="button_inscription">
@@ -258,7 +258,7 @@ QLineEdit:focus{
 	font-size: 24px;
 	font-weight: bold;
 	
-	color: rgb(255, 255, 255);
+	color: rgb(0,0,0);
 }</string>
     </property>
     <property name="text">

@@ -16,7 +16,7 @@
   <property name="styleSheet">
    <string notr="true">*{
 	font: 8pt &quot;Segoe UI&quot;;
-	background-color: rgb(23,23,23);
+	background-color: rgb(24,24,24);
 	color: white;
 }
 QLineEdit
