@@ -91,6 +91,8 @@ $(document).ready(function(){initNavTree('class_main_window.html',''); initResiz
 
 <div class="header">
   <div class="summary">
+<a href="#pub-slots">Connecteurs publics</a> &#124;
+<a href="#signals">Signaux</a> &#124;
 <a href="#pub-methods">Fonctions membres publiques</a> &#124;
 <a href="class_main_window-members.html">Liste de tous les membres</a>  </div>
   <div class="headertitle"><div class="title">Référence de la classe MainWindow</div></div>
@@ -103,24 +105,43 @@ Graphe d'héritage de MainWindow:</div>
   <img src="class_main_window.png" alt=""/>
  </div></div>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-slots" name="pub-slots"></a>
+Connecteurs publics</h2></td></tr>
+<tr class="memitem:af10b8e68f701dec14d203f13c26536a0"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#af10b8e68f701dec14d203f13c26536a0">onEditionSent</a> (<a class="el" href="class_user.html">User</a> user)</td></tr>
+<tr class="memdesc:af10b8e68f701dec14d203f13c26536a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Listener de la modification du <a class="el" href="class_user.html">User</a> via la page principale.  <br /></td></tr>
+<tr class="separator:af10b8e68f701dec14d203f13c26536a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="signals" name="signals"></a>
+Signaux</h2></td></tr>
+<tr class="memitem:a511521473317493854f37b296097a3d1"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a511521473317493854f37b296097a3d1">notifyCloseSignup</a> (<a class="el" href="class_user.html">User</a> *user)</td></tr>
+<tr class="memdesc:a511521473317493854f37b296097a3d1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gère le transfert d'un utilisateur à la fin de l'inscription.  <br /></td></tr>
+<tr class="separator:a511521473317493854f37b296097a3d1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af71682fcb00db1467594697fa9d5fa26"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#af71682fcb00db1467594697fa9d5fa26">notifyUpdatedUser</a> (<a class="el" href="class_user.html">User</a> user)</td></tr>
+<tr class="memdesc:af71682fcb00db1467594697fa9d5fa26"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gère le transfert d'un utilisateur à la fin de l'inscription.  <br /></td></tr>
+<tr class="separator:af71682fcb00db1467594697fa9d5fa26"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
-<tr class="memitem:a996c5a2b6f77944776856f08ec30858d"><td class="memItemLeft" align="right" valign="top"><a id="a996c5a2b6f77944776856f08ec30858d" name="a996c5a2b6f77944776856f08ec30858d"></a>
-&#160;</td><td class="memItemRight" valign="bottom"><b>MainWindow</b> (QWidget *parent=nullptr)</td></tr>
-<tr class="separator:a996c5a2b6f77944776856f08ec30858d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae6d83f2f12ea11edcf2f949c299e851e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#ae6d83f2f12ea11edcf2f949c299e851e">storage</a> ()</td></tr>
-<tr class="memdesc:ae6d83f2f12ea11edcf2f949c299e851e"><td class="mdescLeft">&#160;</td><td class="mdescRight">storage  <br /></td></tr>
+<tr class="memitem:a94118b06cc1727a893d87dc1d88c82e0"><td class="memItemLeft" align="right" valign="top"><a id="a94118b06cc1727a893d87dc1d88c82e0" name="a94118b06cc1727a893d87dc1d88c82e0"></a>
+&#160;</td><td class="memItemRight" valign="bottom"><b>MainWindow</b> (int XML=1, QWidget *parent=nullptr)</td></tr>
+<tr class="separator:a94118b06cc1727a893d87dc1d88c82e0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fa4a4b8b71b34daf72e89072c51f2c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_window.html#a1fa4a4b8b71b34daf72e89072c51f2c8">closeWindow</a> ()</td></tr>
+<tr class="memdesc:a1fa4a4b8b71b34daf72e89072c51f2c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">closeWindow  <br /></td></tr>
+<tr class="separator:a1fa4a4b8b71b34daf72e89072c51f2c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae6d83f2f12ea11edcf2f949c299e851e"><td class="memItemLeft" align="right" valign="top"><a id="ae6d83f2f12ea11edcf2f949c299e851e" name="ae6d83f2f12ea11edcf2f949c299e851e"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>storage</b> ()</td></tr>
+<tr class="memdesc:ae6d83f2f12ea11edcf2f949c299e851e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Incrit le nouvel utilisateur dans le fichier XML. <br /></td></tr>
 <tr class="separator:ae6d83f2f12ea11edcf2f949c299e851e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentation des fonctions membres</h2>
-<a id="ae6d83f2f12ea11edcf2f949c299e851e" name="ae6d83f2f12ea11edcf2f949c299e851e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae6d83f2f12ea11edcf2f949c299e851e">&#9670;&#160;</a></span>storage()</h2>
+<a id="a1fa4a4b8b71b34daf72e89072c51f2c8" name="a1fa4a4b8b71b34daf72e89072c51f2c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fa4a4b8b71b34daf72e89072c51f2c8">&#9670;&#160;</a></span>closeWindow()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void MainWindow::storage </td>
+          <td class="memname">void MainWindow::closeWindow </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -128,8 +149,110 @@ Fonctions membres publiques</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>storage </p>
-<dl class="section return"><dt>Renvoie</dt><dd></dd></dl>
+<p>closeWindow </p>
+<p>Ferme la fenêtre d'inscription et ouvre celle de la connexion </p>
+
+</div>
+</div>
+<a id="a511521473317493854f37b296097a3d1" name="a511521473317493854f37b296097a3d1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a511521473317493854f37b296097a3d1">&#9670;&#160;</a></span>notifyCloseSignup</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::notifyCloseSignup </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> *&#160;</td>
+          <td class="paramname"><em>user</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gère le transfert d'un utilisateur à la fin de l'inscription. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user</td><td>utilisateur à transmettre </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af71682fcb00db1467594697fa9d5fa26" name="af71682fcb00db1467594697fa9d5fa26"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af71682fcb00db1467594697fa9d5fa26">&#9670;&#160;</a></span>notifyUpdatedUser</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::notifyUpdatedUser </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a>&#160;</td>
+          <td class="paramname"><em>user</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Gère le transfert d'un utilisateur à la fin de l'inscription. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user</td><td>utilisateur à transmettre </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af10b8e68f701dec14d203f13c26536a0" name="af10b8e68f701dec14d203f13c26536a0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af10b8e68f701dec14d203f13c26536a0">&#9670;&#160;</a></span>onEditionSent</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainWindow::onEditionSent </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a>&#160;</td>
+          <td class="paramname"><em>user</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">slot</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Listener de la modification du <a class="el" href="class_user.html">User</a> via la page principale. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user</td><td>utilisateur contenant les informations &amp; modifier </td></tr>
+  </table>
+  </dd>
+</dl>
 
 </div>
 </div>

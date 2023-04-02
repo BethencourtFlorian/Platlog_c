@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['xmlparser_0',['XMLParser',['../class_x_m_l_parser.html',1,'']]]
+  ['newdatabase_0',['NewDatabase',['../class_new_database.html',1,'']]]
 ];

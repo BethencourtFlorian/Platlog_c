@@ -1,9 +1,22 @@
 var searchData=
 [
-  ['setemail_0',['setEmail',['../classuser.html#a65d6d7b2a1352045df85b15bfdf0ab0b',1,'user']]],
-  ['setfirstname_1',['setFirstName',['../classuser.html#a1250a8d129e140c88ef1605369c94a05',1,'user']]],
-  ['setlastname_2',['setLastName',['../classuser.html#a5b6992140bedd60223ea300009aa6f06',1,'user']]],
-  ['setlogin_3',['setLogin',['../classuser.html#a1e7de9dcc2e27f206845e2f03bea54d8',1,'user']]],
-  ['setpassword_4',['setPassword',['../classuser.html#aa9ab1304270e1bea25ef6f15dabe730a',1,'user']]],
-  ['storage_5',['storage',['../class_main_window.html#ae6d83f2f12ea11edcf2f949c299e851e',1,'MainWindow']]]
+  ['getdatabases_0',['getDatabases',['../class_profile.html#ad07c4479dfc6cd8a5fdfd7586b7d8153',1,'Profile']]],
+  ['getdatabasewithname_1',['getDatabaseWithName',['../class_admin_page.html#a30aea7372c6592ea545ec5b357f0996e',1,'AdminPage']]],
+  ['getdbs_2',['getDbs',['../class_profile.html#a151778dba0aa8522ac9d26e385e08312',1,'Profile']]],
+  ['getemail_3',['getEmail',['../class_user.html#ad6ef2b0be0450bdc6ac2c01ed7c8d9ca',1,'User']]],
+  ['getfirstname_4',['getFirstName',['../class_user.html#a021fbb99ac4ad7405f91e20c2df57119',1,'User']]],
+  ['getid_5',['getId',['../class_profile.html#a04527a0af935cfd00ca666637f023cfd',1,'Profile']]],
+  ['getlastname_6',['getLastName',['../class_user.html#a780953bfd05d82e953bda9482b50a27e',1,'User']]],
+  ['getlogin_7',['getLogin',['../class_user.html#ae045d8e4f6f43b2b580d3bfbbd3b5778',1,'User']]],
+  ['getloginuser_8',['getLoginUser',['../class_profile.html#a2c116a34212b085c103235cccd4aec28',1,'Profile']]],
+  ['getpassword_9',['getPassword',['../class_user.html#a96d673c7c62ecdfdd4c509db8350262d',1,'User']]],
+  ['getprofile_10',['getProfile',['../class_user.html#a2bacb77727efdb727aeeb99381e8db9a',1,'User']]],
+  ['getprofiles_11',['getProfiles',['../class_user.html#ad8b0e67cc63cd591d70cedbf4fb8f3fc',1,'User']]],
+  ['getprofilewithid_12',['getProfileWithId',['../class_admin_page.html#a3bbd8a9651d18824c78b5c4ec28e1588',1,'AdminPage']]],
+  ['getrightedit_13',['getRightEdit',['../class_user.html#a805213ecdce6103def7bdcc711f05edf',1,'User']]],
+  ['getrightread_14',['getRightRead',['../class_user.html#ab52b2dcab08a72ba80eeb2af052cbb9f',1,'User']]],
+  ['getrights_15',['getRights',['../class_user.html#abb0df47b21200b27cd07b68bdbedf5be',1,'User']]],
+  ['getrightsudo_16',['getRightSudo',['../class_user.html#a5235387812dc179b550e7a0ccdf10311',1,'User']]],
+  ['getusers_17',['GetUsers',['../class_x_m_l_parser.html#a935cc228f32ef5fc0cc28bed4b01d423',1,'XMLParser']]],
+  ['getuserwithlogin_18',['getUserWithLogin',['../class_admin_page.html#a9d23054f1ea0c4d8cca4f3c283997af9',1,'AdminPage']]]
 ];

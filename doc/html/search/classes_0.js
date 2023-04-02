@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['connexionpage_0',['ConnexionPage',['../class_connexion_page.html',1,'']]]
+  ['adminpage_0',['AdminPage',['../class_admin_page.html',1,'']]]
 ];

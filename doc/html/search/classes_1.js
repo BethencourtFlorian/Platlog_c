@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['mainpage_0',['MainPage',['../class_main_page.html',1,'']]],
-  ['mainwindow_1',['MainWindow',['../class_main_window.html',1,'']]]
+  ['comboboxdelegate_0',['ComboBoxDelegate',['../class_combo_box_delegate.html',1,'']]],
+  ['connexionpage_1',['ConnexionPage',['../class_connexion_page.html',1,'']]]
 ];

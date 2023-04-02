@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['xmlparser_0',['XMLParser',['../class_x_m_l_parser.html',1,'']]]
+  ['mainpage_0',['MainPage',['../class_main_page.html',1,'']]],
+  ['mainwindow_1',['MainWindow',['../class_main_window.html',1,'']]],
+  ['menu_2',['Menu',['../class_menu.html',1,'']]]
 ];

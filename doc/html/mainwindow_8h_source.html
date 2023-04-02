@@ -100,35 +100,53 @@ $(document).ready(function(){initNavTree('mainwindow_8h_source.html',''); initRe
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;QMainWindow&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;QCryptographicHash.h&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;connexionpage.h&quot;</span></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span> </div>
+<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;user.h&quot;</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span> </div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>QT_BEGIN_NAMESPACE</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>Ui { <span class="keyword">class </span><a class="code hl_class" href="class_main_window.html">MainWindow</a>; }</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>QT_END_NAMESPACE</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span> </div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="class_main_window.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="class_main_window.html">MainWindow</a> : <span class="keyword">public</span> QMainWindow</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    Q_OBJECT</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_class" href="class_main_window.html">MainWindow</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <a class="code hl_class" href="class_main_window.html">~MainWindow</a>();</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span> </div>
-<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_main_window.html#ae6d83f2f12ea11edcf2f949c299e851e">storage</a>();</div>
-<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
-<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    Ui::MainWindow *ui;</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    QString login;</div>
-<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    QString password;</div>
-<div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    QString email;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    QString firstName;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    QString lastName;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>};</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span><span class="preprocessor">#endif </span><span class="comment">// MAINWINDOW_H</span></div>
-<div class="ttc" id="aclass_main_window_html"><div class="ttname"><a href="class_main_window.html">MainWindow</a></div><div class="ttdef"><b>Definition:</b> mainwindow.h:16</div></div>
-<div class="ttc" id="aclass_main_window_html_ae6d83f2f12ea11edcf2f949c299e851e"><div class="ttname"><a href="class_main_window.html#ae6d83f2f12ea11edcf2f949c299e851e">MainWindow::storage</a></div><div class="ttdeci">void storage()</div><div class="ttdoc">storage</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:26</div></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>QT_BEGIN_NAMESPACE</div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="keyword">namespace </span>Ui { <span class="keyword">class </span><a class="code hl_class" href="class_main_window.html">MainWindow</a>; }</div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>QT_END_NAMESPACE</div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span> </div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno"><a class="line" href="class_main_window.html">   14</a></span><span class="keyword">class </span><a class="code hl_class" href="class_main_window.html">MainWindow</a> : <span class="keyword">public</span> QMainWindow</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>{</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    Q_OBJECT</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span> </div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <a class="code hl_class" href="class_main_window.html">MainWindow</a>(<span class="keywordtype">int</span> XML = 1, QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    <a class="code hl_class" href="class_main_window.html">~MainWindow</a>();</div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno">   26</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_main_window.html#a1fa4a4b8b71b34daf72e89072c51f2c8">closeWindow</a>();</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_main_window.html#ae6d83f2f12ea11edcf2f949c299e851e">storage</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>signals:</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno"><a class="line" href="class_main_window.html#a511521473317493854f37b296097a3d1">   38</a></span>    <span class="keywordtype">void</span> <a class="code hl_signal" href="class_main_window.html#a511521473317493854f37b296097a3d1">notifyCloseSignup</a>(<a class="code hl_class" href="class_user.html">User</a>* user);</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span> </div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno"><a class="line" href="class_main_window.html#af71682fcb00db1467594697fa9d5fa26">   44</a></span>    <span class="keywordtype">void</span> <a class="code hl_signal" href="class_main_window.html#af71682fcb00db1467594697fa9d5fa26">notifyUpdatedUser</a>(<a class="code hl_class" href="class_user.html">User</a> user);</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span> </div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span><span class="keyword">public</span> slots:</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <span class="keywordtype">void</span> <a class="code hl_slot" href="class_main_window.html#af10b8e68f701dec14d203f13c26536a0">onEditionSent</a>(<a class="code hl_class" href="class_user.html">User</a> user);</div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span> </div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span><span class="keyword">private</span> slots:</div>
+<div class="line"><a id="l00059" name="l00059"></a><span class="lineno">   59</span>    <span class="keywordtype">void</span> emitUpdatedUser();</div>
+<div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span> </div>
+<div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    Ui::MainWindow *ui;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span> </div>
+<div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span>    QString login;</div>
+<div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>    QString password;</div>
+<div class="line"><a id="l00066" name="l00066"></a><span class="lineno">   66</span>    QString email;</div>
+<div class="line"><a id="l00067" name="l00067"></a><span class="lineno">   67</span>    QString firstName;</div>
+<div class="line"><a id="l00068" name="l00068"></a><span class="lineno">   68</span>    QString lastName;</div>
+<div class="line"><a id="l00069" name="l00069"></a><span class="lineno">   69</span> </div>
+<div class="line"><a id="l00070" name="l00070"></a><span class="lineno">   70</span>    <span class="keywordtype">int</span> XML;</div>
+<div class="line"><a id="l00071" name="l00071"></a><span class="lineno">   71</span>};</div>
+<div class="line"><a id="l00072" name="l00072"></a><span class="lineno">   72</span><span class="preprocessor">#endif </span><span class="comment">// MAINWINDOW_H</span></div>
+<div class="ttc" id="aclass_main_window_html"><div class="ttname"><a href="class_main_window.html">MainWindow</a></div><div class="ttdef"><b>Definition:</b> mainwindow.h:15</div></div>
+<div class="ttc" id="aclass_main_window_html_a1fa4a4b8b71b34daf72e89072c51f2c8"><div class="ttname"><a href="class_main_window.html#a1fa4a4b8b71b34daf72e89072c51f2c8">MainWindow::closeWindow</a></div><div class="ttdeci">void closeWindow()</div><div class="ttdoc">closeWindow</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:29</div></div>
+<div class="ttc" id="aclass_main_window_html_a511521473317493854f37b296097a3d1"><div class="ttname"><a href="class_main_window.html#a511521473317493854f37b296097a3d1">MainWindow::notifyCloseSignup</a></div><div class="ttdeci">void notifyCloseSignup(User *user)</div><div class="ttdoc">Gère le transfert d'un utilisateur à la fin de l'inscription.</div></div>
+<div class="ttc" id="aclass_main_window_html_ae6d83f2f12ea11edcf2f949c299e851e"><div class="ttname"><a href="class_main_window.html#ae6d83f2f12ea11edcf2f949c299e851e">MainWindow::storage</a></div><div class="ttdeci">void storage()</div><div class="ttdoc">Incrit le nouvel utilisateur dans le fichier XML.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:54</div></div>
+<div class="ttc" id="aclass_main_window_html_af10b8e68f701dec14d203f13c26536a0"><div class="ttname"><a href="class_main_window.html#af10b8e68f701dec14d203f13c26536a0">MainWindow::onEditionSent</a></div><div class="ttdeci">void onEditionSent(User user)</div><div class="ttdoc">Listener de la modification du User via la page principale.</div><div class="ttdef"><b>Definition:</b> mainwindow.cpp:33</div></div>
+<div class="ttc" id="aclass_main_window_html_af71682fcb00db1467594697fa9d5fa26"><div class="ttname"><a href="class_main_window.html#af71682fcb00db1467594697fa9d5fa26">MainWindow::notifyUpdatedUser</a></div><div class="ttdeci">void notifyUpdatedUser(User user)</div><div class="ttdoc">Gère le transfert d'un utilisateur à la fin de l'inscription.</div></div>
+<div class="ttc" id="aclass_user_html"><div class="ttname"><a href="class_user.html">User</a></div><div class="ttdef"><b>Definition:</b> user.h:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

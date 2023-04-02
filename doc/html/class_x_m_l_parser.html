@@ -99,16 +99,153 @@ $(document).ready(function(){initNavTree('class_x_m_l_parser.html',''); initResi
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Fonctions membres publiques statiques</h2></td></tr>
-<tr class="memitem:a2ee892dc9b1b754c43f40ccb4fd9f734"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a2ee892dc9b1b754c43f40ccb4fd9f734">CheckUser</a> (QDomDocument &amp;document, QDomElement &amp;users, QString filePath)</td></tr>
-<tr class="memdesc:a2ee892dc9b1b754c43f40ccb4fd9f734"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consulte la liste des utilisateurs.  <br /></td></tr>
-<tr class="separator:a2ee892dc9b1b754c43f40ccb4fd9f734"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1f37c5126089bbffdc9226c89b2a3ed1"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a1f37c5126089bbffdc9226c89b2a3ed1">CheckConnexion</a> (QString filePath, <a class="el" href="classuser.html">user</a> &amp;foundUser, QString typedPassword, QString typedLogin)</td></tr>
-<tr class="memdesc:a1f37c5126089bbffdc9226c89b2a3ed1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tente une combinaison login/mdp.  <br /></td></tr>
-<tr class="separator:a1f37c5126089bbffdc9226c89b2a3ed1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a72ff78b000847229aee634970c7e3e05"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a72ff78b000847229aee634970c7e3e05">AddUser</a> (QDomDocument &amp;document, QDomElement newUser, QString filePath)</td></tr>
+<tr class="memdesc:a72ff78b000847229aee634970c7e3e05"><td class="mdescLeft">&#160;</td><td class="mdescRight">Consulte la liste des utilisateurs.  <br /></td></tr>
+<tr class="separator:a72ff78b000847229aee634970c7e3e05"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5347c907628a14769da765a284364f28"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a5347c907628a14769da765a284364f28">AddDatabase</a> (QString path, <a class="el" href="class_user.html">User</a> &amp;user, <a class="el" href="class_database.html">Database</a> &amp;database, int idProfile)</td></tr>
+<tr class="memdesc:a5347c907628a14769da765a284364f28"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute une base de données à un profil.  <br /></td></tr>
+<tr class="separator:a5347c907628a14769da765a284364f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5173d052c9199dbbec8b0174c43c263d"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_database.html">Database</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a5173d052c9199dbbec8b0174c43c263d">searchDatabase</a> (QString path, <a class="el" href="class_user.html">User</a> &amp;user, QString profileName, QString databaseName)</td></tr>
+<tr class="memdesc:a5173d052c9199dbbec8b0174c43c263d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrouve une base de données dans le fichier XML, puis la retourne.  <br /></td></tr>
+<tr class="separator:a5173d052c9199dbbec8b0174c43c263d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc46dd6ef7bfc5ecdb29334cfab3994e"><td class="memItemLeft" align="right" valign="top">static int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#abc46dd6ef7bfc5ecdb29334cfab3994e">CheckConnexion</a> (QString filePath, <a class="el" href="class_user.html">User</a> &amp;foundUser, QString typedPassword, QString typedLogin)</td></tr>
+<tr class="memdesc:abc46dd6ef7bfc5ecdb29334cfab3994e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tente une combinaison login/mdp.  <br /></td></tr>
+<tr class="separator:abc46dd6ef7bfc5ecdb29334cfab3994e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a935cc228f32ef5fc0cc28bed4b01d423"><td class="memItemLeft" align="right" valign="top">static std::list&lt; <a class="el" href="class_user.html">User</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a935cc228f32ef5fc0cc28bed4b01d423">GetUsers</a> (QString filePath)</td></tr>
+<tr class="memdesc:a935cc228f32ef5fc0cc28bed4b01d423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retourne la liste des utilisateurs créés depuis le fichier XML.  <br /></td></tr>
+<tr class="separator:a935cc228f32ef5fc0cc28bed4b01d423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4df970db248b95b2d6ff0fae1a5dd2cf"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a4df970db248b95b2d6ff0fae1a5dd2cf">fillUser</a> (QString path, <a class="el" href="class_user.html">User</a> &amp;user)</td></tr>
+<tr class="memdesc:a4df970db248b95b2d6ff0fae1a5dd2cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de remplir un objet user avec les profils/base de données du fichier XML.  <br /></td></tr>
+<tr class="separator:a4df970db248b95b2d6ff0fae1a5dd2cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8649697a011da679bcb0d0243e17c527"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a8649697a011da679bcb0d0243e17c527">deleteProfileById</a> (QString filePath, <a class="el" href="class_user.html">User</a> &amp;user, QString profileName)</td></tr>
+<tr class="memdesc:a8649697a011da679bcb0d0243e17c527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supprime un profil ainsi que ses bases de données pour un fichier XML.  <br /></td></tr>
+<tr class="separator:a8649697a011da679bcb0d0243e17c527"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ba9f8e4bea0602f60f06e331432dc1c"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a5ba9f8e4bea0602f60f06e331432dc1c">deleteDatabaseById</a> (QString filePath, <a class="el" href="class_user.html">User</a> &amp;user, QString profileName, QString databaseName)</td></tr>
+<tr class="memdesc:a5ba9f8e4bea0602f60f06e331432dc1c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Supprime la base de données d'un profil pour un fichier XML.  <br /></td></tr>
+<tr class="separator:a5ba9f8e4bea0602f60f06e331432dc1c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80c30196a9cdb73f0077c22dab863dbd"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#a80c30196a9cdb73f0077c22dab863dbd">saveChanges</a> (QString path, list&lt; <a class="el" href="class_user.html">User</a> * &gt; listUsers)</td></tr>
+<tr class="memdesc:a80c30196a9cdb73f0077c22dab863dbd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de recharger le contenu du fichier XML dans les objets utilisateurs, profils et bases de données.  <br /></td></tr>
+<tr class="separator:a80c30196a9cdb73f0077c22dab863dbd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeacb738153592385807b3d72e71a9b97"><td class="memItemLeft" align="right" valign="top">static void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_x_m_l_parser.html#aeacb738153592385807b3d72e71a9b97">editUserInfo</a> (QString path, QString oldLogin, <a class="el" href="class_user.html">User</a> userUpdated)</td></tr>
+<tr class="memdesc:aeacb738153592385807b3d72e71a9b97"><td class="mdescLeft">&#160;</td><td class="mdescRight">Permet de recharger le contenu du fichier XML dans les objets utilisateurs, profils et bases de données.  <br /></td></tr>
+<tr class="separator:aeacb738153592385807b3d72e71a9b97"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentation des fonctions membres</h2>
-<a id="a1f37c5126089bbffdc9226c89b2a3ed1" name="a1f37c5126089bbffdc9226c89b2a3ed1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a1f37c5126089bbffdc9226c89b2a3ed1">&#9670;&#160;</a></span>CheckConnexion()</h2>
+<a id="a5347c907628a14769da765a284364f28" name="a5347c907628a14769da765a284364f28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5347c907628a14769da765a284364f28">&#9670;&#160;</a></span>AddDatabase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void XMLParser::AddDatabase </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> &amp;&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_database.html">Database</a> &amp;&#160;</td>
+          <td class="paramname"><em>database</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>idProfile</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Ajoute une base de données à un profil. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>chemin d'accès au fichier XML </td></tr>
+    <tr><td class="paramname">user</td><td>utilisateur actuellement connecté au logiciel </td></tr>
+    <tr><td class="paramname">database</td><td>base de données à insérer </td></tr>
+    <tr><td class="paramname">idProfile</td><td>identifiant de profil dans le fichier XML </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="a72ff78b000847229aee634970c7e3e05" name="a72ff78b000847229aee634970c7e3e05"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a72ff78b000847229aee634970c7e3e05">&#9670;&#160;</a></span>AddUser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int XMLParser::AddUser </td>
+          <td>(</td>
+          <td class="paramtype">QDomDocument &amp;&#160;</td>
+          <td class="paramname"><em>document</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QDomElement&#160;</td>
+          <td class="paramname"><em>newUser</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>filePath</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Consulte la liste des utilisateurs. </p>
+<p>Si la liste est vide, un "super" utilisateur est créé. Sinon on renvoie la liste de tous les utilisateurs </p><dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">document</td><td>Un QDomDocument pour copier le contenu du fichier XML </td></tr>
+    <tr><td class="paramname">users</td><td>Un QDomElement faisant partie de document nécessaire à la copie du fichier XML </td></tr>
+    <tr><td class="paramname">filePath</td><td>Le chemin vers le fichier XML des utilisateurs </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>0 si tout va bien, un code d'erreur sinon </dd></dl>
+
+</div>
+</div>
+<a id="abc46dd6ef7bfc5ecdb29334cfab3994e" name="abc46dd6ef7bfc5ecdb29334cfab3994e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc46dd6ef7bfc5ecdb29334cfab3994e">&#9670;&#160;</a></span>CheckConnexion()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -125,7 +262,7 @@ Fonctions membres publiques statiques</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="classuser.html">user</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> &amp;&#160;</td>
           <td class="paramname"><em>foundUser</em>, </td>
         </tr>
         <tr>
@@ -167,8 +304,8 @@ Fonctions membres publiques statiques</h2></td></tr>
 
 </div>
 </div>
-<a id="a2ee892dc9b1b754c43f40ccb4fd9f734" name="a2ee892dc9b1b754c43f40ccb4fd9f734"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ee892dc9b1b754c43f40ccb4fd9f734">&#9670;&#160;</a></span>CheckUser()</h2>
+<a id="a5ba9f8e4bea0602f60f06e331432dc1c" name="a5ba9f8e4bea0602f60f06e331432dc1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ba9f8e4bea0602f60f06e331432dc1c">&#9670;&#160;</a></span>deleteDatabaseById()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -177,22 +314,28 @@ Fonctions membres publiques statiques</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int XMLParser::CheckUser </td>
+          <td class="memname">void XMLParser::deleteDatabaseById </td>
           <td>(</td>
-          <td class="paramtype">QDomDocument &amp;&#160;</td>
-          <td class="paramname"><em>document</em>, </td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>filePath</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">QDomElement &amp;&#160;</td>
-          <td class="paramname"><em>users</em>, </td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> &amp;&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">QString&#160;</td>
-          <td class="paramname"><em>filePath</em>&#160;</td>
+          <td class="paramname"><em>profileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>databaseName</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -207,16 +350,310 @@ Fonctions membres publiques statiques</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p>Consulte la liste des utilisateurs. </p>
-<p>Si la liste est vide, un "super" utilisateur est créé. Sinon on renvoie la liste de tous les utilisateurs </p><dl class="params"><dt>Paramètres</dt><dd>
+<p>Supprime la base de données d'un profil pour un fichier XML. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
   <table class="params">
-    <tr><td class="paramname">document</td><td>Un QDomDocument pour copier le contenu du fichier XML </td></tr>
-    <tr><td class="paramname">users</td><td>Un QDomElement faisant partie de document nécessaire à la copie du fichier XML </td></tr>
-    <tr><td class="paramname">filePath</td><td>Le chemin vers le fichier XML des utilisateurs </td></tr>
+    <tr><td class="paramname">filePath</td><td>chemin d'accès au fichier XML </td></tr>
+    <tr><td class="paramname">user</td><td>utilisateur possédant la base de données à supprimer </td></tr>
+    <tr><td class="paramname">profileName</td><td>nom du profil possédant la base de données à supprimer </td></tr>
+    <tr><td class="paramname">databaseName</td><td>nom de la base de données à supprimer </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Renvoie</dt><dd>0 si tout va bien, un code d'erreur sinon </dd></dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="a8649697a011da679bcb0d0243e17c527" name="a8649697a011da679bcb0d0243e17c527"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8649697a011da679bcb0d0243e17c527">&#9670;&#160;</a></span>deleteProfileById()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void XMLParser::deleteProfileById </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>filePath</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> &amp;&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>profileName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Supprime un profil ainsi que ses bases de données pour un fichier XML. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>chemin d'accès au fichier XML </td></tr>
+    <tr><td class="paramname">user</td><td>utilisateur possédant le profil à supprimer </td></tr>
+    <tr><td class="paramname">profileName</td><td>nom du profil à supprimer </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="aeacb738153592385807b3d72e71a9b97" name="aeacb738153592385807b3d72e71a9b97"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aeacb738153592385807b3d72e71a9b97">&#9670;&#160;</a></span>editUserInfo()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void XMLParser::editUserInfo </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>oldLogin</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a>&#160;</td>
+          <td class="paramname"><em>userUpdated</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Permet de recharger le contenu du fichier XML dans les objets utilisateurs, profils et bases de données. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>chemin d'accès au fichier XML </td></tr>
+    <tr><td class="paramname">oldLogin</td><td>string pour trouver l'utilisateur à modifier </td></tr>
+    <tr><td class="paramname">userUpdated</td><td>utilisateur contenant les nouvelles informations </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="a4df970db248b95b2d6ff0fae1a5dd2cf" name="a4df970db248b95b2d6ff0fae1a5dd2cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4df970db248b95b2d6ff0fae1a5dd2cf">&#9670;&#160;</a></span>fillUser()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void XMLParser::fillUser </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> &amp;&#160;</td>
+          <td class="paramname"><em>user</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Permet de remplir un objet user avec les profils/base de données du fichier XML. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>chemin d'accès au fichier XML </td></tr>
+    <tr><td class="paramname">user</td><td>utilisateur à remplir avec les profils et bases de données correspondants. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="a935cc228f32ef5fc0cc28bed4b01d423" name="a935cc228f32ef5fc0cc28bed4b01d423"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a935cc228f32ef5fc0cc28bed4b01d423">&#9670;&#160;</a></span>GetUsers()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::list&lt; <a class="el" href="class_user.html">User</a> * &gt; XMLParser::GetUsers </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>filePath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retourne la liste des utilisateurs créés depuis le fichier XML. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filePath</td><td>chemin d'accès au fichier XML </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>filePath liste des utilisateurs du fichier XML </dd></dl>
+
+</div>
+</div>
+<a id="a80c30196a9cdb73f0077c22dab863dbd" name="a80c30196a9cdb73f0077c22dab863dbd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80c30196a9cdb73f0077c22dab863dbd">&#9670;&#160;</a></span>saveChanges()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void XMLParser::saveChanges </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">list&lt; <a class="el" href="class_user.html">User</a> * &gt;&#160;</td>
+          <td class="paramname"><em>listUsers</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Permet de recharger le contenu du fichier XML dans les objets utilisateurs, profils et bases de données. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>chemin d'accès au fichier XML </td></tr>
+    <tr><td class="paramname">listUsers</td><td>liste d'utilisateurs à mettre à jour selon le fichier XML </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>void </dd></dl>
+
+</div>
+</div>
+<a id="a5173d052c9199dbbec8b0174c43c263d" name="a5173d052c9199dbbec8b0174c43c263d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5173d052c9199dbbec8b0174c43c263d">&#9670;&#160;</a></span>searchDatabase()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_database.html">Database</a> * XMLParser::searchDatabase </td>
+          <td>(</td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>path</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> &amp;&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>profileName</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>databaseName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Retrouve une base de données dans le fichier XML, puis la retourne. </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">path</td><td>chemin d'accès au fichier XML </td></tr>
+    <tr><td class="paramname">user</td><td>utilisateur actuellement connecté au logiciel </td></tr>
+    <tr><td class="paramname">profileName</td><td>nom du profil de l'utilisateur </td></tr>
+    <tr><td class="paramname">databaseName</td><td>nom de la base de données à retrouver </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Renvoie</dt><dd>Database* pointeur vers la base de données (url et nom) </dd></dl>
 
 </div>
 </div>

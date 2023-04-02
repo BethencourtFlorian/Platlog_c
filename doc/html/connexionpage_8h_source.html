@@ -101,38 +101,39 @@ $(document).ready(function(){initNavTree('connexionpage_8h_source.html',''); ini
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span><span class="preprocessor">#include &lt;QFile&gt;</span></div>
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span><span class="preprocessor">#include &quot;mainwindow.h&quot;</span></div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#include &quot;mainpage.h&quot;</span></div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;user.h&quot;</span></div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &lt;QMainWindow&gt;</span></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span> </div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">namespace </span>Ui {</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">class </span><a class="code hl_class" href="class_connexion_page.html">ConnexionPage</a>;</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>}</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span> </div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno"><a class="line" href="class_connexion_page.html">   16</a></span><span class="keyword">class </span><a class="code hl_class" href="class_connexion_page.html">ConnexionPage</a> : <span class="keyword">public</span> QMainWindow</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>{</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    Q_OBJECT</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span> </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="class_connexion_page.html">ConnexionPage</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
-<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <a class="code hl_class" href="class_connexion_page.html">~ConnexionPage</a>();</div>
-<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span> </div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_connexion_page.html#a5f5046b1cd400eeb311856749fce1114">onConnectionButton_Click</a>();</div>
-<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_connexion_page.html#a9b9df2ecfcb2ef38b303b5d1a71d62e8">onInscriptionButton_Click</a>();</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span> </div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>signals:</div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno"><a class="line" href="class_connexion_page.html#a05d14e1296df90ebd22c89ddd5f51c20">   42</a></span>    <span class="keywordtype">void</span> <a class="code hl_signal" href="class_connexion_page.html#a05d14e1296df90ebd22c89ddd5f51c20">notifyInfoSent</a>(<a class="code hl_class" href="classuser.html">user</a>&amp; <a class="code hl_class" href="classuser.html">user</a>);</div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span> </div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    Ui::ConnexionPage *ui;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>};</div>
-<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="preprocessor">#endif </span><span class="comment">// CONNEXIONPAGE_H</span></div>
-<div class="ttc" id="aclass_connexion_page_html"><div class="ttname"><a href="class_connexion_page.html">ConnexionPage</a></div><div class="ttdef"><b>Definition:</b> connexionpage.h:17</div></div>
-<div class="ttc" id="aclass_connexion_page_html_a05d14e1296df90ebd22c89ddd5f51c20"><div class="ttname"><a href="class_connexion_page.html#a05d14e1296df90ebd22c89ddd5f51c20">ConnexionPage::notifyInfoSent</a></div><div class="ttdeci">void notifyInfoSent(user &amp;user)</div><div class="ttdoc">Envoie les informations de l'utilisateur à la MainPage.</div></div>
-<div class="ttc" id="aclass_connexion_page_html_a5f5046b1cd400eeb311856749fce1114"><div class="ttname"><a href="class_connexion_page.html#a5f5046b1cd400eeb311856749fce1114">ConnexionPage::onConnectionButton_Click</a></div><div class="ttdeci">void onConnectionButton_Click()</div><div class="ttdoc">Vérifie la combinaison login/mdp.</div><div class="ttdef"><b>Definition:</b> connexionpage.cpp:20</div></div>
-<div class="ttc" id="aclass_connexion_page_html_a9b9df2ecfcb2ef38b303b5d1a71d62e8"><div class="ttname"><a href="class_connexion_page.html#a9b9df2ecfcb2ef38b303b5d1a71d62e8">ConnexionPage::onInscriptionButton_Click</a></div><div class="ttdeci">void onInscriptionButton_Click()</div><div class="ttdoc">Ouvre la fenêtre d'inscription.</div><div class="ttdef"><b>Definition:</b> connexionpage.cpp:39</div></div>
-<div class="ttc" id="aclassuser_html"><div class="ttname"><a href="classuser.html">user</a></div><div class="ttdef"><b>Definition:</b> user.h:9</div></div>
+<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="preprocessor">#include &quot;adminpage.h&quot;</span></div>
+<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span><span class="preprocessor">#include &quot;user.h&quot;</span></div>
+<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span><span class="preprocessor">#include &lt;QMainWindow&gt;</span></div>
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span> </div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span><span class="keyword">namespace </span>Ui {</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">class </span><a class="code hl_class" href="class_connexion_page.html">ConnexionPage</a>;</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>}</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno"><a class="line" href="class_connexion_page.html">   17</a></span><span class="keyword">class </span><a class="code hl_class" href="class_connexion_page.html">ConnexionPage</a> : <span class="keyword">public</span> QMainWindow</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>{</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    Q_OBJECT</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span>    <span class="keyword">explicit</span> <a class="code hl_class" href="class_connexion_page.html">ConnexionPage</a>(QWidget *parent = <span class="keyword">nullptr</span>);</div>
+<div class="line"><a id="l00023" name="l00023"></a><span class="lineno">   23</span>    <a class="code hl_class" href="class_connexion_page.html">~ConnexionPage</a>();</div>
+<div class="line"><a id="l00024" name="l00024"></a><span class="lineno">   24</span> </div>
+<div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_connexion_page.html#a5f5046b1cd400eeb311856749fce1114">onConnectionButton_Click</a>();</div>
+<div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span> </div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_connexion_page.html#a9b9df2ecfcb2ef38b303b5d1a71d62e8">onInscriptionButton_Click</a>();</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span> </div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>signals:</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno"><a class="line" href="class_connexion_page.html#ae8ef828ca43c5562ac120a671a223a7a">   43</a></span>    <span class="keywordtype">void</span> <a class="code hl_signal" href="class_connexion_page.html#ae8ef828ca43c5562ac120a671a223a7a">notifyInfoSent</a>(<a class="code hl_class" href="class_user.html">User</a>&amp; user);</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span> </div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    Ui::ConnexionPage *ui;</div>
+<div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span>};</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span> </div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span><span class="preprocessor">#endif </span><span class="comment">// CONNEXIONPAGE_H</span></div>
+<div class="ttc" id="aclass_connexion_page_html"><div class="ttname"><a href="class_connexion_page.html">ConnexionPage</a></div><div class="ttdef"><b>Definition:</b> connexionpage.h:18</div></div>
+<div class="ttc" id="aclass_connexion_page_html_a5f5046b1cd400eeb311856749fce1114"><div class="ttname"><a href="class_connexion_page.html#a5f5046b1cd400eeb311856749fce1114">ConnexionPage::onConnectionButton_Click</a></div><div class="ttdeci">void onConnectionButton_Click()</div><div class="ttdoc">Vérifie la combinaison login/mdp.</div><div class="ttdef"><b>Definition:</b> connexionpage.cpp:22</div></div>
+<div class="ttc" id="aclass_connexion_page_html_a9b9df2ecfcb2ef38b303b5d1a71d62e8"><div class="ttname"><a href="class_connexion_page.html#a9b9df2ecfcb2ef38b303b5d1a71d62e8">ConnexionPage::onInscriptionButton_Click</a></div><div class="ttdeci">void onInscriptionButton_Click()</div><div class="ttdoc">Ouvre la fenêtre d'inscription.</div><div class="ttdef"><b>Definition:</b> connexionpage.cpp:49</div></div>
+<div class="ttc" id="aclass_connexion_page_html_ae8ef828ca43c5562ac120a671a223a7a"><div class="ttname"><a href="class_connexion_page.html#ae8ef828ca43c5562ac120a671a223a7a">ConnexionPage::notifyInfoSent</a></div><div class="ttdeci">void notifyInfoSent(User &amp;user)</div><div class="ttdoc">Envoie les informations de l'utilisateur à la MainPage.</div></div>
+<div class="ttc" id="aclass_user_html"><div class="ttname"><a href="class_user.html">User</a></div><div class="ttdef"><b>Definition:</b> user.h:11</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

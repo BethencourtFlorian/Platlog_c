@@ -1,5 +1,10 @@
 var searchData=
 [
-  ['mainpage_0',['MainPage',['../class_main_page.html',1,'']]],
-  ['mainwindow_1',['MainWindow',['../class_main_window.html',1,'']]]
+  ['database_0',['Database',['../class_database.html',1,'']]],
+  ['databaseadd_1',['DatabaseAdd',['../class_database_add.html',1,'']]],
+  ['deletedatabasebyid_2',['deleteDatabaseById',['../class_x_m_l_parser.html#a5ba9f8e4bea0602f60f06e331432dc1c',1,'XMLParser']]],
+  ['deleteprofile_3',['deleteProfile',['../class_user.html#a7b5a016bc914dad82a9e1953c7fc7444',1,'User']]],
+  ['deleteprofilebyid_4',['deleteProfileById',['../class_x_m_l_parser.html#a8649697a011da679bcb0d0243e17c527',1,'XMLParser']]],
+  ['destroyeddb_5',['destroyedDB',['../class_database_add.html#abf5c740f2c69ac5512d87f116a28b32d',1,'DatabaseAdd']]],
+  ['destroyedprofile_6',['destroyedProfile',['../class_profile.html#ab07291af76ec6d41e16a3ee6c45a68ce',1,'Profile']]]
 ];

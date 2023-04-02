@@ -92,6 +92,7 @@ $(document).ready(function(){initNavTree('class_main_page.html',''); initResizab
 <div class="header">
   <div class="summary">
 <a href="#pub-slots">Connecteurs publics</a> &#124;
+<a href="#signals">Signaux</a> &#124;
 <a href="#pub-methods">Fonctions membres publiques</a> &#124;
 <a href="class_main_page-members.html">Liste de tous les membres</a>  </div>
   <div class="headertitle"><div class="title">Référence de la classe MainPage</div></div>
@@ -106,9 +107,39 @@ Graphe d'héritage de MainPage:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-slots" name="pub-slots"></a>
 Connecteurs publics</h2></td></tr>
-<tr class="memitem:a16a48b77d818ff302815985803e982d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_page.html#a16a48b77d818ff302815985803e982d3">onInfoSent</a> (<a class="el" href="classuser.html">user</a> &amp;<a class="el" href="classuser.html">user</a>)</td></tr>
-<tr class="memdesc:a16a48b77d818ff302815985803e982d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remplit la <a class="el" href="class_main_page.html">MainPage</a>.  <br /></td></tr>
-<tr class="separator:a16a48b77d818ff302815985803e982d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa42464affe65fbe9317b7981354d331d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_page.html#aa42464affe65fbe9317b7981354d331d">onInfoSent</a> (<a class="el" href="class_user.html">User</a> &amp;user)</td></tr>
+<tr class="memdesc:aa42464affe65fbe9317b7981354d331d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Remplit la <a class="el" href="class_main_page.html">MainPage</a>.  <br /></td></tr>
+<tr class="separator:aa42464affe65fbe9317b7981354d331d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad78fc596b33dff2dacce16f0334fd610"><td class="memItemLeft" align="right" valign="top"><a id="ad78fc596b33dff2dacce16f0334fd610" name="ad78fc596b33dff2dacce16f0334fd610"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>instanciatePage</b> ()</td></tr>
+<tr class="memdesc:ad78fc596b33dff2dacce16f0334fd610"><td class="mdescLeft">&#160;</td><td class="mdescRight">Instancie le treeview avec le contenu du fichier XML. <br /></td></tr>
+<tr class="separator:ad78fc596b33dff2dacce16f0334fd610"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aeaa6a5eecefc03f177c48d6c2ad7a356"><td class="memItemLeft" align="right" valign="top"><a id="aeaa6a5eecefc03f177c48d6c2ad7a356" name="aeaa6a5eecefc03f177c48d6c2ad7a356"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>refreshProfile</b> ()</td></tr>
+<tr class="memdesc:aeaa6a5eecefc03f177c48d6c2ad7a356"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute un nouveau profil dans le treeView. <br /></td></tr>
+<tr class="separator:aeaa6a5eecefc03f177c48d6c2ad7a356"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab285df4cd110220523e0f634b9314ba4"><td class="memItemLeft" align="right" valign="top"><a id="ab285df4cd110220523e0f634b9314ba4" name="ab285df4cd110220523e0f634b9314ba4"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>refreshDB</b> (unsigned int idProfile)</td></tr>
+<tr class="memdesc:ab285df4cd110220523e0f634b9314ba4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Ajoute une nouvelle base de données dans un treeView. <br /></td></tr>
+<tr class="separator:ab285df4cd110220523e0f634b9314ba4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="signals" name="signals"></a>
+Signaux</h2></td></tr>
+<tr class="memitem:a43e6b0d078a4028fdf011a1d98edb794"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_page.html#a43e6b0d078a4028fdf011a1d98edb794">notifyUsernameProfile</a> (QString &amp;username)</td></tr>
+<tr class="memdesc:a43e6b0d078a4028fdf011a1d98edb794"><td class="mdescLeft">&#160;</td><td class="mdescRight">signal transférant le nom d'un profil d'une page à l'autre  <br /></td></tr>
+<tr class="separator:a43e6b0d078a4028fdf011a1d98edb794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2bd95fbe69f98c4f3e300832728cdd59"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_page.html#a2bd95fbe69f98c4f3e300832728cdd59">notifyDbSent</a> (QSqlDatabase &amp;db)</td></tr>
+<tr class="memdesc:a2bd95fbe69f98c4f3e300832728cdd59"><td class="mdescLeft">&#160;</td><td class="mdescRight">signal transférant une base de données d'une page à l'autre  <br /></td></tr>
+<tr class="separator:a2bd95fbe69f98c4f3e300832728cdd59"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af003cfc3ac73b4bd1acf67aaa44a8c71"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_page.html#af003cfc3ac73b4bd1acf67aaa44a8c71">notifyUser</a> (<a class="el" href="class_user.html">User</a> &amp;user)</td></tr>
+<tr class="memdesc:af003cfc3ac73b4bd1acf67aaa44a8c71"><td class="mdescLeft">&#160;</td><td class="mdescRight">signal transférant un utilisateur d'une page à l'autre  <br /></td></tr>
+<tr class="separator:af003cfc3ac73b4bd1acf67aaa44a8c71"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e4501df1d175cdaf26f604cb0dae178"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_page.html#a1e4501df1d175cdaf26f604cb0dae178">notifyUserWithSelected</a> (<a class="el" href="class_user.html">User</a> &amp;user, QString selectedItem)</td></tr>
+<tr class="memdesc:a1e4501df1d175cdaf26f604cb0dae178"><td class="mdescLeft">&#160;</td><td class="mdescRight">signal transférant un utilisateur ainsi que le profil sélectionné sur la TreeView  <br /></td></tr>
+<tr class="separator:a1e4501df1d175cdaf26f604cb0dae178"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9e14b945feb8f19dfe1f18be2bc21227"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_main_page.html#a9e14b945feb8f19dfe1f18be2bc21227">notifyUserEdit</a> (<a class="el" href="class_user.html">User</a> user)</td></tr>
+<tr class="memdesc:a9e14b945feb8f19dfe1f18be2bc21227"><td class="mdescLeft">&#160;</td><td class="mdescRight">signal transférant un utilisateur à la page d'inscription pour mettre à jour ses informations  <br /></td></tr>
+<tr class="separator:a9e14b945feb8f19dfe1f18be2bc21227"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Fonctions membres publiques</h2></td></tr>
@@ -117,8 +148,189 @@ Fonctions membres publiques</h2></td></tr>
 <tr class="separator:a03a81454bcfe83bef44784531c39a206"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Documentation des fonctions membres</h2>
-<a id="a16a48b77d818ff302815985803e982d3" name="a16a48b77d818ff302815985803e982d3"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a16a48b77d818ff302815985803e982d3">&#9670;&#160;</a></span>onInfoSent</h2>
+<a id="a2bd95fbe69f98c4f3e300832728cdd59" name="a2bd95fbe69f98c4f3e300832728cdd59"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2bd95fbe69f98c4f3e300832728cdd59">&#9670;&#160;</a></span>notifyDbSent</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainPage::notifyDbSent </td>
+          <td>(</td>
+          <td class="paramtype">QSqlDatabase &amp;&#160;</td>
+          <td class="paramname"><em>db</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>signal transférant une base de données d'une page à l'autre </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">db</td><td>objet base de données à transférer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="af003cfc3ac73b4bd1acf67aaa44a8c71" name="af003cfc3ac73b4bd1acf67aaa44a8c71"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af003cfc3ac73b4bd1acf67aaa44a8c71">&#9670;&#160;</a></span>notifyUser</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainPage::notifyUser </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> &amp;&#160;</td>
+          <td class="paramname"><em>user</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>signal transférant un utilisateur d'une page à l'autre </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user</td><td>utilisateur à transférer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a9e14b945feb8f19dfe1f18be2bc21227" name="a9e14b945feb8f19dfe1f18be2bc21227"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9e14b945feb8f19dfe1f18be2bc21227">&#9670;&#160;</a></span>notifyUserEdit</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainPage::notifyUserEdit </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a>&#160;</td>
+          <td class="paramname"><em>user</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>signal transférant un utilisateur à la page d'inscription pour mettre à jour ses informations </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user</td><td>utilisateur à transférer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a43e6b0d078a4028fdf011a1d98edb794" name="a43e6b0d078a4028fdf011a1d98edb794"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a43e6b0d078a4028fdf011a1d98edb794">&#9670;&#160;</a></span>notifyUsernameProfile</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainPage::notifyUsernameProfile </td>
+          <td>(</td>
+          <td class="paramtype">QString &amp;&#160;</td>
+          <td class="paramname"><em>username</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>signal transférant le nom d'un profil d'une page à l'autre </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">username</td><td>pseudo du profil à transférer </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="a1e4501df1d175cdaf26f604cb0dae178" name="a1e4501df1d175cdaf26f604cb0dae178"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e4501df1d175cdaf26f604cb0dae178">&#9670;&#160;</a></span>notifyUserWithSelected</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void MainPage::notifyUserWithSelected </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> &amp;&#160;</td>
+          <td class="paramname"><em>user</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">QString&#160;</td>
+          <td class="paramname"><em>selectedItem</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">signal</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>signal transférant un utilisateur ainsi que le profil sélectionné sur la TreeView </p>
+<dl class="params"><dt>Paramètres</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">user</td><td>utilisateur à transférer </td></tr>
+    <tr><td class="paramname">selectedItem</td><td>nom du profil sélectionné dans la TreeView </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa42464affe65fbe9317b7981354d331d" name="aa42464affe65fbe9317b7981354d331d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa42464affe65fbe9317b7981354d331d">&#9670;&#160;</a></span>onInfoSent</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -129,7 +341,7 @@ Fonctions membres publiques</h2></td></tr>
         <tr>
           <td class="memname">void MainPage::onInfoSent </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classuser.html">user</a> &amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="class_user.html">User</a> &amp;&#160;</td>
           <td class="paramname"><em>user</em></td><td>)</td>
           <td></td>
         </tr>

@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['getemail_0',['getEmail',['../classuser.html#acae1891d85a31730f4b32663aad12d42',1,'user']]],
-  ['getfirstname_1',['getFirstName',['../classuser.html#a0df96c4bc377f36e0cf08fa5bc24de68',1,'user']]],
-  ['getlastname_2',['getLastName',['../classuser.html#a53ba618793443720cb222109d5cdfd00',1,'user']]],
-  ['getlogin_3',['getLogin',['../classuser.html#af5019765c8ea02a73d683d7179cc8b36',1,'user']]],
-  ['getpassword_4',['getPassword',['../classuser.html#a4d5802df8faba48edbf267e6f0d1efd5',1,'user']]]
+  ['checkconnexion_0',['CheckConnexion',['../class_x_m_l_parser.html#abc46dd6ef7bfc5ecdb29334cfab3994e',1,'XMLParser']]],
+  ['clearprofiles_1',['clearProfiles',['../class_user.html#a04434009ef14d29e2031b436f9477011',1,'User']]],
+  ['closewindow_2',['closeWindow',['../class_main_window.html#a1fa4a4b8b71b34daf72e89072c51f2c8',1,'MainWindow']]],
+  ['comboboxdelegate_3',['ComboBoxDelegate',['../class_combo_box_delegate.html',1,'']]],
+  ['connexionpage_4',['ConnexionPage',['../class_connexion_page.html',1,'']]]
 ];

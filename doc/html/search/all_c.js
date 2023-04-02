@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['savechanges_0',['saveChanges',['../class_x_m_l_parser.html#a80c30196a9cdb73f0077c22dab863dbd',1,'XMLParser']]],
+  ['searchdatabase_1',['searchDatabase',['../class_x_m_l_parser.html#a5173d052c9199dbbec8b0174c43c263d',1,'XMLParser']]],
+  ['sendnewdatabase_2',['sendNewDatabase',['../class_database_add.html#a9ca7250fc9a8cd1d1db9822aab5f29c7',1,'DatabaseAdd']]],
+  ['sendnewid_3',['sendNewId',['../class_profile.html#a9f5c100e5353a7f7fb8ee5560f9f93a0',1,'Profile']]],
+  ['setemail_4',['setEmail',['../class_user.html#a0d1d97006e98ac98fb06dccca2c47f39',1,'User']]],
+  ['setfirstname_5',['setFirstName',['../class_user.html#aa368815c9e0301ef9b50bd875bfd4fbb',1,'User']]],
+  ['setid_6',['setId',['../class_profile.html#a1c10e662d857b282bc5bc8308cdeafb4',1,'Profile']]],
+  ['setlastname_7',['setLastName',['../class_user.html#ad8345d9973d6580e778d3958ca71e360',1,'User']]],
+  ['setlogin_8',['setLogin',['../class_user.html#a7f458742ddf7ce618492055e2e813f81',1,'User']]],
+  ['setloginuser_9',['setLoginUser',['../class_profile.html#a051d1af7fd15a51872c2c8d6bf512105',1,'Profile']]],
+  ['setpassword_10',['setPassword',['../class_user.html#aa6ec2cf38cd9f2432232242d707dfb81',1,'User']]],
+  ['setrightedit_11',['setRightEdit',['../class_user.html#a0c739fc949c841bb1cb43213c79373c4',1,'User']]],
+  ['setrightread_12',['setRightRead',['../class_user.html#afa349289fb2a0236f9c75f4f0fc06588',1,'User']]],
+  ['setrights_13',['setRights',['../class_user.html#a1b132e5e767458482f0a93008a28e565',1,'User']]],
+  ['setrightsudo_14',['setRightSudo',['../class_user.html#ab580c0359206f5bf8041b350facdc58f',1,'User']]],
+  ['showquery_15',['showQuery',['../class_database.html#ad62865e528b4292becc81c2aed4ea66d',1,'Database']]],
+  ['storage_16',['storage',['../class_main_window.html#ae6d83f2f12ea11edcf2f949c299e851e',1,'MainWindow']]]
+];
