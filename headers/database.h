@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QDialog>
+#include <QMessageBox>
 #include <QSqlDatabase>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
@@ -27,8 +28,13 @@ public:
 
     QString getName() const;
     QString getPath() const;
+    int getRead() const;
+    int getEdit() const;
+
     void setName(const QString &newName);
     void setPath(const QString &newPath);
+    void setRead(const int &newRead);
+    void setEdit(const int &newEdit);
     void showQuery(QString queryString);
 
 public slots:
@@ -40,7 +46,8 @@ private:
     Ui::Database *ui;
     QString name;
     QString path;
-
+    int read = 1;
+    int edit = 1;
 };
 
 #endif // DATABASE_H

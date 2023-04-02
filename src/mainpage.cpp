@@ -141,6 +141,8 @@ void MainPage::on_treeWidget_itemDoubleClicked(QTreeWidgetItem *item, int column
         QSqlDatabase SQLdb = QSqlDatabase::addDatabase("QSQLITE");
         SQLdb.setDatabaseName(db->getPath());
         Database *dbPage = new Database;
+        dbPage->setRead(user.getRightRead());
+        dbPage->setEdit(user.getRightEdit());
         connect(this, &MainPage::notifyDbSent, dbPage, &Database::onDbSent);
         dbPage->show();
         emit notifyDbSent(SQLdb); // On transmet la base de données à la page Database
